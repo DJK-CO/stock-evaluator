@@ -1,7 +1,7 @@
 // JavaScript Core: Stock Evaluator Calculations and Charting
 
 // 雲端部署後，請將下方網址替換為您的 Render 後端網址 (例如 https://my-backend.onrender.com)
-const CLOUD_BACKEND_URL = "https://your-render-backend-url.onrender.com";
+const CLOUD_BACKEND_URL = "https://stock-evaluator-backend.onrender.com";
 
 const API_BASE = (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1")
     ? ""
