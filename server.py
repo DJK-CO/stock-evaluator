@@ -2,18 +2,28 @@
 import os
 import json
 from http.server import SimpleHTTPRequestHandler, HTTPServer
+from urllib.parse import urlparse, parse_qs
 
 PORT = int(os.environ.get("PORT", 8080))
 
 class CustomAPIHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
         # API Route to trigger data refresh
-        if self.path == '/api/refresh':
+        parsed_path = urlparse(self.path)
+        if parsed_path.path == '/api/refresh':
             try:
-                print("後端收到 /api/refresh 請求，正在更新數據...")
+                query_params = parse_qs(parsed_path.query)
+                is_force = query_params.get('force', ['false'])[0].lower() == 'true'
+                
+                if is_force:
+                    print("後端收到帶有 force=true 的 /api/refresh 請求，將強制重新抓取數據...")
+                else:
+                    print("後端收到 /api/refresh 請求，嘗試讀取快取或更新數據...")
+                
                 # Import fetch function directly from analyzer.py
                 from analyzer import fetch_realtime_data
-                data = fetch_realtime_data()
+                data = fetch_realtime_data(force=is_force)
+
                 
                 self.send_response(200)
                 self.send_header('Content-type', 'application/json; charset=utf-8')

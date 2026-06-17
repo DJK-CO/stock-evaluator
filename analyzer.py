@@ -3,6 +3,13 @@ import sys
 import json
 import os
 import yfinance as yf
+import time
+
+# Memory Cache for API performance optimization (TTL: 10 minutes)
+_CACHE_DATA = None
+_CACHE_TIME = 0
+_CACHE_TTL = 600
+
 
 # Preset mappings for fallbacks or base data
 TICKERS = {
@@ -111,9 +118,20 @@ MOCK_FALLBACKS = {
     }
 }
 
-def fetch_realtime_data():
+def fetch_realtime_data(force=False):
+    global _CACHE_DATA, _CACHE_TIME
+    
+    current_time = time.time()
+    if not force and _CACHE_DATA and (current_time - _CACHE_TIME < _CACHE_TTL):
+        print(f"[Cache Hit!] 從記憶體快取讀取即時數據 (剩餘有效時間: {int(_CACHE_TTL - (current_time - _CACHE_TIME))} 秒)")
+        return _CACHE_DATA
+        
     results = {}
-    print("開始從 Yahoo Finance 抓取即時數據...")
+    if force:
+        print("強制繞過快取，重新從 Yahoo Finance 抓取數據...")
+    else:
+        print("快取過期或未建立，開始從 Yahoo Finance 抓取即時數據...")
+
     
     for symbol, meta in TICKERS.items():
         print(f"正在更新: {symbol} ...")
@@ -254,7 +272,13 @@ def fetch_realtime_data():
         json.dump(results, f, ensure_ascii=False, indent=4)
         
     print(f"所有數據已導出至 {output_path}。")
+    
+    # Update memory cache
+    _CACHE_DATA = results
+    _CACHE_TIME = current_time
+    
     return results
+
 
 if __name__ == "__main__":
     if len(sys.argv) > 1:
