@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智慧股市估值與評估系統 | Premium Stock Evaluator</title>
+    <meta name="description" content="利用經典的 DCF 折現現金流、葛拉漢公式、DDM 股利折現及 PE/PB 估值模型，即時運算股票內在價值與安全邊際。">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Lucide Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/lucide@0.344.0/dist/umd/lucide.min.js"></script>
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="glass-bg-blur"></div>
+    <div class="container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="brand">
+                <i data-lucide="trending-up" class="brand-icon"></i>
+                <div class="brand-text">
+                    <h1>智慧股市評估系統</h1>
+                    <span class="subtitle">Stock Valuation Intelligence Dashboard</span>
+                </div>
+            </div>
+            <div class="preset-selector">
+                <span id="auto-refresh-badge" class="auto-refresh-badge"><i data-lucide="clock" style="width: 0.8rem; height: 0.8rem;"></i> 台股交易日 09:00-13:30 每 5 分鐘自動刷新</span>
+                <button id="btn-api-refresh" class="btn-refresh"><i data-lucide="refresh-cw" class="icon-spin-disabled" style="width: 1rem; height: 1rem;"></i> 即時數據更新</button>
+                <span id="update-timestamp" class="timestamp-label">最後更新：預設範本</span>
+                <label for="stock-preset"><i data-lucide="layers"></i> 載入經典範本：</label>
+                <select id="stock-preset">
+                    <optgroup label="🇹🇼 台灣經典股票 (台幣 TWD)">
+                        <option value="2330">台積電 (2330.TW)</option>
+                    </optgroup>
+                    <optgroup label="🇹🇼 台股熱門 ETF (台幣 TWD)">
+                        <option value="0050">元大台灣50 (0050.TW) - 市值型</option>
+                        <option value="006208">富邦台50 (006208.TW) - 社團人氣市值型</option>
+                        <option value="00878">國泰永續高股息 (00878.TW) - 高股息首選</option>
+                        <option value="00919">群益台灣精選高息 (00919.TW) - 季配息人氣王</option>
+                        <option value="00929">復華台灣科技優息 (00929.TW) - 月配息科技優息</option>
+                        <option value="00713">元大台灣高息低波 (00713.TW) - 低波高股息</option>
+                        <option value="00940">元大台灣價值高息 (00940.TW) - 價值高股息</option>
+                    </optgroup>
+                    <optgroup label="🇺🇸 美國經典與熱門 AI 股 (美金 USD)">
+                        <option value="NVDA" selected>輝達 (NVDA) - AI 霸主</option>
+                        <option value="MSFT">微軟 (MSFT) - AI 軟體巨頭</option>
+                        <option value="AAPL">蘋果公司 (AAPL) - 消費電子巨頭</option>
+                        <option value="AVGO">博通 (AVGO) - 6月熱門 AI 晶片</option>
+                        <option value="AMD">超微半導體 (AMD) - AI 晶片二當家</option>
+                        <option value="TSM">台積電 ADR (TSM) - 溢價套利焦點</option>
+                        <option value="SMCI">超微電腦 (SMCI) - AI 伺服器飆股</option>
+                        <option value="GOOGL">谷歌 (GOOGL) - 搜尋與 AI 巨頭</option>
+                        <option value="TSLA">特斯拉 (TSLA) - 電動車與機器人</option>
+                        <option value="VOO">標普 500 ETF (VOO) - 美股大盤市值型</option>
+                        <option value="QQQ">納斯達克 100 ETF (QQQ) - 美股科技市值型</option>
+                        <option value="SCHD">美股高股息 ETF (SCHD) - 存股防禦型</option>
+                    </optgroup>
+                    <option value="custom">✍️ 自訂輸入模式</option>
+                </select>
+            </div>
+        </header>
+
+        <!-- Tab Navigation Bar -->
+        <nav class="tab-navigation">
+            <button class="tab-btn active" id="tab-btn-valuation"><i data-lucide="line-chart"></i> 內在價值估值</button>
+            <button class="tab-btn" id="tab-btn-compound"><i data-lucide="badge-dollar-sign"></i> 複利與定期定額</button>
+            <button class="tab-btn" id="tab-btn-drip"><i data-lucide="piggy-bank"></i> 高股息再投資 (DRIP)</button>
+        </nav>
+
+        <!-- Tab 1: Stock Valuation Dashboard -->
+        <div id="tab-content-valuation" class="tab-content-container">
+            <div class="dashboard-grid">
+                <!-- Sidebar: Parameters Control -->
+                <aside class="control-panel card">
+                    <h2 class="section-title"><i data-lucide="sliders"></i> 評估參數調整</h2>
+                    
+                    <!-- Basic Stock Info (Editable) -->
+                    <div class="parameter-group info-group">
+                        <h3>基本資訊</h3>
+                        <div class="input-row">
+                            <div class="input-col">
+                                <label for="stock-symbol">代號</label>
+                                <input type="text" id="stock-symbol" value="NVDA" placeholder="例如: NVDA">
+                            </div>
+                            <div class="input-col">
+                                <label for="stock-name">名稱</label>
+                                <input type="text" id="stock-name" value="輝達" placeholder="例如: 輝達">
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <div class="input-col">
+                                <label for="current-price" id="lbl-current-price">當前股價</label>
+                                <input type="number" id="current-price" value="127.4" step="0.1" min="0.1">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Financial Inputs -->
+                    <div class="parameter-group">
+                        <h3>財務基本面指標</h3>
+                        
+                        <div class="input-wrapper">
+                            <div class="input-label-row">
+                                <label for="input-eps" id="lbl-eps">每股盈餘 (EPS)</label>
+                                <span class="value-display" id="display-eps">$2.00</span>
+                            </div>
+                            <input type="number" id="input-eps" value="2.00" step="0.01" min="0.01">
+                        </div>
+
+                        <div class="input-wrapper">
+                            <div class="input-label-row">
+                                <label for="input-bps" id="lbl-bps">每股淨值 (BPS)</label>
+                                <span class="value-display" id="display-bps">$12.50</span>
+                            </div>
+                            <input type="number" id="input-bps" value="12.50" step="0.01" min="0.01">
+                        </div>
+
+                        <div class="input-wrapper">
+                            <div class="input-label-row">
+                                <label for="input-dividend" id="lbl-dividend">預期股利</label>
+                                <span class="value-display" id="display-dividend">$0.04</span>
+                            </div>
+                            <input type="number" id="input-dividend" value="0.04" step="0.01" min="0">
+                        </div>
+
+                        <div class="input-wrapper">
+                            <div class="input-label-row">
+                                <label for="input-fcf" id="lbl-fcf">自由現金流 (FCF, 百萬)</label>
+                                <span class="value-display" id="display-fcf">$27,000</span>
+                            </div>
+                            <input type="number" id="input-fcf" value="27000" step="100" min="0">
+                        </div>
+
+                        <div class="input-wrapper">
+                            <div class="input-label-row">
+                                <label for="input-shares">流通股數 (百萬)</label>
+                                <span class="value-display" id="display-shares">24,500</span>
+                            </div>
+                            <input type="number" id="input-shares" value="24500" step="100" min="1">
+                        </div>
+                    </div>
+
+                    <!-- Growth and Rate Sliders -->
+                    <div class="parameter-group">
+                        <h3>成長率與折現率設定</h3>
+
+                        <div class="slider-wrapper">
+                            <div class="slider-label-row">
+                                <label for="slider-growth-1">高成長期 (1-5年) 成長率</label>
+                                <span class="slider-value" id="val-growth-1">30%</span>
+                            </div>
+                            <input type="range" id="slider-growth-1" min="-20" max="100" value="30" class="styled-slider">
+                        </div>
+
+                        <div class="slider-wrapper">
+                            <div class="slider-label-row">
+                                <label for="slider-growth-2">穩健期 (6-10年) 成長率</label>
+                                <span class="slider-value" id="val-growth-2">15%</span>
+                            </div>
+                            <input type="range" id="slider-growth-2" min="-20" max="50" value="15" class="styled-slider">
+                        </div>
+
+                        <div class="slider-wrapper">
+                            <div class="slider-label-row">
+                                <label for="slider-terminal">永續成長率 (Terminal Rate)</label>
+                                <span class="slider-value" id="val-terminal">2.5%</span>
+                            </div>
+                            <input type="range" id="slider-terminal" min="0" max="8" value="2.5" step="0.1" class="styled-slider">
+                        </div>
+
+                        <div class="slider-wrapper">
+                            <div class="slider-label-row">
+                                <label for="slider-discount">折現率 (期望報酬率)</label>
+                                <span class="slider-value" id="val-discount">9%</span>
+                            </div>
+                            <input type="range" id="slider-discount" min="4" max="20" value="9" step="0.5" class="styled-slider">
+                        </div>
+
+                        <div class="slider-wrapper">
+                            <div class="slider-label-row">
+                                <label for="slider-safety">安全邊際 (Margin of Safety)</label>
+                                <span class="slider-value" id="val-safety">20%</span>
+                            </div>
+                            <input type="range" id="slider-safety" min="0" max="50" value="20" step="5" class="styled-slider">
+                        </div>
+                    </div>
+
+                    <!-- Multipliers -->
+                    <div class="parameter-group">
+                        <h3>乘數模型設定</h3>
+                        <div class="input-row">
+                            <div class="input-col">
+                                <label for="input-pe">合理 PE</label>
+                                <input type="number" id="input-pe" value="45" step="1" min="1">
+                            </div>
+                            <div class="input-col">
+                                <label for="input-pb">合理 PB</label>
+                                <input type="number" id="input-pb" value="15" step="0.5" min="0.1">
+                            </div>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main Panel: Results & Visualizations -->
+                <main class="results-panel">
+                    <!-- ETF Warning Banner -->
+                    <div id="etf-warning-banner" class="etf-warning-banner" style="display: none;">
+                        <i data-lucide="alert-triangle" style="width: 1.2rem; height: 1.2rem; flex-shrink: 0;"></i>
+                        <span><strong>ETF 評估提示：</strong>此標的為 ETF，折現現金流 (DCF) 與葛拉漢公式「不適用」。建議將評估權重集中於股利折現 (DDM) 與乘數估值，並關注收益平準金與溢價情況。</span>
+                    </div>
+                    <!-- Row 1: Summary KPI Card -->
+                    <section class="summary-dashboard card gradient-card">
+                        <div class="summary-details">
+                            <div class="stock-badge">
+                                <span id="badge-symbol">NVDA</span>
+                                <h2 id="badge-name">輝達</h2>
+                            </div>
+                            <div class="metric-container">
+                                <div class="metric-block">
+                                    <span class="metric-label">當前市價</span>
+                                    <span class="metric-value price-now" id="display-price-now">$127.40</span>
+                                </div>
+                                <div class="metric-divider"></div>
+                                <div class="metric-block">
+                                    <span class="metric-label">預估內在價值 (綜合權重)</span>
+                                    <span class="metric-value price-intrinsic" id="display-price-intrinsic">$112.50</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="valuation-status-box">
+                            <div class="status-gauge-container">
+                                <div class="status-indicator-ring">
+                                    <div class="ring-fill" id="status-ring"></div>
+                                    <div class="ring-center">
+                                        <span class="status-percent" id="status-percent">-11.7%</span>
+                                        <span class="status-label">安全邊際</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="status-verdict">
+                                <div class="verdict-tag" id="verdict-tag">高於內在價值</div>
+                                <p class="verdict-desc" id="verdict-desc">當前股價高於估計的內在價值，建議等待安全邊際出現再行佈局。</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Row 2: Charts & Breakdown -->
+                    <div class="visuals-row">
+                        <!-- Chart Card -->
+                        <div class="chart-card card">
+                            <h2 class="section-title"><i data-lucide="bar-chart-3"></i> 估值模型對比圖</h2>
+                            <div class="chart-container">
+                                <canvas id="valuationChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Rule of 40 & Model Weights -->
+                        <div class="analysis-details-card card">
+                            <h2 class="section-title"><i data-lucide="check-circle-2"></i> 綜合分析指標</h2>
+                            
+                            <div class="indicators-list">
+                                <!-- Rule of 40 -->
+                                <div class="indicator-item">
+                                    <div class="indicator-header">
+                                        <span>成長股 40 法則 (Rule of 40)</span>
+                                        <span class="indicator-status badge-pass" id="rule-40-status">符合</span>
+                                    </div>
+                                    <div class="progress-bar-container">
+                                        <div class="progress-bar" id="rule-40-bar" style="width: 75%;"></div>
+                                    </div>
+                                    <span class="indicator-detail" id="rule-40-detail">營收成長率 (50%) + 自由現金流利潤率 (25%) = 75%</span>
+                                </div>
+
+                                <!-- Value Gap -->
+                                <div class="indicator-item">
+                                    <div class="indicator-header">
+                                        <span>合理買入價 (考慮安全邊際)</span>
+                                        <span class="indicator-status text-primary" id="safety-buy-price">$90.00</span>
+                                    </div>
+                                    <p class="indicator-detail-text">將內在價值打折 <span id="safety-discount-pct">20%</span> 後的價格，提供資產下跌時的緩衝保護。</p>
+                                </div>
+
+                                <!-- Risk & Trade Decisions Plan -->
+                                <div class="indicator-item" style="border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.85rem; margin-top: 0.25rem;">
+                                    <div class="indicator-header">
+                                        <span>個股風險評級</span>
+                                        <span class="indicator-status" id="stock-risk-badge" style="padding: 0.15rem 0.5rem; border-radius: 4px; font-weight: 700; font-size: 0.85rem;">中風險</span>
+                                    </div>
+                                    <p class="indicator-detail-text" id="stock-risk-desc" style="color: var(--text-secondary); line-height: 1.4; margin-top: 0.15rem;">評估中...</p>
+                                    
+                                    <div class="trade-targets-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 0.6rem; border-top: 1px dashed rgba(255,255,255,0.06); padding-top: 0.6rem;">
+                                        <div class="target-box" style="background: rgba(255,255,255,0.02); padding: 0.45rem 0.6rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.03);">
+                                            <span style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.15rem;">建議買進價 (安全買入)</span>
+                                            <span id="trade-buy-price" style="font-size: 0.95rem; font-weight: 700; color: var(--success); font-family: 'Outfit', sans-serif;">$90.00</span>
+                                        </div>
+                                        <div class="target-box" style="background: rgba(255,255,255,0.02); padding: 0.45rem 0.6rem; border-radius: 6px; border: 1px solid rgba(255,255,255,0.03);">
+                                            <span style="font-size: 0.7rem; color: var(--text-muted); display: block; margin-bottom: 0.15rem;">建議賣出價 (獲利高估)</span>
+                                            <span id="trade-sell-price" style="font-size: 0.95rem; font-weight: 700; color: var(--danger); font-family: 'Outfit', sans-serif;">$130.00</span>
+                                        </div>
+                                    </div>
+                                    <p id="trade-action-tip" style="font-size: 0.78rem; color: #a855f7; margin-top: 0.6rem; font-weight: 600; text-align: left; line-height: 1.45;"></p>
+                                </div>
+
+                                <!-- Model Weights Settings -->
+                                <div class="weights-configuration">
+                                    <h3>模型綜合權重設定 (%)</h3>
+                                    <div class="weight-sliders">
+                                        <div class="weight-item">
+                                            <label>DCF</label>
+                                            <input type="number" id="weight-dcf" value="40" min="0" max="100">
+                                        </div>
+                                        <div class="weight-item">
+                                            <label>葛拉漢</label>
+                                            <input type="number" id="weight-graham" value="20" min="0" max="100">
+                                        </div>
+                                        <div class="weight-item">
+                                            <label>股利折現</label>
+                                            <input type="number" id="weight-ddm" value="10" min="0" max="100">
+                                        </div>
+                                        <div class="weight-item">
+                                            <label>乘數估值</label>
+                                            <input type="number" id="weight-mult" value="30" min="0" max="100">
+                                        </div>
+                                    </div>
+                                    <div class="weight-error-msg" id="weight-error"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Row 3: Model Breakdowns -->
+                    <section class="models-grid">
+                        <!-- DCF Card -->
+                        <div class="model-detail-card card">
+                            <div class="model-card-header">
+                                <span class="model-badge dcf-bg">DCF</span>
+                                <h3>折現現金流估值</h3>
+                            </div>
+                            <div class="model-calc-result" id="calc-dcf">$115.20</div>
+                            <p class="model-desc">基於未來 10 年自由現金流預測，並使用折現率折現回今日的價值加上終值。</p>
+                        </div>
+
+                        <!-- Graham Card -->
+                        <div class="model-detail-card card">
+                            <div class="model-card-header">
+                                <span class="model-badge graham-bg">Graham</span>
+                                <h3>葛拉漢公式估值</h3>
+                            </div>
+                            <div class="model-calc-result" id="calc-graham">$58.09</div>
+                            <p class="model-desc">經典防禦型公式：√(22.5 × EPS × 每股淨值)。適合資產與盈利穩定的公司。</p>
+                        </div>
+
+                        <!-- DDM Card -->
+                        <div class="model-detail-card card">
+                            <div class="model-card-header">
+                                <span class="model-badge ddm-bg">DDM</span>
+                                <h3>股利折現模型</h3>
+                            </div>
+                            <div class="model-calc-result" id="calc-ddm">$0.65</div>
+                            <p class="model-desc">高登增長模型：D * (1 + g) / (r - g)。適合股利政策穩定、高配息的成熟企業。</p>
+                        </div>
+
+                        <!-- Multiplier Card -->
+                        <div class="model-detail-card card">
+                            <div class="model-card-header">
+                                <span class="model-badge mult-bg">Multipliers</span>
+                                <h3>本益比/淨值比乘數</h3>
+                            </div>
+                            <div class="model-calc-result" id="calc-multiplier">$138.75</div>
+                            <p class="model-desc">結合合理 PE (權重50%) 與合理 PB (權重50%) 乘數估值，反映市場相對估值水準。</p>
+                        </div>
+                    </section>
+
+                    <!-- Row 4: Long-term Investment Strategy & Execution Tactics -->
+                    <section class="strategy-panel card" style="margin-top: 1.5rem; background: linear-gradient(135deg, rgba(20, 24, 38, 0.9) 0%, rgba(15, 23, 42, 0.8) 100%); border: 1px solid rgba(99, 102, 241, 0.15);">
+                        <h2 class="section-title" style="color: var(--text-primary);"><i data-lucide="compass" style="color: #a855f7;"></i> 長期投資策略與購買端操作建議</h2>
+                        <div class="strategy-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 1rem;">
+                            <div class="strategy-col">
+                                <h3 style="font-size: 0.95rem; color: #a855f7; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="target" style="width: 1rem; height: 1rem;"></i> 標的投資模式</h3>
+                                <p id="strategy-mode-name" style="font-size: 1.1rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.25rem;">高成長 AI 股模式</p>
+                                <p id="strategy-mode-desc" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45;">評估中...</p>
+                            </div>
+                            <div class="strategy-col" style="border-left: 1px solid rgba(255,255,255,0.05); padding-left: 1.5rem;">
+                                <h3 style="font-size: 0.95rem; color: var(--success); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="shopping-cart" style="width: 1rem; height: 1rem;"></i> 購買端交易執行建議</h3>
+                                <p id="strategy-execution" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45;">評估中...</p>
+                            </div>
+                            <div class="strategy-col" style="border-left: 1px solid rgba(255,255,255,0.05); padding-left: 1.5rem;">
+                                <h3 style="font-size: 0.95rem; color: #06b6d4; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.35rem;"><i data-lucide="trending-up" style="width: 1rem; height: 1rem;"></i> 長期持有策略評估</h3>
+                                <p id="strategy-longterm" style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45;">評估中...</p>
+                            </div>
+                        </div>
+                    </section>
+                </main>
+            </div>
+        </div>
+
+        <!-- Tab 2: Compound Interest Calculator -->
+        <div id="tab-content-compound" class="tab-content-container" style="display: none;">
+            <div class="calculator-grid">
+                <!-- Sidebar: Compound Parameters -->
+                <aside class="control-panel card">
+                    <h2 class="section-title"><i data-lucide="badge-dollar-sign"></i> 複利參數設定</h2>
+                    
+                    <div class="parameter-group info-group">
+                        <div class="input-wrapper">
+                            <label for="comp-initial" id="lbl-comp-initial">初始本金</label>
+                            <input type="number" id="comp-initial" value="100000" step="5000" min="0">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="comp-monthly" id="lbl-comp-monthly">每月定期定額投入</label>
+                            <input type="number" id="comp-monthly" value="5000" step="500" min="0">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="comp-rate">預期年化報酬率 (%)</label>
+                            <input type="number" id="comp-rate" value="8.0" step="0.5" min="0" max="100">
+                        </div>
+                        <div class="input-wrapper">
+                            <div class="slider-label-row">
+                                <label for="comp-years">投資年限</label>
+                                <span class="slider-value" id="val-comp-years">10年</span>
+                            </div>
+                            <input type="range" id="comp-years" min="1" max="40" value="10" class="styled-slider">
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main: Trajectory & Stats -->
+                <main class="results-panel">
+                    <section class="summary-dashboard card gradient-card">
+                        <div class="metric-container" style="width: 100%; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
+                            <div class="metric-block">
+                                <span class="metric-label" id="lbl-comp-final-bal">期末預估總資產</span>
+                                <span class="metric-value price-now" id="comp-final-balance">NT$ 948,000</span>
+                            </div>
+                            <div class="metric-divider"></div>
+                            <div class="metric-block">
+                                <span class="metric-label" id="lbl-comp-total-prin">累積投入本金</span>
+                                <span class="metric-value" style="color: var(--text-primary);" id="comp-total-principal">NT$ 700,000</span>
+                            </div>
+                            <div class="metric-divider"></div>
+                            <div class="metric-block">
+                                <span class="metric-label" id="lbl-comp-total-int">累積複利收益</span>
+                                <span class="metric-value price-intrinsic" id="comp-total-interest">NT$ 248,000</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Chart Card -->
+                    <div class="chart-card card" style="min-height: 400px;">
+                        <h2 class="section-title"><i data-lucide="line-chart"></i> 資產增長複利曲線</h2>
+                        <div class="chart-container">
+                            <canvas id="compoundChart"></canvas>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Tab 3: Dividend Reinvestment (DRIP) Calculator -->
+        <div id="tab-content-drip" class="tab-content-container" style="display: none;">
+            <!-- Drip non-dividend warning banner -->
+            <div id="drip-no-dividend-warning" class="etf-warning-banner" style="display: none; background: rgba(239, 68, 68, 0.08); border-color: rgba(239, 68, 68, 0.25); color: #f87171; margin-bottom: 1.5rem; width: 100%;">
+                <i data-lucide="alert-triangle" style="color: #ef4444; width: 1.2rem; height: 1.2rem; flex-shrink: 0;"></i>
+                <span><strong>無配息標的提示：</strong>此標的（如 TSLA, AMD, SMCI）不發放股利，股利再投資計畫 (DRIP) 無法產生滾存與複利效果。系統已將期末年領股息與累積股利設為 0，建議選擇高股息或有配息的標的進行 DRIP 計算。</span>
+            </div>
+            <div class="calculator-grid">
+                <!-- Sidebar: DRIP Parameters -->
+                <aside class="control-panel card">
+                    <h2 class="section-title"><i data-lucide="piggy-bank"></i> 股息再投資設定</h2>
+                    
+                    <div class="parameter-group info-group">
+                        <div class="input-wrapper">
+                            <label for="drip-price" id="lbl-drip-price">目前股價</label>
+                            <input type="number" id="drip-price" value="23.5" step="0.5" min="0.1">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="drip-shares">初始持有股數</label>
+                            <input type="number" id="drip-shares" value="10000" step="1000" min="0">
+                            <span class="input-detail" style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.2rem; display: block;">例如：10,000 股 = 10 張 (台股)</span>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="drip-dividend" id="lbl-drip-dividend">預估每股發放股利 (年)</label>
+                            <input type="number" id="drip-dividend" value="1.40" step="0.1" min="0">
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="drip-frequency">配息頻率方式</label>
+                            <select id="drip-frequency" style="cursor: pointer;">
+                                <option value="1">年配息 (1次/年)</option>
+                                <option value="2">半年配 (2次/年)</option>
+                                <option value="4" selected>季配息 (4次/年)</option>
+                                <option value="12">月配息 (12次/年)</option>
+                            </select>
+                        </div>
+                        <div class="input-wrapper">
+                            <label for="drip-annual-add" id="lbl-drip-annual-add">每年額外加碼本金</label>
+                            <input type="number" id="drip-annual-add" value="50000" step="5000" min="0">
+                        </div>
+                        <div class="input-wrapper" style="display: flex; align-items: center; gap: 0.5rem; padding: 0.5rem 0;">
+                            <input type="checkbox" id="drip-reinvest" checked style="width: 1.1rem; height: 1.1rem; accent-color: var(--accent); cursor: pointer;">
+                            <label for="drip-reinvest" style="cursor: pointer; font-size: 0.9rem;">開啟「股息再投資」計畫 (DRIP)</label>
+                        </div>
+                        <div class="input-wrapper">
+                            <div class="slider-label-row">
+                                <label for="drip-years">計畫執行年限</label>
+                                <span class="slider-value" id="val-drip-years">10年</span>
+                            </div>
+                            <input type="range" id="drip-years" min="1" max="30" value="10" class="styled-slider">
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main: DRIP Trajectory -->
+                <main class="results-panel">
+                    <section class="summary-dashboard card gradient-card">
+                        <div class="metric-container" style="width: 100%; justify-content: space-around; flex-wrap: wrap; gap: 1rem;">
+                            <div class="metric-block">
+                                <span class="metric-label">期末累積持有股數</span>
+                                <span class="metric-value price-now" id="drip-final-shares">15,480 股</span>
+                            </div>
+                            <div class="metric-divider"></div>
+                            <div class="metric-block">
+                                <span class="metric-label" id="lbl-drip-final-inc">期末年領股息預估</span>
+                                <span class="metric-value price-intrinsic" id="drip-final-income">NT$ 21,672</span>
+                            </div>
+                            <div class="metric-divider"></div>
+                            <div class="metric-block">
+                                <span class="metric-label" id="lbl-drip-total-div">累積領取總股息</span>
+                                <span class="metric-value" style="color: var(--text-primary);" id="drip-total-dividends">NT$ 124,500</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Chart Card -->
+                    <div class="chart-card card" style="min-height: 400px;">
+                        <h2 class="section-title"><i data-lucide="line-chart"></i> 股利滾存與股數增長曲線</h2>
+                        <div class="chart-container">
+                            <canvas id="dripChart"></canvas>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script Init -->
+    <script src="app.js"></script>
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
