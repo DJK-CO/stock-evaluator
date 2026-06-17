@@ -37,83 +37,83 @@ TICKERS = {
 
 MOCK_FALLBACKS = {
     "2330.TW": {
-        "price": 920.0, "eps": 40.2, "bps": 162.5, "dividend": 16.0, "fcf": 480000.0, "shares": 25930.0,
+        "price": 920.0, "eps": 45.0, "bps": 180.0, "dividend": 20.0, "fcf": 480000.0, "shares": 25930.0,
         "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 25, "pb": 5.8, "rule40Growth": 22, "rule40FCFMargin": 38
     },
     "0050.TW": {
-        "price": 185.0, "eps": 8.50, "bps": 75.00, "dividend": 5.50, "fcf": 0.0, "shares": 1.0,
+        "price": 185.0, "eps": 9.00, "bps": 80.00, "dividend": 6.50, "fcf": 0.0, "shares": 1.0,
         "growth1": 6, "growth2": 4, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 21.8, "pb": 2.4, "rule40Growth": 12, "rule40FCFMargin": 0
     },
     "006208.TW": {
-        "price": 108.0, "eps": 5.20, "bps": 45.00, "dividend": 3.50, "fcf": 0.0, "shares": 1.0,
+        "price": 108.0, "eps": 5.60, "bps": 48.00, "dividend": 4.20, "fcf": 0.0, "shares": 1.0,
         "growth1": 6, "growth2": 4, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 21.0, "pb": 2.40, "rule40Growth": 12, "rule40FCFMargin": 0
     },
     "00878.TW": {
-        "price": 23.5, "eps": 1.50, "bps": 16.00, "dividend": 1.40, "fcf": 0.0, "shares": 1.0,
+        "price": 23.5, "eps": 1.70, "bps": 18.00, "dividend": 1.80, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 15.6, "pb": 1.47, "rule40Growth": 8, "rule40FCFMargin": 0
     },
     "00919.TW": {
-        "price": 25.0, "eps": 1.80, "bps": 16.00, "dividend": 2.20, "fcf": 0.0, "shares": 1.0,
+        "price": 25.0, "eps": 2.00, "bps": 17.00, "dividend": 2.88, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 14.0, "pb": 1.56, "rule40Growth": 8, "rule40FCFMargin": 0
     },
     "00929.TW": {
-        "price": 20.0, "eps": 1.40, "bps": 15.00, "dividend": 1.60, "fcf": 0.0, "shares": 1.0,
+        "price": 20.0, "eps": 1.60, "bps": 16.00, "dividend": 2.20, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.8, "safety": 10, "pe": 14.5, "pb": 1.33, "rule40Growth": 10, "rule40FCFMargin": 0
     },
     "AAPL": {
-        "price": 214.3, "eps": 6.60, "bps": 4.85, "dividend": 1.00, "fcf": 104000.0, "shares": 15280.0,
+        "price": 214.3, "eps": 7.20, "bps": 6.00, "dividend": 1.04, "fcf": 104000.0, "shares": 15280.0,
         "growth1": 8, "growth2": 6, "terminal": 2.0, "discount": 7.5, "safety": 15, "pe": 30, "pb": 44.0, "rule40Growth": 6, "rule40FCFMargin": 26
     },
     "NVDA": {
-        "price": 127.4, "eps": 2.00, "bps": 12.50, "dividend": 0.04, "fcf": 27000.0, "shares": 24500.0,
+        "price": 127.4, "eps": 3.80, "bps": 14.00, "dividend": 0.04, "fcf": 27000.0, "shares": 24500.0,
         "growth1": 30, "growth2": 15, "terminal": 2.5, "discount": 9.0, "safety": 20, "pe": 45, "pb": 15.0, "rule40Growth": 90, "rule40FCFMargin": 45
     },
     "AVGO": {
-        "price": 175.0, "eps": 5.20, "bps": 24.50, "dividend": 2.12, "fcf": 18500.0, "shares": 465.0,
+        "price": 175.0, "eps": 5.50, "bps": 28.00, "dividend": 2.12, "fcf": 18500.0, "shares": 465.0,
         "growth1": 25, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 33.0, "pb": 7.1, "rule40Growth": 45, "rule40FCFMargin": 42
     },
     "MSFT": {
-        "price": 420.0, "eps": 11.80, "bps": 37.00, "dividend": 3.00, "fcf": 70000.0, "shares": 7430.0,
+        "price": 420.0, "eps": 12.50, "bps": 40.00, "dividend": 3.00, "fcf": 70000.0, "shares": 7430.0,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.0, "safety": 15, "pe": 35, "pb": 12.0, "rule40Growth": 15, "rule40FCFMargin": 30
     },
     "TSLA": {
-        "price": 184.8, "eps": 2.52, "bps": 21.30, "dividend": 0.00, "fcf": 4400.0, "shares": 3180.0,
+        "price": 184.8, "eps": 2.60, "bps": 22.00, "dividend": 0.00, "fcf": 4400.0, "shares": 3180.0,
         "growth1": 20, "growth2": 12, "terminal": 2.0, "discount": 10.0, "safety": 25, "pe": 65, "pb": 8.5, "rule40Growth": 15, "rule40FCFMargin": 10
     },
     "AMD": {
-        "price": 160.0, "eps": 2.10, "bps": 36.50, "dividend": 0.00, "fcf": 1200.0, "shares": 1610.0,
+        "price": 160.0, "eps": 2.20, "bps": 38.00, "dividend": 0.00, "fcf": 1200.0, "shares": 1610.0,
         "growth1": 22, "growth2": 12, "terminal": 2.0, "discount": 9.5, "safety": 20, "pe": 75.0, "pb": 4.4, "rule40Growth": 15, "rule40FCFMargin": 10
     },
     "GOOGL": {
-        "price": 175.0, "eps": 7.20, "bps": 24.00, "dividend": 0.80, "fcf": 69000.0, "shares": 12400.0,
+        "price": 175.0, "eps": 7.50, "bps": 26.00, "dividend": 0.80, "fcf": 69000.0, "shares": 12400.0,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.0, "safety": 15, "pe": 24.0, "pb": 7.29, "rule40Growth": 14, "rule40FCFMargin": 28
     },
     "TSM": {
-        "price": 180.0, "eps": 6.50, "bps": 26.50, "dividend": 1.80, "fcf": 15000.0, "shares": 5180.0,
+        "price": 180.0, "eps": 6.80, "bps": 28.00, "dividend": 1.80, "fcf": 15000.0, "shares": 5180.0,
         "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 28.0, "pb": 6.8, "rule40Growth": 22, "rule40FCFMargin": 38
     },
     "SMCI": {
-        "price": 850.0, "eps": 22.00, "bps": 85.00, "dividend": 0.00, "fcf": 1200.0, "shares": 58.0,
+        "price": 850.0, "eps": 24.00, "bps": 90.00, "dividend": 0.00, "fcf": 1200.0, "shares": 58.0,
         "growth1": 45, "growth2": 20, "terminal": 2.0, "discount": 10.5, "safety": 30, "pe": 35.0, "pb": 8.5, "rule40Growth": 80, "rule40FCFMargin": 10
     },
     "00713.TW": {
-        "price": 58.0, "eps": 3.50, "bps": 24.50, "dividend": 3.20, "fcf": 0.0, "shares": 1.0,
+        "price": 58.0, "eps": 3.80, "bps": 26.00, "dividend": 3.80, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.5, "safety": 10, "pe": 16.5, "pb": 2.3, "rule40Growth": 10, "rule40FCFMargin": 0
     },
     "00940.TW": {
-        "price": 10.2, "eps": 0.65, "bps": 10.00, "dividend": 0.72, "fcf": 0.0, "shares": 1.0,
+        "price": 10.2, "eps": 0.70, "bps": 10.00, "dividend": 0.80, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 15.0, "pb": 1.0, "rule40Growth": 8, "rule40FCFMargin": 0
     },
     "VOO": {
-        "price": 500.0, "eps": 18.50, "bps": 110.00, "dividend": 6.20, "fcf": 0.0, "shares": 1.0,
+        "price": 500.0, "eps": 19.00, "bps": 115.00, "dividend": 6.80, "fcf": 0.0, "shares": 1.0,
         "growth1": 7, "growth2": 5, "terminal": 1.8, "discount": 7.0, "safety": 10, "pe": 25.0, "pb": 4.5, "rule40Growth": 14, "rule40FCFMargin": 0
     },
     "QQQ": {
-        "price": 460.0, "eps": 15.00, "bps": 65.00, "dividend": 2.50, "fcf": 0.0, "shares": 1.0,
+        "price": 460.0, "eps": 16.00, "bps": 70.00, "dividend": 3.00, "fcf": 0.0, "shares": 1.0,
         "growth1": 12, "growth2": 8, "terminal": 2.0, "discount": 7.5, "safety": 10, "pe": 30.0, "pb": 7.0, "rule40Growth": 18, "rule40FCFMargin": 0
     },
     "SCHD": {
-        "price": 82.0, "eps": 4.20, "bps": 32.00, "dividend": 2.80, "fcf": 0.0, "shares": 1.0,
+        "price": 82.0, "eps": 4.30, "bps": 34.00, "dividend": 2.90, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.5, "safety": 10, "pe": 16.5, "pb": 2.5, "rule40Growth": 10, "rule40FCFMargin": 0
     }
 }
@@ -138,31 +138,53 @@ def fetch_realtime_data(force=False):
         fallback = MOCK_FALLBACKS[symbol]
         try:
             ticker = yf.Ticker(symbol)
-            info = ticker.info
+            
+            # Safe info retrieval to prevent yfinance crash
+            try:
+                info = ticker.info
+                if not isinstance(info, dict):
+                    info = {}
+            except Exception:
+                info = {}
             
             # Fetch current price
             price = info.get("currentPrice") or info.get("regularMarketPrice")
             if not price:
-                # Try getting from history
-                hist = ticker.history(period="1d")
-                if not hist.empty:
-                    price = float(hist['Close'].iloc[-1])
-                else:
-                    price = fallback["price"]
+                try:
+                    hist = ticker.history(period="1d")
+                    if not hist.empty:
+                        price = float(hist['Close'].iloc[-1])
+                except Exception:
+                    pass
+            if not price:
+                price = fallback["price"]
             
             # Get financial stats
             eps = info.get("trailingEps") or info.get("forwardEps") or fallback["eps"]
             bps = info.get("bookValue") or fallback["bps"]
             
-            # Dividends
+            # Dividends (Try info first, fallback to historical sum if missing)
             dividend = info.get("dividendRate") or info.get("trailingAnnualDividendRate")
+            if dividend is None or dividend <= 0:
+                try:
+                    div_history = ticker.dividends
+                    if div_history is not None and not div_history.empty:
+                        import pandas as pd
+                        now = pd.Timestamp.now(tz=div_history.index.tz)
+                        one_year_ago = now - pd.Timedelta(days=365)
+                        recent_divs = div_history[div_history.index >= one_year_ago]
+                        if not recent_divs.empty:
+                            dividend = float(recent_divs.sum())
+                            print(f"  [歷史配息計算] {symbol} 過去一年累計股利為: {dividend}")
+                except Exception as ex:
+                    print(f"  計算歷史股利出錯 ({symbol}): {ex}")
+            
             if dividend is None or dividend <= 0:
                 dividend = fallback["dividend"]
             
             # FCF and Shares
             fcf = info.get("freeCashflow")
             if not fcf:
-                # Try calculating from cashflow statement
                 try:
                     cf = ticker.cashflow
                     if "Free Cash Flow" in cf.index:
@@ -182,6 +204,14 @@ def fetch_realtime_data(force=False):
                 shares = shares / 1000000.0 # to millions
             else:
                 shares = fallback["shares"]
+                
+            # If it is ETF, overwrite missing stats with custom fallback to prevent corporate valuation errors
+            if meta.get("isETF"):
+                eps = fallback["eps"]
+                bps = fallback["bps"]
+                fcf = fallback["fcf"]
+                shares = fallback["shares"]
+
                 
             # Name
             name = info.get("longName") or info.get("shortName")
