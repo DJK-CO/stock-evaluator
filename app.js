@@ -1422,6 +1422,13 @@ function calculateValuation() {
 
     const cSymbol = currentCurrency === "TWD" ? "NT$" : "$";
     
+    // 外部範疇宣告估值變數以供 Chart.js 圖表使用
+    let dcfValue = 0;
+    let grahamValue = 0;
+    let ddmValue = 0;
+    let multiplierValue = 0;
+    let epvValue = 0;
+    
     // Update labels dynamic currencies
     const lblCurrentPrice = document.getElementById("lbl-current-price");
     const lblEps = document.getElementById("lbl-eps");
@@ -1558,6 +1565,11 @@ function calculateValuation() {
 
         // Display Base case details on the UI
         if (growth1Rate === g1 && discRate === discount) {
+            dcfValue = dcf;
+            grahamValue = graham;
+            ddmValue = ddm;
+            multiplierValue = mult;
+            
             calcDcfEl.textContent = isETFSelected ? "不適用" : formatCurrency(dcf);
             calcGrahamEl.textContent = isETFSelected ? "不適用" : formatCurrency(graham);
             calcDdmEl.textContent = dividend <= 0 ? "不適用 (無配息)" : formatCurrency(ddm);
@@ -1565,6 +1577,7 @@ function calculateValuation() {
             
             // Model E: EPV (Zero-Growth Benchmark)
             const epvVal = isETFSelected ? (dividend / discRate) : (eps / discRate);
+            epvValue = epvVal;
             const calcEpvEl = document.getElementById("calc-epv");
             if (calcEpvEl) {
                 calcEpvEl.textContent = epvVal <= 0 ? "不適用" : formatCurrency(epvVal);
@@ -1856,25 +1869,26 @@ function calculateValuation() {
     // ==========================================
     // Update Chart.js Visualization
     // ==========================================
-    updateValuationChart(price, intrinsicValue, isETFSelected ? 0 : dcfValue, isETFSelected ? 0 : grahamValue, ddmValue, multiplierValue);
+    updateValuationChart(price, intrinsicValue, isETFSelected ? 0 : dcfValue, isETFSelected ? 0 : grahamValue, ddmValue, multiplierValue, epvValue);
 }
 
 // Chart.js Manager
-function updateValuationChart(currentPrice, intrinsicValue, dcf, graham, ddm, multiplier) {
+function updateValuationChart(currentPrice, intrinsicValue, dcf, graham, ddm, multiplier, epv) {
     const ctx = document.getElementById('valuationChart').getContext('2d');
     
     const chartData = {
-        labels: ['當前市價', '綜合內在價值', 'DCF 估值', '葛拉漢公式', '股利折現 (DDM)', '乘數估值'],
+        labels: ['當前市價', '綜合內在價值', 'DCF 估值', '葛拉漢公式', '股利折現 (DDM)', '乘數估值', 'EPV 估值'],
         datasets: [{
             label: `股票估值對比 (${currentCurrency === "TWD" ? "NT$" : "$"})`,
-            data: [currentPrice, intrinsicValue, dcf, graham, ddm, multiplier],
+            data: [currentPrice, intrinsicValue, dcf, graham, ddm, multiplier, epv],
             backgroundColor: [
                 'rgba(248, 250, 252, 0.15)', // 當前市價
                 'rgba(99, 102, 241, 0.85)',  // 綜合內在價值
                 'rgba(99, 102, 241, 0.45)',  // DCF
                 'rgba(139, 92, 246, 0.45)',  // Graham
                 'rgba(236, 72, 153, 0.45)',  // DDM
-                'rgba(6, 182, 212, 0.45)'    // Multipliers
+                'rgba(6, 182, 212, 0.45)',   // Multipliers
+                'rgba(16, 185, 129, 0.45)'    // EPV
             ],
             borderColor: [
                 'rgba(248, 250, 252, 0.5)',
@@ -1882,7 +1896,8 @@ function updateValuationChart(currentPrice, intrinsicValue, dcf, graham, ddm, mu
                 '#6366f1',
                 '#8b5cf6',
                 '#ec4899',
-                '#06b6d4'
+                '#06b6d4',
+                '#10b981'
             ],
             borderWidth: 1.5,
             borderRadius: 6,
