@@ -32,7 +32,13 @@ TICKERS = {
     "SMCI": {"currency": "USD", "isETF": False, "isHot": True, "hotReason": "AI 伺服器液冷架構巨頭，2024-2026年社團頭號 AI 飆股與散熱概念股，波動極大。"},
     "VOO": {"currency": "USD", "isETF": True, "etfType": "市值型", "etfDesc": "Vanguard S&P 500 ETF，最經典的美股標普500大盤代表，長期複利穩健。"},
     "QQQ": {"currency": "USD", "isETF": True, "etfType": "市值型", "etfDesc": "Invesco QQQ，追蹤Nasdaq 100指數，美股科技龍頭大本營，長期成長動能強。"},
-    "SCHD": {"currency": "USD", "isETF": True, "etfType": "高股息", "etfDesc": "Schwab US Dividend Equity ETF，美股最熱門高息增長 ETF，防禦與存股首選。"}
+    "SCHD": {"currency": "USD", "isETF": True, "etfType": "高股息", "etfDesc": "Schwab US Dividend Equity ETF，美股最熱門高息增長 ETF，防禦與存股首選。"},
+    "0052.TW": {"currency": "TWD", "isETF": True, "etfType": "科技型", "etfDesc": "富邦台灣科技 ETF，追蹤台灣科技板塊，台股科技巨頭與半導體比例高。", "isHot": True, "hotReason": "富邦科技 (0052.TW) 為台股成分股純度最高的科技/半導體 ETF，台積電佔比高達 60% 以上，為社團中熱門度僅次於 0050 的『台股科技大盤』代表。"},
+    "2327.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "國巨 (2327.TW) 為被動元件全球龍頭。受益於 AI 伺服器與高階車用電容 (MLCC) 需求爆發，其高階被動元件市佔率領先，是 2026 被動元件板塊最具話題性的熱門股。"},
+    "2492.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "華新科 (2492.TW) 為台灣第二大被動元件廠。受益於終端消費電子復甦與 AI 手機/PC 換代拉動的 MLCC/電阻需求，為社團中低價位被動元件投資焦點。"},
+    "2344.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "華邦電 (2344.TW) 為記憶體與主動元件大廠。Nor Flash 與 Specialty DRAM 受惠於 AI 邊緣運算設備大增，產能滿載，為 2026 記憶體循環復甦的主要主動元件代表。"},
+    "3481.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "群創 (3481.TW) 因積極轉型半導體扇出型面板級封裝 (FOPLP)，切入 AI 晶片先進封裝市場，股價受先進封裝產能供不應求拉動，成為社團人氣最高的面板與半導體轉型飆股。"},
+    "2409.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "友達 (2409.TW) 為面板巨頭，除面板報價回溫外，積極跨足 Micro LED 與高階車用智慧座艙解決方案，Micro LED 先進顯示技術量產進度領先，是社團討論車用與新顯示技術的首選。"}
 }
 
 MOCK_FALLBACKS = {
@@ -115,6 +121,30 @@ MOCK_FALLBACKS = {
     "SCHD": {
         "price": 82.0, "eps": 4.30, "bps": 34.00, "dividend": 2.90, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.5, "safety": 10, "pe": 16.5, "pb": 2.5, "rule40Growth": 10, "rule40FCFMargin": 0
+    },
+    "0052.TW": {
+        "price": 205.0, "eps": 12.00, "bps": 90.00, "dividend": 4.50, "fcf": 0.0, "shares": 1.0,
+        "growth1": 12, "growth2": 8, "terminal": 1.8, "discount": 7.0, "safety": 10, "pe": 18.0, "pb": 2.20, "rule40Growth": 15, "rule40FCFMargin": 0
+    },
+    "2327.TW": {
+        "price": 650.0, "eps": 48.00, "bps": 290.00, "dividend": 20.00, "fcf": 12000.0, "shares": 418.0,
+        "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 13.5, "pb": 2.20, "rule40Growth": 18, "rule40FCFMargin": 22
+    },
+    "2492.TW": {
+        "price": 98.0, "eps": 5.20, "bps": 76.00, "dividend": 3.00, "fcf": 1800.0, "shares": 485.0,
+        "growth1": 10, "growth2": 6, "terminal": 1.5, "discount": 7.5, "safety": 10, "pe": 18.8, "pb": 1.30, "rule40Growth": 12, "rule40FCFMargin": 15
+    },
+    "2344.TW": {
+        "price": 24.5, "eps": 1.50, "bps": 21.00, "dividend": 0.80, "fcf": 4500.0, "shares": 3980.0,
+        "growth1": 8, "growth2": 5, "terminal": 1.5, "discount": 7.5, "safety": 10, "pe": 16.3, "pb": 1.20, "rule40Growth": 8, "rule40FCFMargin": 12
+    },
+    "3481.TW": {
+        "price": 14.5, "eps": 0.80, "bps": 24.00, "dividend": 0.50, "fcf": -2000.0, "shares": 9560.0,
+        "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 18.1, "pb": 0.60, "rule40Growth": 6, "rule40FCFMargin": -5
+    },
+    "2409.TW": {
+        "price": 16.5, "eps": 0.60, "bps": 22.00, "dividend": 0.50, "fcf": -1500.0, "shares": 7690.0,
+        "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 27.5, "pb": 0.75, "rule40Growth": 6, "rule40FCFMargin": -4
     }
 }
 
@@ -228,6 +258,18 @@ def fetch_realtime_data(force=False):
                 name = "群益台灣精選高息"
             elif symbol == "00929.TW":
                 name = "復華台灣科技優息"
+            elif symbol == "0052.TW":
+                name = "富邦科技"
+            elif symbol == "2327.TW":
+                name = "國巨"
+            elif symbol == "2492.TW":
+                name = "華新科"
+            elif symbol == "2344.TW":
+                name = "華邦電"
+            elif symbol == "3481.TW":
+                name = "群創"
+            elif symbol == "2409.TW":
+                name = "友達"
             elif not name:
                 name = fallback.get("name") or symbol
 
@@ -274,7 +316,20 @@ def fetch_realtime_data(force=False):
             print(f"[ERROR] Failed fetching {symbol}: {str(e)}. Using fallback data.")
             results[symbol] = {
                 "symbol": symbol,
-                "name": "台積電" if symbol == "2330.TW" else ("元大台灣50 (市值型)" if symbol == "0050.TW" else ("國泰永續高股息 (高股息)" if symbol == "00878.TW" else symbol)),
+                "name": {
+                    "2330.TW": "台積電",
+                    "0050.TW": "元大台灣50",
+                    "006208.TW": "富邦台50",
+                    "00878.TW": "國泰永續高股息",
+                    "00919.TW": "群益台灣精選高息",
+                    "00929.TW": "復華台灣科技優息",
+                    "0052.TW": "富邦科技",
+                    "2327.TW": "國巨",
+                    "2492.TW": "華新科",
+                    "2344.TW": "華邦電",
+                    "3481.TW": "群創",
+                    "2409.TW": "友達"
+                }.get(symbol, symbol),
                 "price": fallback["price"],
                 "eps": fallback["eps"],
                 "bps": fallback["bps"],
