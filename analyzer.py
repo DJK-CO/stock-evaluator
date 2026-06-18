@@ -38,32 +38,52 @@ TICKERS = {
     "2492.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "華新科 (2492.TW) 為台灣第二大被動元件廠。受益於終端消費電子復甦與 AI 手機/PC 換代拉動的 MLCC/電阻需求，為社團中低價位被動元件投資焦點。"},
     "2344.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "華邦電 (2344.TW) 為記憶體與主動元件大廠。Nor Flash 與 Specialty DRAM 受惠於 AI 邊緣運算設備大增，產能滿載，為 2026 記憶體循環復甦的主要主動元件代表。"},
     "3481.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "群創 (3481.TW) 因積極轉型半導體扇出型面板級封裝 (FOPLP)，切入 AI 晶片先進封裝市場，股價受先進封裝產能供不應求拉動，成為社團人氣最高的面板與半導體轉型飆股。"},
-    "2409.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "友達 (2409.TW) 為面板巨頭，除面板報價回溫外，積極跨足 Micro LED 與高階車用智慧座艙解決方案，Micro LED 先進顯示技術量產進度領先，是社團討論車用與新顯示技術的首選。"}
+    "2409.TW": {"currency": "TWD", "isETF": False, "isHot": True, "hotReason": "友達 (2409.TW) 為面板巨頭，除面板報價回溫外，積極跨足 Micro LED 與高階車用智慧座艙解決方案，Micro LED 先進顯示技術量產進度領先，是社團討論車用與新顯示技術的首選。"},
+    "2317.TW": {"currency": "TWD", "isETF": False},
+    "2454.TW": {"currency": "TWD", "isETF": False},
+    "2308.TW": {"currency": "TWD", "isETF": False},
+    "2303.TW": {"currency": "TWD", "isETF": False},
+    "2382.TW": {"currency": "TWD", "isETF": False},
+    "2301.TW": {"currency": "TWD", "isETF": False},
+    "2891.TW": {"currency": "TWD", "isETF": False},
+    "2603.TW": {"currency": "TWD", "isETF": False},
+    "2379.TW": {"currency": "TWD", "isETF": False},
+    "3034.TW": {"currency": "TWD", "isETF": False},
+    "3711.TW": {"currency": "TWD", "isETF": False},
+    "3045.TW": {"currency": "TWD", "isETF": False},
+    "2412.TW": {"currency": "TWD", "isETF": False},
+    "3231.TW": {"currency": "TWD", "isETF": False},
+    "AMZN": {"currency": "USD", "isETF": False},
+    "TXN": {"currency": "USD", "isETF": False},
+    "ABBV": {"currency": "USD", "isETF": False},
+    "AMGN": {"currency": "USD", "isETF": False},
+    "CVX": {"currency": "USD", "isETF": False},
+    "PEP": {"currency": "USD", "isETF": False}
 }
 
 MOCK_FALLBACKS = {
     "2330.TW": {
-        "price": 920.0, "eps": 45.0, "bps": 180.0, "dividend": 20.0, "fcf": 480000.0, "shares": 25930.0,
+        "price": 2400.0, "eps": 73.0, "bps": 227.0, "dividend": 24.0, "fcf": 719000.0, "shares": 25930.0,
         "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 25, "pb": 5.8, "rule40Growth": 22, "rule40FCFMargin": 38
     },
     "0050.TW": {
-        "price": 185.0, "eps": 9.00, "bps": 80.00, "dividend": 6.50, "fcf": 0.0, "shares": 1.0,
+        "price": 428.0, "eps": 9.00, "bps": 80.00, "dividend": 6.50, "fcf": 0.0, "shares": 1.0,
         "growth1": 6, "growth2": 4, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 21.8, "pb": 2.4, "rule40Growth": 12, "rule40FCFMargin": 0
     },
     "006208.TW": {
-        "price": 108.0, "eps": 5.60, "bps": 48.00, "dividend": 4.20, "fcf": 0.0, "shares": 1.0,
+        "price": 248.0, "eps": 5.60, "bps": 48.00, "dividend": 4.20, "fcf": 0.0, "shares": 1.0,
         "growth1": 6, "growth2": 4, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 21.0, "pb": 2.40, "rule40Growth": 12, "rule40FCFMargin": 0
     },
     "00878.TW": {
-        "price": 23.5, "eps": 1.70, "bps": 18.00, "dividend": 1.80, "fcf": 0.0, "shares": 1.0,
+        "price": 33.5, "eps": 1.70, "bps": 18.00, "dividend": 1.80, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 15.6, "pb": 1.47, "rule40Growth": 8, "rule40FCFMargin": 0
     },
     "00919.TW": {
-        "price": 25.0, "eps": 2.00, "bps": 17.00, "dividend": 2.88, "fcf": 0.0, "shares": 1.0,
+        "price": 30.5, "eps": 2.00, "bps": 17.00, "dividend": 2.88, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 14.0, "pb": 1.56, "rule40Growth": 8, "rule40FCFMargin": 0
     },
     "00929.TW": {
-        "price": 20.0, "eps": 1.60, "bps": 16.00, "dividend": 2.20, "fcf": 0.0, "shares": 1.0,
+        "price": 25.0, "eps": 1.60, "bps": 16.00, "dividend": 2.20, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.8, "safety": 10, "pe": 14.5, "pb": 1.33, "rule40Growth": 10, "rule40FCFMargin": 0
     },
     "AAPL": {
@@ -127,24 +147,104 @@ MOCK_FALLBACKS = {
         "growth1": 12, "growth2": 8, "terminal": 1.8, "discount": 7.0, "safety": 10, "pe": 18.0, "pb": 2.20, "rule40Growth": 15, "rule40FCFMargin": 0
     },
     "2327.TW": {
-        "price": 650.0, "eps": 48.00, "bps": 290.00, "dividend": 20.00, "fcf": 12000.0, "shares": 418.0,
+        "price": 1040.0, "eps": 55.00, "bps": 320.00, "dividend": 22.00, "fcf": 12000.0, "shares": 418.0,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 13.5, "pb": 2.20, "rule40Growth": 18, "rule40FCFMargin": 22
     },
     "2492.TW": {
-        "price": 98.0, "eps": 5.20, "bps": 76.00, "dividend": 3.00, "fcf": 1800.0, "shares": 485.0,
+        "price": 563.0, "eps": 8.50, "bps": 85.00, "dividend": 4.00, "fcf": 1800.0, "shares": 485.0,
         "growth1": 10, "growth2": 6, "terminal": 1.5, "discount": 7.5, "safety": 10, "pe": 18.8, "pb": 1.30, "rule40Growth": 12, "rule40FCFMargin": 15
     },
     "2344.TW": {
-        "price": 24.5, "eps": 1.50, "bps": 21.00, "dividend": 0.80, "fcf": 4500.0, "shares": 3980.0,
+        "price": 212.0, "eps": 2.50, "bps": 28.00, "dividend": 1.20, "fcf": 4500.0, "shares": 3980.0,
         "growth1": 8, "growth2": 5, "terminal": 1.5, "discount": 7.5, "safety": 10, "pe": 16.3, "pb": 1.20, "rule40Growth": 8, "rule40FCFMargin": 12
     },
     "3481.TW": {
-        "price": 14.5, "eps": 0.80, "bps": 24.00, "dividend": 0.50, "fcf": -2000.0, "shares": 9560.0,
+        "price": 61.7, "eps": 1.80, "bps": 28.00, "dividend": 0.80, "fcf": -2000.0, "shares": 9560.0,
         "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 18.1, "pb": 0.60, "rule40Growth": 6, "rule40FCFMargin": -5
     },
     "2409.TW": {
-        "price": 16.5, "eps": 0.60, "bps": 22.00, "dividend": 0.50, "fcf": -1500.0, "shares": 7690.0,
+        "price": 26.95, "eps": 1.50, "bps": 23.00, "dividend": 0.80, "fcf": -1500.0, "shares": 7690.0,
         "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 27.5, "pb": 0.75, "rule40Growth": 6, "rule40FCFMargin": -4
+    },
+    "2317.TW": {
+        "price": 200.0, "eps": 15.5, "bps": 120.0, "dividend": 7.0, "fcf": 150000.0, "shares": 13860.0,
+        "growth1": 10, "growth2": 7, "terminal": 1.5, "discount": 7.5, "safety": 15, "pe": 18.0, "pb": 1.8, "rule40Growth": 15, "rule40FCFMargin": 8
+    },
+    "2454.TW": {
+        "price": 1400.0, "eps": 75.0, "bps": 310.0, "dividend": 62.0, "fcf": 95000.0, "shares": 1600.0,
+        "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 22.0, "pb": 5.0, "rule40Growth": 18, "rule40FCFMargin": 20
+    },
+    "2308.TW": {
+        "price": 380.0, "eps": 13.5, "bps": 95.0, "dividend": 6.5, "fcf": 28000.0, "shares": 2590.0,
+        "growth1": 12, "growth2": 8, "terminal": 1.5, "discount": 7.5, "safety": 15, "pe": 28.0, "pb": 4.0, "rule40Growth": 12, "rule40FCFMargin": 10
+    },
+    "2303.TW": {
+        "price": 55.0, "eps": 4.8, "bps": 28.0, "dividend": 3.0, "fcf": 45000.0, "shares": 12500.0,
+        "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 11.5, "pb": 1.9, "rule40Growth": 6, "rule40FCFMargin": 25
+    },
+    "2382.TW": {
+        "price": 280.0, "eps": 12.0, "bps": 60.0, "dividend": 9.0, "fcf": 42000.0, "shares": 3860.0,
+        "growth1": 15, "growth2": 10, "terminal": 1.5, "discount": 8.0, "safety": 15, "pe": 23.0, "pb": 4.6, "rule40Growth": 25, "rule40FCFMargin": 6
+    },
+    "2301.TW": {
+        "price": 110.0, "eps": 6.2, "bps": 38.0, "dividend": 4.5, "fcf": 9800.0, "shares": 2350.0,
+        "growth1": 8, "growth2": 6, "terminal": 1.2, "discount": 7.0, "safety": 10, "pe": 17.5, "pb": 2.9, "rule40Growth": 10, "rule40FCFMargin": 9
+    },
+    "2891.TW": {
+        "price": 36.0, "eps": 2.8, "bps": 22.5, "dividend": 1.8, "fcf": 0.0, "shares": 19500.0,
+        "growth1": 5, "growth2": 4, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 13.0, "pb": 1.6, "rule40Growth": 8, "rule40FCFMargin": 0
+    },
+    "2603.TW": {
+        "price": 195.0, "eps": 22.0, "bps": 240.0, "dividend": 10.0, "fcf": 85000.0, "shares": 2110.0,
+        "growth1": 5, "growth2": 3, "terminal": 0.5, "discount": 9.0, "safety": 25, "pe": 8.8, "pb": 0.8, "rule40Growth": 12, "rule40FCFMargin": 35
+    },
+    "2379.TW": {
+        "price": 530.0, "eps": 28.0, "bps": 110.0, "dividend": 18.0, "fcf": 18000.0, "shares": 510.0,
+        "growth1": 12, "growth2": 8, "terminal": 1.5, "discount": 8.0, "safety": 15, "pe": 18.9, "pb": 4.8, "rule40Growth": 14, "rule40FCFMargin": 16
+    },
+    "3034.TW": {
+        "price": 600.0, "eps": 38.5, "bps": 145.0, "dividend": 32.0, "fcf": 24000.0, "shares": 600.0,
+        "growth1": 8, "growth2": 5, "terminal": 1.2, "discount": 7.5, "safety": 15, "pe": 15.5, "pb": 4.1, "rule40Growth": 10, "rule40FCFMargin": 20
+    },
+    "3711.TW": {
+        "price": 165.0, "eps": 9.5, "bps": 72.0, "dividend": 5.5, "fcf": 38000.0, "shares": 4380.0,
+        "growth1": 10, "growth2": 7, "terminal": 1.5, "discount": 7.5, "safety": 15, "pe": 17.3, "pb": 2.3, "rule40Growth": 12, "rule40FCFMargin": 12
+    },
+    "3045.TW": {
+        "price": 105.0, "eps": 4.3, "bps": 32.0, "dividend": 4.3, "fcf": 15000.0, "shares": 3020.0,
+        "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.0, "safety": 10, "pe": 24.0, "pb": 3.3, "rule40Growth": 6, "rule40FCFMargin": 15
+    },
+    "2412.TW": {
+        "price": 125.0, "eps": 4.8, "bps": 50.0, "dividend": 4.8, "fcf": 35000.0, "shares": 7750.0,
+        "growth1": 3, "growth2": 2, "terminal": 1.0, "discount": 5.8, "safety": 10, "pe": 26.0, "pb": 2.5, "rule40Growth": 4, "rule40FCFMargin": 18
+    },
+    "3231.TW": {
+        "price": 115.0, "eps": 5.2, "bps": 35.0, "dividend": 2.6, "fcf": 12000.0, "shares": 2890.0,
+        "growth1": 15, "growth2": 10, "terminal": 1.5, "discount": 8.0, "safety": 15, "pe": 22.0, "pb": 3.3, "rule40Growth": 28, "rule40FCFMargin": 5
+    },
+    "AMZN": {
+        "price": 185.0, "eps": 3.5, "bps": 22.0, "dividend": 0.0, "fcf": 32000.0, "shares": 10400.0,
+        "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 52.8, "pb": 8.4, "rule40Growth": 12, "rule40FCFMargin": 11
+    },
+    "TXN": {
+        "price": 195.0, "eps": 7.0, "bps": 18.0, "dividend": 5.2, "fcf": 5400.0, "shares": 910.0,
+        "growth1": 8, "growth2": 6, "terminal": 2.0, "discount": 7.5, "safety": 15, "pe": 27.8, "pb": 10.8, "rule40Growth": 8, "rule40FCFMargin": 20
+    },
+    "ABBV": {
+        "price": 170.0, "eps": 6.5, "bps": 8.0, "dividend": 6.2, "fcf": 22000.0, "shares": 1760.0,
+        "growth1": 6, "growth2": 5, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 26.1, "pb": 21.2, "rule40Growth": 6, "rule40FCFMargin": 35
+    },
+    "AMGN": {
+        "price": 300.0, "eps": 14.5, "bps": 12.0, "dividend": 9.0, "fcf": 11000.0, "shares": 535.0,
+        "growth1": 7, "growth2": 5, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 20.7, "pb": 25.0, "rule40Growth": 7, "rule40FCFMargin": 30
+    },
+    "CVX": {
+        "price": 155.0, "eps": 12.0, "bps": 88.0, "dividend": 6.5, "fcf": 18000.0, "shares": 1850.0,
+        "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 7.5, "safety": 15, "pe": 12.9, "pb": 1.76, "rule40Growth": 5, "rule40FCFMargin": 12
+    },
+    "PEP": {
+        "price": 165.0, "eps": 7.2, "bps": 15.0, "dividend": 5.2, "fcf": 8200.0, "shares": 1370.0,
+        "growth1": 5, "growth2": 4, "terminal": 1.5, "discount": 6.5, "safety": 10, "pe": 22.9, "pb": 11.0, "rule40Growth": 5, "rule40FCFMargin": 14
     }
 }
 
@@ -189,9 +289,38 @@ def fetch_realtime_data(force=False):
             if not price:
                 price = fallback["price"]
             
+            # 0050.TW 價格精度防偽校正
+            if symbol == "0050.TW" and price < 150:
+                try:
+                    t006208 = yf.Ticker("006208.TW")
+                    p006208 = t006208.info.get("currentPrice") or t006208.info.get("regularMarketPrice")
+                    if not p006208:
+                        hist006208 = t006208.history(period="1d")
+                        if not hist006208.empty:
+                            p006208 = float(hist006208['Close'].iloc[-1])
+                    if p006208 and p006208 > 0:
+                        price = p006208 * 1.725
+                        print(f"  [0050.TW 價格防偽校正] yfinance 原始價格過低，已依 006208.TW 價格 ({p006208}) 乘 1.725 校正為: {price:.2f}")
+                except Exception as ex:
+                    print(f"  [0050.TW 價格校正失敗]: {ex}")
+            
             # Get financial stats
-            eps = info.get("trailingEps") or info.get("forwardEps") or fallback["eps"]
-            bps = info.get("bookValue") or fallback["bps"]
+            eps = info.get("trailingEps") or info.get("forwardEps")
+            bps = info.get("bookValue")
+            
+            # 台股基本面財務指標防禦性檢驗與校正
+            if symbol.endswith(".TW") and not meta.get("isETF"):
+                if eps is None or eps < (fallback["eps"] * 0.4):
+                    print(f"  [基本面防偽] {symbol} 的 EPS 抓取值 ({eps}) 偏離過大，強制回退至預設值: {fallback['eps']}")
+                    eps = fallback["eps"]
+                if bps is None or bps < (fallback["bps"] * 0.4):
+                    print(f"  [基本面防偽] {symbol} 的 BPS 抓取值 ({bps}) 偏離過大，強制回退至預設值: {fallback['bps']}")
+                    bps = fallback["bps"]
+            else:
+                if not eps:
+                    eps = fallback["eps"]
+                if not bps:
+                    bps = fallback["bps"]
             
             # Dividends (Try info first, fallback to historical sum if missing)
             dividend = info.get("dividendRate") or info.get("trailingAnnualDividendRate")
@@ -209,7 +338,10 @@ def fetch_realtime_data(force=False):
                 except Exception as ex:
                     print(f"  計算歷史股利出錯 ({symbol}): {ex}")
             
-            if dividend is None or dividend <= 0:
+            if symbol.endswith(".TW") and not meta.get("isETF") and (dividend is None or dividend < (fallback["dividend"] * 0.4)):
+                print(f"  [基本面防偽] {symbol} 的預估股利 ({dividend}) 偏離過大，強制回退至預設值: {fallback['dividend']}")
+                dividend = fallback["dividend"]
+            elif dividend is None or dividend <= 0:
                 dividend = fallback["dividend"]
             
             # FCF and Shares
@@ -270,6 +402,46 @@ def fetch_realtime_data(force=False):
                 name = "群創"
             elif symbol == "2409.TW":
                 name = "友達"
+            elif symbol == "2317.TW":
+                name = "鴻海"
+            elif symbol == "2454.TW":
+                name = "聯發科"
+            elif symbol == "2308.TW":
+                name = "台達電"
+            elif symbol == "2303.TW":
+                name = "聯電"
+            elif symbol == "2382.TW":
+                name = "廣達"
+            elif symbol == "2301.TW":
+                name = "光寶科"
+            elif symbol == "2891.TW":
+                name = "中信金"
+            elif symbol == "2603.TW":
+                name = "長榮"
+            elif symbol == "2379.TW":
+                name = "瑞昱"
+            elif symbol == "3034.TW":
+                name = "聯詠"
+            elif symbol == "3711.TW":
+                name = "日月光投控"
+            elif symbol == "3045.TW":
+                name = "台灣大"
+            elif symbol == "2412.TW":
+                name = "中華電"
+            elif symbol == "3231.TW":
+                name = "緯創"
+            elif symbol == "AMZN":
+                name = "亞馬遜"
+            elif symbol == "TXN":
+                name = "德州儀器"
+            elif symbol == "ABBV":
+                name = "艾伯維"
+            elif symbol == "AMGN":
+                name = "安進"
+            elif symbol == "CVX":
+                name = "雪佛龍"
+            elif symbol == "PEP":
+                name = "百事"
             elif not name:
                 name = fallback.get("name") or symbol
 
@@ -328,7 +500,27 @@ def fetch_realtime_data(force=False):
                     "2492.TW": "華新科",
                     "2344.TW": "華邦電",
                     "3481.TW": "群創",
-                    "2409.TW": "友達"
+                    "2409.TW": "友達",
+                    "2317.TW": "鴻海",
+                    "2454.TW": "聯發科",
+                    "2308.TW": "台達電",
+                    "2303.TW": "聯電",
+                    "2382.TW": "廣達",
+                    "2301.TW": "光寶科",
+                    "2891.TW": "中信金",
+                    "2603.TW": "長榮",
+                    "2379.TW": "瑞昱",
+                    "3034.TW": "聯詠",
+                    "3711.TW": "日月光投控",
+                    "3045.TW": "台灣大",
+                    "2412.TW": "中華電",
+                    "3231.TW": "緯創",
+                    "AMZN": "亞馬遜",
+                    "TXN": "德州儀器",
+                    "ABBV": "艾伯維",
+                    "AMGN": "安進",
+                    "CVX": "雪佛龍",
+                    "PEP": "百事"
                 }.get(symbol, symbol),
                 "price": fallback["price"],
                 "eps": fallback["eps"],

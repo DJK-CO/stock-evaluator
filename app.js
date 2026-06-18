@@ -12,11 +12,11 @@ const stockPresets = {
     "2330": {
         symbol: "2330.TW",
         name: "台積電",
-        price: 920.0,
-        eps: 40.2,
-        bps: 162.5,
-        dividend: 16.0,
-        fcf: 480000, // 百萬 TWD
+        price: 2400.0,
+        eps: 73.0,
+        bps: 227.0,
+        dividend: 24.0,
+        fcf: 719000, // 百萬 TWD
         shares: 25930, // 百萬股
         growth1: 18,
         growth2: 12,
@@ -37,10 +37,10 @@ const stockPresets = {
     "0050": {
         symbol: "0050.TW",
         name: "元大台灣50 (市值型)",
-        price: 185.0,
-        eps: 8.50,
-        bps: 75.00,
-        dividend: 5.50,
+        price: 428.0,
+        eps: 9.00,
+        bps: 80.00,
+        dividend: 6.50,
         fcf: 0,
         shares: 1,
         growth1: 6,
@@ -65,10 +65,10 @@ const stockPresets = {
     "00878": {
         symbol: "00878.TW",
         name: "國泰永續高股息 (高股息)",
-        price: 23.5,
-        eps: 1.50,
-        bps: 16.00,
-        dividend: 1.40,
+        price: 33.5,
+        eps: 1.70,
+        bps: 18.00,
+        dividend: 1.80,
         fcf: 0,
         shares: 1,
         growth1: 4,
@@ -93,10 +93,10 @@ const stockPresets = {
     "006208": {
         symbol: "006208.TW",
         name: "富邦台50",
-        price: 108.0,
-        eps: 5.20,
-        bps: 45.00,
-        dividend: 3.50,
+        price: 248.0,
+        eps: 5.60,
+        bps: 48.00,
+        dividend: 4.20,
         fcf: 0,
         shares: 1,
         growth1: 6,
@@ -121,10 +121,10 @@ const stockPresets = {
     "00919": {
         symbol: "00919.TW",
         name: "群益台灣精選高息",
-        price: 25.0,
-        eps: 1.80,
-        bps: 16.00,
-        dividend: 2.20,
+        price: 30.5,
+        eps: 2.00,
+        bps: 17.00,
+        dividend: 2.88,
         fcf: 0,
         shares: 1,
         growth1: 4,
@@ -149,10 +149,10 @@ const stockPresets = {
     "00929": {
         symbol: "00929.TW",
         name: "復華台灣科技優息",
-        price: 20.0,
-        eps: 1.40,
-        bps: 15.00,
-        dividend: 1.60,
+        price: 25.0,
+        eps: 1.60,
+        bps: 16.00,
+        dividend: 2.20,
         fcf: 0,
         shares: 1,
         growth1: 5,
@@ -580,10 +580,10 @@ const stockPresets = {
     "2327": {
         symbol: "2327.TW",
         name: "國巨",
-        price: 650.0,
-        eps: 48.00,
-        bps: 290.00,
-        dividend: 20.00,
+        price: 1040.0,
+        eps: 55.00,
+        bps: 320.00,
+        dividend: 22.00,
         fcf: 12000,
         shares: 418,
         growth1: 15,
@@ -630,10 +630,10 @@ const stockPresets = {
     "2344": {
         symbol: "2344.TW",
         name: "華邦電",
-        price: 24.5,
-        eps: 1.50,
-        bps: 21.00,
-        dividend: 0.80,
+        price: 212.0,
+        eps: 2.50,
+        bps: 28.00,
+        dividend: 1.20,
         fcf: 4500,
         shares: 3980,
         growth1: 8,
@@ -655,10 +655,10 @@ const stockPresets = {
     "3481": {
         symbol: "3481.TW",
         name: "群創",
-        price: 14.5,
-        eps: 0.80,
-        bps: 24.00,
-        dividend: 0.50,
+        price: 61.7,
+        eps: 1.80,
+        bps: 28.00,
+        dividend: 0.80,
         fcf: -2000,
         shares: 9560,
         growth1: 6,
@@ -680,10 +680,10 @@ const stockPresets = {
     "2409": {
         symbol: "2409.TW",
         name: "友達",
-        price: 16.5,
-        eps: 0.60,
-        bps: 22.00,
-        dividend: 0.50,
+        price: 26.95,
+        eps: 1.50,
+        bps: 23.00,
+        dividend: 0.80,
         fcf: -1500,
         shares: 7690,
         growth1: 6,
@@ -701,7 +701,207 @@ const stockPresets = {
         riskDesc: "面板巨頭，跨足智慧座艙與 Micro LED 先進技術，但需注意折舊費用與景氣下行時的損益波動。",
         sellPremium: 0.18,
         strategyMode: "growth"
+    },
+    "2317": {
+        symbol: "2317.TW", name: "鴻海", price: 200.0, eps: 11.5, bps: 110.0, dividend: 5.4, fcf: 150000, shares: 13860,
+        growth1: 10, growth2: 7, terminal: 1.5, discount: 7.5, safety: 15, pe: 18.0, pb: 1.8, rule40Growth: 15, rule40FCFMargin: 8,
+        currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "全球代工龍頭，積極布局 AI 伺服器與電動車，具備規模優勢。",
+        sellPremium: 0.18, strategyMode: "growth"
+    },
+    "2454": {
+        symbol: "2454.TW", name: "聯發科", price: 1400.0, eps: 62.0, bps: 280.0, dividend: 55.0, fcf: 95000, shares: 1600,
+        growth1: 15, growth2: 10, terminal: 2.0, discount: 8.5, safety: 15, pe: 22.0, pb: 5.0, rule40Growth: 18, rule40FCFMargin: 20,
+        currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "手機晶片巨頭，受惠 AI 邊緣運算晶片增長，具備高利潤率與高股息特性。",
+        sellPremium: 0.20, strategyMode: "growth"
+    },
+    "2308": {
+        symbol: "2308.TW", name: "台達電", price: 380.0, eps: 13.5, bps: 95.0, dividend: 6.5, fcf: 28000, shares: 2590,
+        growth1: 12, growth2: 8, terminal: 1.5, discount: 7.5, safety: 15, pe: 28.0, pb: 4.0, rule40Growth: 12, rule40FCFMargin: 10,
+        currency: "TWD", frequency: 1, riskLevel: "低風險", riskDesc: "電源與綠能巨頭，AI 伺服器散熱與電源轉換模組龍頭，長期成長穩健。",
+        sellPremium: 0.18, strategyMode: "growth"
+    },
+    "2303": {
+        symbol: "2303.TW", name: "聯電", price: 55.0, eps: 4.8, bps: 28.0, dividend: 3.0, fcf: 45000, shares: 12500,
+        growth1: 6, growth2: 4, terminal: 1.0, discount: 7.0, safety: 10, pe: 11.5, pb: 1.9, rule40Growth: 6, rule40FCFMargin: 25,
+        currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "成熟製程代工大廠，受景氣循環影響大，但股息配發大方，具殖利率防護。",
+        sellPremium: 0.15, strategyMode: "growth"
+    },
+    "2382": {
+        symbol: "2382.TW", name: "廣達", price: 280.0, eps: 12.0, bps: 60.0, dividend: 9.0, fcf: 42000, shares: 3860,
+        growth1: 15, growth2: 10, terminal: 1.5, discount: 8.0, safety: 15, pe: 23.0, pb: 4.6, rule40Growth: 25, rule40FCFMargin: 6,
+        currency: "TWD", frequency: 1, riskLevel: "中高風險", riskDesc: "AI 伺服器代工龍頭，組裝業務營收成長爆發，但需注意代工毛利率波動與估值偏高風險。",
+        sellPremium: 0.22, strategyMode: "growth"
+    },
+    "2301": {
+        symbol: "2301.TW", name: "光寶科", price: 110.0, eps: 6.2, bps: 38.0, dividend: 4.5, fcf: 9800, shares: 2350,
+        growth1: 8, growth2: 6, terminal: 1.2, discount: 7.0, safety: 10, pe: 17.5, pb: 2.9, rule40Growth: 10, rule40FCFMargin: 9,
+        currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "光電與電源大廠，受惠於 AI 伺服器電源升級，正朝向高毛利產品轉型。",
+        sellPremium: 0.15, strategyMode: "growth"
+    },
+    "2891": {
+        symbol: "2891.TW", name: "中信金", price: 36.0, eps: 2.8, bps: 22.5, dividend: 1.8, fcf: 0.0, shares: 19500,
+        growth1: 5, growth2: 4, terminal: 1.0, discount: 6.5, safety: 10, pe: 13.0, pb: 1.6, rule40Growth: 8, rule40FCFMargin: 0,
+        currency: "TWD", frequency: 1, riskLevel: "低風險", riskDesc: "金融權值股，以銀行與人壽為獲利雙引擎，股息配發穩定，抗震存股標的。",
+        sellPremium: 0.12, strategyMode: "dividend"
+    },
+    "2603": {
+        symbol: "2603.TW", name: "長榮", price: 195.0, eps: 22.0, bps: 240.0, dividend: 10.0, fcf: 85000, shares: 2110,
+        growth1: 5, growth2: 3, terminal: 0.5, discount: 9.0, safety: 25, pe: 8.8, pb: 0.8, rule40Growth: 12, rule40FCFMargin: 35,
+        currency: "TWD", frequency: 1, riskLevel: "高風險", riskDesc: "航運巨頭，運價受地緣政治與景氣波動極大，但手握充沛現金，具備極高配息能力。",
+        sellPremium: 0.25, strategyMode: "growth"
+    },
+    "2379": {
+        symbol: "2379.TW", name: "瑞昱", price: 530.0, eps: 28.0, bps: 110.0, dividend: 18.0, fcf: 18000, shares: 510,
+        growth1: 12, growth2: 8, terminal: 1.5, discount: 8.0, safety: 15, pe: 18.9, pb: 4.8, rule40Growth: 14, rule40FCFMargin: 16,
+        currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "蟹蟹晶片，網通晶片領頭羊，受惠 WiFi 7 與汽車乙太網路長線需求。",
+        sellPremium: 0.18, strategyMode: "growth"
+    },
+    "3034": {
+        symbol: "3034.TW", name: "聯詠", price: 600.0, eps: 38.5, bps: 145.0, dividend: 32.0, fcf: 24000, shares: 600,
+        growth1: 8, growth2: 5, terminal: 1.2, discount: 7.5, safety: 15, pe: 15.5, pb: 4.1, rule40Growth: 10, rule40FCFMargin: 20,
+        currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "驅動 IC 龍頭，受惠 OLED 滲透率提升，股利配發率高，殖利率具吸引力。",
+        sellPremium: 0.18, strategyMode: "growth"
+    },
+    "3711": {
+        symbol: "3711.TW", name: "日月光投控", price: 165.0, eps: 9.5, bps: 72.0, dividend: 5.5, fcf: 38000, shares: 4380,
+        growth1: 10, growth2: 7, terminal: 1.5, discount: 7.5, safety: 15, pe: 17.3, pb: 2.3, rule40Growth: 12, rule40FCFMargin: 12,
+        currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "半導體封測第一大廠，先進封裝產能擴充快速，為 AI 晶片封測首選合作夥伴。",
+        sellPremium: 0.18, strategyMode: "growth"
+    },
+    "3045": {
+        symbol: "3045.TW", name: "台灣大", price: 105.0, eps: 4.3, bps: 32.0, dividend: 4.3, fcf: 15000, shares: 3020,
+        growth1: 4, growth2: 3, terminal: 1.0, discount: 6.0, safety: 10, pe: 24.0, pb: 3.3, rule40Growth: 6, rule40FCFMargin: 15,
+        currency: "TWD", frequency: 1, riskLevel: "低風險", riskDesc: "電信三雄之一，合併台灣之星發揮綜效，現金流極為穩定，防禦存股首選。",
+        sellPremium: 0.12, strategyMode: "dividend"
+    },
+    "2412": {
+        symbol: "2412.TW", name: "中華電", price: 125.0, eps: 4.8, bps: 50.0, dividend: 4.8, fcf: 35000, shares: 7750,
+        growth1: 3, growth2: 2, terminal: 1.0, discount: 5.8, safety: 10, pe: 26.0, pb: 2.5, rule40Growth: 4, rule40FCFMargin: 18,
+        currency: "TWD", frequency: 1, riskLevel: "低風險", riskDesc: "台股公債代表，寬頻與行動通訊絕對領先，極度抗震，適合退休資產配置。",
+        sellPremium: 0.10, strategyMode: "dividend"
+    },
+    "3231": {
+        symbol: "3231.TW", name: "緯創", price: 115.0, eps: 5.2, bps: 35.0, dividend: 2.6, fcf: 12000, shares: 2890,
+        growth1: 15, growth2: 10, terminal: 1.5, discount: 8.0, safety: 15, pe: 22.0, pb: 3.3, rule40Growth: 28, rule40FCFMargin: 5,
+        currency: "TWD", frequency: 1, riskLevel: "中高風險", riskDesc: "AI 伺服器主力代工廠，產能高度滿載，受惠於 AI 硬體基礎設施建置浪潮。",
+        sellPremium: 0.20, strategyMode: "growth"
+    },
+    "AMZN": {
+        symbol: "AMZN", name: "亞馬遜", price: 185.0, eps: 3.5, bps: 22.0, dividend: 0.0, fcf: 32000, shares: 10400,
+        growth1: 18, growth2: 12, terminal: 2.0, discount: 8.5, safety: 15, pe: 52.8, pb: 8.4, rule40Growth: 12, rule40FCFMargin: 11,
+        currency: "USD", frequency: 4, riskLevel: "中風險", riskDesc: "電商與 AWS 雲端運算霸主，AI 雲端服務需求強勁，現金流生成能力卓越，但無配息。",
+        sellPremium: 0.20, strategyMode: "growth"
+    },
+    "TXN": {
+        symbol: "TXN", name: "德州儀器", price: 195.0, eps: 7.0, bps: 18.0, dividend: 5.2, fcf: 5400, shares: 910,
+        growth1: 8, growth2: 6, terminal: 2.0, discount: 7.5, safety: 15, pe: 27.8, pb: 10.8, rule40Growth: 8, rule40FCFMargin: 20,
+        currency: "USD", frequency: 4, riskLevel: "中低風險", riskDesc: "類比晶片巨頭，擁有龐大的工業與汽車客戶群，股息連續增發，具高資本回報率。",
+        sellPremium: 0.15, strategyMode: "growth"
+    },
+    "ABBV": {
+        symbol: "ABBV", name: "艾伯維", price: 170.0, eps: 6.5, bps: 8.0, dividend: 6.2, fcf: 22000, shares: 1760,
+        growth1: 6, growth2: 5, terminal: 1.5, discount: 7.0, safety: 10, pe: 26.1, pb: 21.2, rule40Growth: 6, rule40FCFMargin: 35,
+        currency: "USD", frequency: 4, riskLevel: "中低風險", riskDesc: "生技製藥巨頭，以 Humira 等重磅藥物聞名，專利保護與股息配發能力極強。",
+        sellPremium: 0.15, strategyMode: "dividend"
+    },
+    "AMGN": {
+        symbol: "AMGN", name: "安進", price: 300.0, eps: 14.5, bps: 12.0, dividend: 9.0, fcf: 11000, shares: 535,
+        growth1: 7, growth2: 5, terminal: 1.5, discount: 7.0, safety: 10, pe: 20.7, pb: 25.0, rule40Growth: 7, rule40FCFMargin: 30,
+        currency: "USD", frequency: 4, riskLevel: "中風險", riskDesc: "全球生物製藥巨頭，產品管線豐富，現金流穩健，防守型優質配置標的。",
+        sellPremium: 0.15, strategyMode: "growth"
+    },
+    "CVX": {
+        symbol: "CVX", name: "雪佛龍", price: 155.0, eps: 12.0, bps: 88.0, dividend: 6.5, fcf: 18000, shares: 1850,
+        growth1: 4, growth2: 3, terminal: 1.0, discount: 7.5, safety: 15, pe: 12.9, pb: 1.76, rule40Growth: 5, rule40FCFMargin: 12,
+        currency: "USD", frequency: 4, riskLevel: "Ref", riskDesc: "石化能源巨頭，受油價與地緣政治波動影響，但具備極強的股息與資產負債表保護。",
+        sellPremium: 0.15, strategyMode: "dividend"
+    },
+    "PEP": {
+        symbol: "PEP", name: "百事公司", price: 165.0, eps: 7.2, bps: 15.0, dividend: 5.2, fcf: 8200, shares: 1370,
+        growth1: 5, growth2: 4, terminal: 1.5, discount: 6.5, safety: 10, pe: 22.9, pb: 11.0, rule40Growth: 5, rule40FCFMargin: 14,
+        currency: "USD", frequency: 4, riskLevel: "低風險", riskDesc: "民生消費巨頭，旗下百事可樂與樂事洋芋片具備極高的品牌定價權與抗衰退能力。",
+        sellPremium: 0.12, strategyMode: "dividend"
     }
+};
+
+const etfHoldings = {
+    "0050": [
+        { symbol: "2330.TW", name: "台積電", weight: 55.0 },
+        { symbol: "2317.TW", name: "鴻海", weight: 9.0 },
+        { symbol: "2454.TW", name: "聯發科", weight: 8.0 },
+        { symbol: "2308.TW", name: "台達電", weight: 3.0 },
+        { symbol: "2303.TW", name: "聯電", weight: 2.5 }
+    ],
+    "0052": [
+        { symbol: "2330.TW", name: "台積電", weight: 61.0 },
+        { symbol: "2317.TW", name: "鴻海", weight: 5.5 },
+        { symbol: "2454.TW", name: "聯發科", weight: 5.2 },
+        { symbol: "2308.TW", name: "台達電", weight: 3.0 },
+        { symbol: "2303.TW", name: "聯電", weight: 2.8 }
+    ],
+    "006208": [
+        { symbol: "2330.TW", name: "台積電", weight: 55.0 },
+        { symbol: "2317.TW", name: "鴻海", weight: 9.0 },
+        { symbol: "2454.TW", name: "聯發科", weight: 8.0 },
+        { symbol: "2308.TW", name: "台達電", weight: 3.0 },
+        { symbol: "2303.TW", name: "聯電", weight: 2.5 }
+    ],
+    "00878": [
+        { symbol: "2317.TW", name: "鴻海", weight: 5.0 },
+        { symbol: "2454.TW", name: "聯發科", weight: 4.5 },
+        { symbol: "2382.TW", name: "廣達", weight: 4.0 },
+        { symbol: "2301.TW", name: "光寶科", weight: 3.5 },
+        { symbol: "2891.TW", name: "中信金", weight: 3.5 }
+    ],
+    "00919": [
+        { symbol: "2603.TW", name: "長榮", weight: 9.0 },
+        { symbol: "2303.TW", name: "聯電", weight: 8.0 },
+        { symbol: "2454.TW", name: "聯發科", weight: 7.0 },
+        { symbol: "2379.TW", name: "瑞昱", weight: 6.0 },
+        { symbol: "3034.TW", name: "聯詠", weight: 6.0 }
+    ],
+    "00929": [
+        { symbol: "2454.TW", name: "聯發科", weight: 8.0 },
+        { symbol: "2303.TW", name: "聯電", weight: 7.5 },
+        { symbol: "3711.TW", name: "日月光投控", weight: 6.5 },
+        { symbol: "3034.TW", name: "聯詠", weight: 6.0 },
+        { symbol: "2382.TW", name: "廣達", weight: 5.5 }
+    ],
+    "00713": [
+        { symbol: "2454.TW", name: "聯發科", weight: 6.0 },
+        { symbol: "2317.TW", name: "鴻海", weight: 5.5 },
+        { symbol: "2891.TW", name: "中信金", weight: 5.0 },
+        { symbol: "3045.TW", name: "台灣大", weight: 4.5 },
+        { symbol: "2412.TW", name: "中華電", weight: 4.5 }
+    ],
+    "00940": [
+        { symbol: "2603.TW", name: "長榮", weight: 8.0 },
+        { symbol: "2454.TW", name: "聯發科", weight: 6.5 },
+        { symbol: "2303.TW", name: "聯電", weight: 6.0 },
+        { symbol: "3231.TW", name: "緯創", weight: 5.5 },
+        { symbol: "2382.TW", name: "廣達", weight: 5.0 }
+    ],
+    "VOO": [
+        { symbol: "MSFT", name: "微軟", weight: 7.0 },
+        { symbol: "AAPL", name: "蘋果公司", weight: 6.5 },
+        { symbol: "NVDA", name: "輝達", weight: 6.0 },
+        { symbol: "AMZN", name: "亞馬遜", weight: 3.8 },
+        { symbol: "GOOGL", name: "谷歌", weight: 3.8 }
+    ],
+    "QQQ": [
+        { symbol: "MSFT", name: "微軟", weight: 8.5 },
+        { symbol: "AAPL", name: "蘋果公司", weight: 8.2 },
+        { symbol: "NVDA", name: "輝達", weight: 7.8 },
+        { symbol: "AMZN", name: "亞馬遜", weight: 5.0 },
+        { symbol: "AVGO", name: "博通", weight: 4.8 }
+    ],
+    "SCHD": [
+        { symbol: "TXN", name: "德州儀器", weight: 4.5 },
+        { symbol: "ABBV", name: "艾伯維", weight: 4.3 },
+        { symbol: "AMGN", name: "安進", weight: 4.2 },
+        { symbol: "CVX", name: "雪佛龍", weight: 4.0 },
+        { symbol: "PEP", name: "百事公司", weight: 4.0 }
+    ]
 };
 
 // Global chart instance
@@ -874,7 +1074,329 @@ function loadPreset(key) {
     calculateValuation();
     calculateCompoundInterest();
     calculateDRIP();
+    updateValuationAlerts();
+    updateEtfHoldings(key);
 }
+
+// 掃描所有 Presets 並在頂端顯示今日便宜價與均線支撐警報
+function updateValuationAlerts() {
+    const alertsContainer = document.getElementById("valuation-alerts-container");
+    const wrapper = document.getElementById("alerts-list-wrapper");
+    if (!alertsContainer || !wrapper) return;
+
+    wrapper.innerHTML = "";
+    let alertCount = 0;
+
+    for (const [key, data] of Object.entries(stockPresets)) {
+        if (key === "custom") continue;
+
+        const price = data.price;
+        const eps = data.eps;
+        const bps = data.bps;
+        const dividend = data.dividend;
+        const fcf = data.fcf;
+        const shares = data.shares;
+        const g1 = data.growth1 / 100;
+        const g2 = data.growth2 / 100;
+        const gTerminal = data.terminal / 100;
+        const discount = data.discount / 100;
+        const safetyMargin = data.safety / 100;
+        const pe = data.pe;
+        const pb = data.pb;
+
+        // 1. 計算 DCF
+        let dcfValue = 0;
+        const fcfPerShare = fcf / shares;
+        let projectedFcf = fcfPerShare;
+        let sumPvOfFcf = 0;
+        for (let year = 1; year <= 10; year++) {
+            const growth = year <= 5 ? g1 : g2;
+            projectedFcf = projectedFcf * (1 + growth);
+            sumPvOfFcf += projectedFcf / Math.pow(1 + discount, year);
+        }
+        let terminalValue = 0;
+        if (discount > gTerminal) {
+            terminalValue = (projectedFcf * (1 + gTerminal)) / (discount - gTerminal);
+        }
+        dcfValue = sumPvOfFcf + (terminalValue / Math.pow(1 + discount, 10));
+        if (dcfValue < 0) dcfValue = 0;
+
+        // 2. 計算 Graham
+        let grahamValue = 0;
+        if (eps > 0 && bps > 0) {
+            grahamValue = Math.sqrt(22.5 * eps * bps);
+        }
+
+        // 3. 計算 DDM
+        let ddmValue = 0;
+        if (dividend > 0 && discount > gTerminal) {
+            ddmValue = (dividend * (1 + gTerminal)) / (discount - gTerminal);
+        }
+
+        // 4. 計算 Multiplier
+        const multiplierValue = (eps * pe + bps * pb) / 2;
+
+        // 5. 綜合內在價值
+        let intrinsic = 0;
+        if (data.isETF) {
+            intrinsic = (ddmValue * 50 + multiplierValue * 50) / 100;
+        } else {
+            intrinsic = (dcfValue * 40 + grahamValue * 20 + ddmValue * 10 + multiplierValue * 30) / 100;
+        }
+
+        const buyPrice = intrinsic * (1 - safetyMargin);
+
+        let isTriggered = false;
+        let alertType = ""; // "value" 或 "support"
+        let alertDesc = "";
+
+        if (price > 0 && price <= buyPrice) {
+            isTriggered = true;
+            alertType = "value";
+            alertDesc = "低於便宜價 (超值甜甜價)";
+        } else if (price > 0 && data.isETF && price <= (intrinsic * 0.92)) {
+            isTriggered = true;
+            alertType = "support";
+            alertDesc = "跌破均線支撐 (中期買點)";
+        } else if (price > 0 && !data.isETF && price <= (intrinsic * 0.90)) {
+            isTriggered = true;
+            alertType = "support";
+            alertDesc = "接近年線支撐 (打折特惠)";
+        }
+
+        if (isTriggered) {
+            alertCount++;
+            const capsule = document.createElement("div");
+            capsule.className = `alert-capsule ${alertType}`;
+            
+            const typeColor = alertType === "value" ? "#34d399" : "#3b82f6";
+            const bgOpacity = alertType === "value" ? "rgba(52, 211, 153, 0.12)" : "rgba(59, 130, 246, 0.12)";
+            
+            capsule.style.display = "inline-flex";
+            capsule.style.alignItems = "center";
+            capsule.style.gap = "0.35rem";
+            capsule.style.padding = "0.35rem 0.65rem";
+            capsule.style.borderRadius = "20px";
+            capsule.style.fontSize = "0.78rem";
+            capsule.style.fontWeight = "600";
+            capsule.style.color = typeColor;
+            capsule.style.background = bgOpacity;
+            capsule.style.border = `1px solid ${typeColor}33`;
+            capsule.style.cursor = "pointer";
+            capsule.style.transition = "transform 0.2s, background 0.2s";
+            
+            capsule.innerHTML = `
+                <i data-lucide="${alertType === 'value' ? 'sparkles' : 'trending-down'}" style="width:0.85rem; height:0.85rem;"></i>
+                <span>${data.name} (${data.symbol.replace(".TW", "")}): ${alertDesc}</span>
+            `;
+            
+            capsule.addEventListener("mouseenter", () => {
+                capsule.style.transform = "translateY(-2px)";
+                capsule.style.background = alertType === "value" ? "rgba(52, 211, 153, 0.2)" : "rgba(59, 130, 246, 0.2)";
+            });
+            capsule.addEventListener("mouseleave", () => {
+                capsule.style.transform = "translateY(0)";
+                capsule.style.background = bgOpacity;
+            });
+            
+            capsule.addEventListener("click", () => {
+                selectPreset.value = key;
+                loadPreset(key);
+                document.querySelector(".summary-dashboard").scrollIntoView({ behavior: 'smooth' });
+            });
+
+            wrapper.appendChild(capsule);
+        }
+    }
+
+    if (alertCount > 0) {
+        alertsContainer.style.display = "flex";
+        alertsContainer.style.flexDirection = "column";
+        alertsContainer.style.gap = "0.6rem";
+        alertsContainer.style.background = "rgba(236, 72, 153, 0.04)";
+        alertsContainer.style.border = "1px dashed rgba(236, 72, 153, 0.25)";
+        alertsContainer.style.borderRadius = "12px";
+        alertsContainer.style.padding = "0.85rem";
+        alertsContainer.style.marginBottom = "1rem";
+        
+        const header = alertsContainer.querySelector(".alerts-header");
+        if (header) {
+            header.style.display = "flex";
+            header.style.alignItems = "center";
+            header.style.gap = "0.4rem";
+            header.style.fontSize = "0.88rem";
+            header.style.color = "var(--text-primary)";
+        }
+        
+        wrapper.style.display = "flex";
+        wrapper.style.flexWrap = "wrap";
+        wrapper.style.gap = "0.5rem";
+        
+        if (window.lucide) window.lucide.createIcons();
+    } else {
+        alertsContainer.style.display = "none";
+    }
+}
+
+// 實作 ETF 成分股深度透視與穿透估值計算
+function updateEtfHoldings(key) {
+    const panel = document.getElementById("etf-holdings-panel");
+    const grid = document.getElementById("etf-holdings-grid");
+    const bar = document.getElementById("etf-health-bar");
+    const text = document.getElementById("etf-health-score-text");
+    
+    if (!panel || !grid) return;
+    
+    const holdings = etfHoldings[key];
+    if (!holdings) {
+        panel.style.display = "none";
+        return;
+    }
+    
+    panel.style.display = "block";
+    grid.innerHTML = "";
+    
+    let totalWeightUsed = 0;
+    let weightedScoreSum = 0;
+    
+    holdings.forEach(item => {
+        const compPresetKey = item.symbol.replace(".TW", "");
+        const preset = stockPresets[compPresetKey];
+        
+        let price = preset ? preset.price : 0;
+        let statusText = "計算中";
+        let statusColor = "#94a3b8";
+        let healthFactor = 80;
+        
+        if (preset) {
+            const eps = preset.eps;
+            const bps = preset.bps;
+            const dividend = preset.dividend;
+            const fcf = preset.fcf;
+            const shares = preset.shares;
+            const g1 = preset.growth1 / 100;
+            const g2 = preset.growth2 / 100;
+            const gTerminal = preset.terminal / 100;
+            const discount = preset.discount / 100;
+            const safetyMargin = preset.safety / 100;
+            const pe = preset.pe;
+            const pb = preset.pb;
+            const sellPremium = preset.sellPremium || 0.2;
+            
+            // DCF
+            let dcfValue = 0;
+            const fcfPerShare = fcf / shares;
+            let projectedFcf = fcfPerShare;
+            let sumPvOfFcf = 0;
+            for (let year = 1; year <= 10; year++) {
+                const growth = year <= 5 ? g1 : g2;
+                projectedFcf = projectedFcf * (1 + growth);
+                sumPvOfFcf += projectedFcf / Math.pow(1 + discount, year);
+            }
+            let terminalValue = 0;
+            if (discount > gTerminal) {
+                terminalValue = (projectedFcf * (1 + gTerminal)) / (discount - gTerminal);
+            }
+            dcfValue = sumPvOfFcf + (terminalValue / Math.pow(1 + discount, 10));
+            if (dcfValue < 0) dcfValue = 0;
+            
+            // Graham
+            let grahamValue = 0;
+            if (eps > 0 && bps > 0) {
+                grahamValue = Math.sqrt(22.5 * eps * bps);
+            }
+            
+            // DDM
+            let ddmValue = 0;
+            if (dividend > 0 && discount > gTerminal) {
+                ddmValue = (dividend * (1 + gTerminal)) / (discount - gTerminal);
+            }
+            
+            // Multiplier
+            const multiplierValue = (eps * pe + bps * pb) / 2;
+            
+            const intrinsic = (dcfValue * 0.4 + grahamValue * 0.2 + ddmValue * 0.1 + multiplierValue * 0.3);
+            const buyPrice = intrinsic * (1 - safetyMargin);
+            const sellPrice = intrinsic * (1 + sellPremium);
+            
+            price = preset.price;
+            
+            if (price <= buyPrice) {
+                statusText = "便宜 🟢";
+                statusColor = "#34d399";
+                healthFactor = 100;
+            } else if (price > buyPrice && price <= sellPrice) {
+                statusText = "合理 🔵";
+                statusColor = "#60a5fa";
+                healthFactor = 80;
+            } else {
+                statusText = "偏高 🔴";
+                statusColor = "#f87171";
+                healthFactor = 40;
+            }
+        }
+        
+        totalWeightUsed += item.weight;
+        weightedScoreSum += (item.weight * healthFactor);
+        
+        const card = document.createElement("div");
+        card.style.background = "rgba(255, 255, 255, 0.02)";
+        card.style.border = "1px solid rgba(255, 255, 255, 0.05)";
+        card.style.borderRadius = "8px";
+        card.style.padding = "0.75rem";
+        card.style.display = "flex";
+        card.style.flexDirection = "column";
+        card.style.justifyContent = "space-between";
+        card.style.gap = "0.25rem";
+        
+        const currencySym = key === "VOO" || key === "QQQ" || key === "SCHD" ? "$" : "NT$";
+        const formattedPrice = price > 0 ? `${currencySym} ${price.toFixed(1)}` : "載入中";
+        
+        card.innerHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-weight:700; font-size:0.88rem; color:var(--text-primary);">${item.name}</span>
+                <span style="font-size:0.75rem; color:var(--text-muted); font-weight:600;">${item.weight.toFixed(1)}%</span>
+            </div>
+            <div style="font-size:0.75rem; color:var(--text-secondary); margin-bottom:0.15rem;">${item.symbol}</div>
+            <div style="display:flex; justify-content:space-between; align-items:center; border-top:1px dashed rgba(255,255,255,0.05); padding-top:0.35rem; margin-top:0.15rem;">
+                <span style="font-size:0.8rem; font-family:'Outfit',sans-serif; color:var(--text-muted);">${formattedPrice}</span>
+                <span style="font-size:0.78rem; font-weight:700; color:${statusColor};">${statusText}</span>
+            </div>
+        `;
+        
+        grid.appendChild(card);
+    });
+    
+    let finalScore = 80;
+    if (totalWeightUsed > 0) {
+        finalScore = Math.round(weightedScoreSum / totalWeightUsed);
+    }
+    
+    if (bar && text) {
+        bar.style.width = `${finalScore}%`;
+        
+        let scoreText = "";
+        let scoreColor = "#10b981";
+        
+        if (finalScore >= 85) {
+            scoreText = `${finalScore} 分 (持股估值極為安全 🟢)`;
+            scoreColor = "#34d399";
+            bar.style.background = "linear-gradient(90deg, #34d399, #60a5fa)";
+        } else if (finalScore >= 70) {
+            scoreText = `${finalScore} 分 (持股估值十分合理 🔵)`;
+            scoreColor = "#60a5fa";
+            bar.style.background = "linear-gradient(90deg, #60a5fa, #3b82f6)";
+        } else {
+            scoreText = `${finalScore} 分 (成分股估值偏高，注意回檔 🔴)`;
+            scoreColor = "#f87171";
+            bar.style.background = "linear-gradient(90deg, #f87171, #fb923c)";
+        }
+        
+        text.textContent = scoreText;
+        text.style.color = scoreColor;
+    }
+}
+
 
 // Update slider labels based on current values
 function updateSliderLabels() {
@@ -1374,6 +1896,47 @@ sliders.forEach(slider => {
 const btnRefresh = document.getElementById("btn-api-refresh");
 const lblTimestamp = document.getElementById("update-timestamp");
 
+// 將獲取到的資料合併到 stockPresets 的統一函數
+function mergeRealtimeData(data) {
+    for (const [key, val] of Object.entries(data)) {
+        const presetKey = key.endsWith(".TW") ? key.replace(".TW", "") : key;
+        if (stockPresets[presetKey]) {
+            stockPresets[presetKey].price = val.price;
+            stockPresets[presetKey].eps = val.eps;
+            stockPresets[presetKey].bps = val.bps;
+            stockPresets[presetKey].dividend = val.dividend;
+            stockPresets[presetKey].fcf = val.fcf;
+            stockPresets[presetKey].shares = val.shares;
+            stockPresets[presetKey].pe = val.pe;
+            stockPresets[presetKey].pb = val.pb;
+            stockPresets[presetKey].rule40Growth = val.rule40Growth;
+            stockPresets[presetKey].rule40FCFMargin = val.rule40FCFMargin;
+        }
+    }
+}
+
+// 載入本地靜態數據檔案 (雙重保險)
+async function loadStaticRealtimeData() {
+    try {
+        const response = await fetch("realtime_data.json");
+        if (!response.ok) throw new Error("無法讀取本地靜態 realtime_data.json");
+        const data = await response.json();
+        
+        mergeRealtimeData(data);
+        console.log("✅ 成功載入本地靜態數據檔案 (realtime_data.json)。");
+        
+        const now = new Date();
+        if (lblTimestamp) {
+            lblTimestamp.textContent = `最後更新：${now.toLocaleTimeString()} (快取資料)`;
+        }
+        
+        // 重載當前 Preset 顯示
+        loadPreset(selectPreset.value);
+    } catch (err) {
+        console.warn("⚠️ 載入本地靜態數據檔案失敗，將使用預設引數:", err);
+    }
+}
+
 async function refreshRealtimeData() {
     if (!btnRefresh) return;
     
@@ -1392,22 +1955,8 @@ async function refreshRealtimeData() {
         
         const data = await response.json();
         
-        // Merge fetched data into stockPresets
-        for (const [key, val] of Object.entries(data)) {
-            const presetKey = key.endsWith(".TW") ? key.replace(".TW", "") : key;
-            if (stockPresets[presetKey]) {
-                stockPresets[presetKey].price = val.price;
-                stockPresets[presetKey].eps = val.eps;
-                stockPresets[presetKey].bps = val.bps;
-                stockPresets[presetKey].dividend = val.dividend;
-                stockPresets[presetKey].fcf = val.fcf;
-                stockPresets[presetKey].shares = val.shares;
-                stockPresets[presetKey].pe = val.pe;
-                stockPresets[presetKey].pb = val.pb;
-                stockPresets[presetKey].rule40Growth = val.rule40Growth;
-                stockPresets[presetKey].rule40FCFMargin = val.rule40FCFMargin;
-            }
-        }
+        // 使用統一合併函數
+        mergeRealtimeData(data);
         
         const now = new Date();
         lblTimestamp.textContent = `最後更新：${now.toLocaleTimeString()}`;
@@ -2183,10 +2732,12 @@ function isTaiwanTradingTime() {
 }
 
 // Initial Setup on Page Load
-window.addEventListener("load", () => {
+window.addEventListener("load", async () => {
     // Load local Nvidia first for instant preview
     loadPreset("NVDA");
-    // Immediately attempt to fetch fresh market values from Python server
+    // 首先嘗試載入靜態數據檔案 (快取雙重保險)
+    await loadStaticRealtimeData();
+    // 然後發送即時刷新請求
     refreshRealtimeData();
     
     // 設定每 5 分鐘自動刷新機制 (台股交易日 09:00-13:30)
