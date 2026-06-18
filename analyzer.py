@@ -5,7 +5,9 @@ import os
 import yfinance as yf
 import time
 
-# Memory Cache for API performance optimization (TTL: 10 minutes)
+# Memory Cache for API performance optimization
+# TTL: 10 分鐘 - 避免短時間內重複呼叫 Yahoo Finance API
+# 前端手動按「重新整理」會帶 force=true 跳過此快取
 _CACHE_DATA = None
 _CACHE_TIME = 0
 _CACHE_TTL = 600
@@ -63,187 +65,187 @@ TICKERS = {
 
 MOCK_FALLBACKS = {
     "2330.TW": {
-        "price": 2400.0, "eps": 73.0, "bps": 227.0, "dividend": 24.0, "fcf": 719000.0, "shares": 25930.0,
+        "price": 2405.0, "eps": 73.68, "bps": 227.17, "dividend": 24.0, "fcf": 719158.44, "shares": 25932.37,
         "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 25, "pb": 5.8, "rule40Growth": 22, "rule40FCFMargin": 38
     },
     "0050.TW": {
-        "price": 428.0, "eps": 9.00, "bps": 80.00, "dividend": 6.50, "fcf": 0.0, "shares": 1.0,
+        "price": 107.0, "eps": 3.42, "bps": 25.00, "dividend": 1.36, "fcf": 0.0, "shares": 1.0,
         "growth1": 6, "growth2": 4, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 21.8, "pb": 2.4, "rule40Growth": 12, "rule40FCFMargin": 0
     },
     "006208.TW": {
-        "price": 248.0, "eps": 5.60, "bps": 48.00, "dividend": 4.20, "fcf": 0.0, "shares": 1.0,
+        "price": 248.1, "eps": 5.60, "bps": 48.00, "dividend": 4.44, "fcf": 0.0, "shares": 1.0,
         "growth1": 6, "growth2": 4, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 21.0, "pb": 2.40, "rule40Growth": 12, "rule40FCFMargin": 0
     },
     "00878.TW": {
-        "price": 33.5, "eps": 1.70, "bps": 18.00, "dividend": 1.80, "fcf": 0.0, "shares": 1.0,
+        "price": 33.6, "eps": 1.70, "bps": 18.00, "dividend": 1.88, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 15.6, "pb": 1.47, "rule40Growth": 8, "rule40FCFMargin": 0
     },
     "00919.TW": {
-        "price": 30.5, "eps": 2.00, "bps": 17.00, "dividend": 2.88, "fcf": 0.0, "shares": 1.0,
+        "price": 30.82, "eps": 2.00, "bps": 17.00, "dividend": 2.86, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 14.0, "pb": 1.56, "rule40Growth": 8, "rule40FCFMargin": 0
     },
     "00929.TW": {
-        "price": 25.0, "eps": 1.60, "bps": 16.00, "dividend": 2.20, "fcf": 0.0, "shares": 1.0,
+        "price": 30.85, "eps": 1.60, "bps": 16.00, "dividend": 1.32, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.8, "safety": 10, "pe": 14.5, "pb": 1.33, "rule40Growth": 10, "rule40FCFMargin": 0
     },
     "AAPL": {
-        "price": 214.3, "eps": 7.20, "bps": 6.00, "dividend": 1.04, "fcf": 104000.0, "shares": 15280.0,
+        "price": 295.95, "eps": 8.26, "bps": 7.26, "dividend": 1.08, "fcf": 101090.75, "shares": 14687.36,
         "growth1": 8, "growth2": 6, "terminal": 2.0, "discount": 7.5, "safety": 15, "pe": 30, "pb": 44.0, "rule40Growth": 6, "rule40FCFMargin": 26
     },
     "NVDA": {
-        "price": 127.4, "eps": 3.80, "bps": 14.00, "dividend": 0.04, "fcf": 27000.0, "shares": 24500.0,
+        "price": 204.65, "eps": 6.53, "bps": 8.07, "dividend": 0.04, "fcf": 46335.87, "shares": 24221.0,
         "growth1": 30, "growth2": 15, "terminal": 2.5, "discount": 9.0, "safety": 20, "pe": 45, "pb": 15.0, "rule40Growth": 90, "rule40FCFMargin": 45
     },
     "AVGO": {
-        "price": 175.0, "eps": 5.50, "bps": 28.00, "dividend": 2.12, "fcf": 18500.0, "shares": 465.0,
+        "price": 392.9, "eps": 6.03, "bps": 18.43, "dividend": 2.6, "fcf": 27212.25, "shares": 4757.58,
         "growth1": 25, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 33.0, "pb": 7.1, "rule40Growth": 45, "rule40FCFMargin": 42
     },
     "MSFT": {
-        "price": 420.0, "eps": 12.50, "bps": 40.00, "dividend": 3.00, "fcf": 70000.0, "shares": 7430.0,
+        "price": 378.91, "eps": 16.78, "bps": 55.78, "dividend": 3.64, "fcf": 37011.25, "shares": 7428.43,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.0, "safety": 15, "pe": 35, "pb": 12.0, "rule40Growth": 15, "rule40FCFMargin": 30
     },
     "TSLA": {
-        "price": 184.8, "eps": 2.60, "bps": 22.00, "dividend": 0.00, "fcf": 4400.0, "shares": 3180.0,
+        "price": 396.38, "eps": 1.09, "bps": 21.90, "dividend": 0.00, "fcf": 5252.0, "shares": 3755.72,
         "growth1": 20, "growth2": 12, "terminal": 2.0, "discount": 10.0, "safety": 25, "pe": 65, "pb": 8.5, "rule40Growth": 15, "rule40FCFMargin": 10
     },
     "AMD": {
-        "price": 160.0, "eps": 2.20, "bps": 38.00, "dividend": 0.00, "fcf": 1200.0, "shares": 1610.0,
+        "price": 512.48, "eps": 2.99, "bps": 39.55, "dividend": 0.00, "fcf": 7173.37, "shares": 1630.6,
         "growth1": 22, "growth2": 12, "terminal": 2.0, "discount": 9.5, "safety": 20, "pe": 75.0, "pb": 4.4, "rule40Growth": 15, "rule40FCFMargin": 10
     },
     "GOOGL": {
-        "price": 175.0, "eps": 7.50, "bps": 26.00, "dividend": 0.80, "fcf": 69000.0, "shares": 12400.0,
+        "price": 363.79, "eps": 13.10, "bps": 39.51, "dividend": 0.88, "fcf": 27921.75, "shares": 5867.16,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.0, "safety": 15, "pe": 24.0, "pb": 7.29, "rule40Growth": 14, "rule40FCFMargin": 28
     },
     "TSM": {
-        "price": 180.0, "eps": 6.80, "bps": 28.00, "dividend": 1.80, "fcf": 15000.0, "shares": 5180.0,
+        "price": 432.15, "eps": 11.63, "bps": 6.54, "dividend": 24.0, "fcf": 719158.44, "shares": 5186.47,
         "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 28.0, "pb": 6.8, "rule40Growth": 22, "rule40FCFMargin": 38
     },
     "SMCI": {
-        "price": 850.0, "eps": 24.00, "bps": 90.00, "dividend": 0.00, "fcf": 1200.0, "shares": 58.0,
+        "price": 27.78, "eps": 1.90, "bps": 12.60, "dividend": 0.00, "fcf": -7448.38, "shares": 601.42,
         "growth1": 45, "growth2": 20, "terminal": 2.0, "discount": 10.5, "safety": 30, "pe": 35.0, "pb": 8.5, "rule40Growth": 80, "rule40FCFMargin": 10
     },
     "00713.TW": {
-        "price": 58.0, "eps": 3.80, "bps": 26.00, "dividend": 3.80, "fcf": 0.0, "shares": 1.0,
+        "price": 61.5, "eps": 3.80, "bps": 26.00, "dividend": 3.44, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.5, "safety": 10, "pe": 16.5, "pb": 2.3, "rule40Growth": 10, "rule40FCFMargin": 0
     },
     "00940.TW": {
-        "price": 10.2, "eps": 0.70, "bps": 10.00, "dividend": 0.80, "fcf": 0.0, "shares": 1.0,
+        "price": 12.65, "eps": 0.70, "bps": 10.00, "dividend": 0.52, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 15.0, "pb": 1.0, "rule40Growth": 8, "rule40FCFMargin": 0
     },
     "VOO": {
-        "price": 500.0, "eps": 19.00, "bps": 115.00, "dividend": 6.80, "fcf": 0.0, "shares": 1.0,
+        "price": 681.41, "eps": 19.00, "bps": 390.85, "dividend": 5.44, "fcf": 0.0, "shares": 1.0,
         "growth1": 7, "growth2": 5, "terminal": 1.8, "discount": 7.0, "safety": 10, "pe": 25.0, "pb": 4.5, "rule40Growth": 14, "rule40FCFMargin": 0
     },
     "QQQ": {
-        "price": 460.0, "eps": 16.00, "bps": 70.00, "dividend": 3.00, "fcf": 0.0, "shares": 1.0,
+        "price": 722.51, "eps": 16.00, "bps": 357.77, "dividend": 1.77, "fcf": 0.0, "shares": 1.0,
         "growth1": 12, "growth2": 8, "terminal": 2.0, "discount": 7.5, "safety": 10, "pe": 30.0, "pb": 7.0, "rule40Growth": 18, "rule40FCFMargin": 0
     },
     "SCHD": {
-        "price": 82.0, "eps": 4.30, "bps": 34.00, "dividend": 2.90, "fcf": 0.0, "shares": 1.0,
+        "price": 31.93, "eps": 4.30, "bps": 34.00, "dividend": 1.06, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.5, "safety": 10, "pe": 16.5, "pb": 2.5, "rule40Growth": 10, "rule40FCFMargin": 0
     },
     "0052.TW": {
-        "price": 205.0, "eps": 12.00, "bps": 90.00, "dividend": 4.50, "fcf": 0.0, "shares": 1.0,
+        "price": 62.5, "eps": 3.66, "bps": 27.45, "dividend": 1.37, "fcf": 0.0, "shares": 1.0,
         "growth1": 12, "growth2": 8, "terminal": 1.8, "discount": 7.0, "safety": 10, "pe": 18.0, "pb": 2.20, "rule40Growth": 15, "rule40FCFMargin": 0
     },
     "2327.TW": {
-        "price": 1040.0, "eps": 55.00, "bps": 320.00, "dividend": 22.00, "fcf": 12000.0, "shares": 418.0,
+        "price": 1040.0, "eps": 12.64, "bps": 81.15, "dividend": 6.00, "fcf": 21481.90, "shares": 2058.73,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 13.5, "pb": 2.20, "rule40Growth": 18, "rule40FCFMargin": 22
     },
     "2492.TW": {
-        "price": 563.0, "eps": 8.50, "bps": 85.00, "dividend": 4.00, "fcf": 1800.0, "shares": 485.0,
+        "price": 554.0, "eps": 4.74, "bps": 65.25, "dividend": 2.40, "fcf": 3642.43, "shares": 484.80,
         "growth1": 10, "growth2": 6, "terminal": 1.5, "discount": 7.5, "safety": 10, "pe": 18.8, "pb": 1.30, "rule40Growth": 12, "rule40FCFMargin": 15
     },
     "2344.TW": {
-        "price": 212.0, "eps": 2.50, "bps": 28.00, "dividend": 1.20, "fcf": 4500.0, "shares": 3980.0,
+        "price": 207.5, "eps": 0.89, "bps": 25.92, "dividend": 0.50, "fcf": -10663.85, "shares": 4500.00,
         "growth1": 8, "growth2": 5, "terminal": 1.5, "discount": 7.5, "safety": 10, "pe": 16.3, "pb": 1.20, "rule40Growth": 8, "rule40FCFMargin": 12
     },
     "3481.TW": {
-        "price": 61.7, "eps": 1.80, "bps": 28.00, "dividend": 0.80, "fcf": -2000.0, "shares": 9560.0,
+        "price": 60.7, "eps": 0.03, "bps": 28.39, "dividend": 1.00, "fcf": 17172.95, "shares": 7981.05,
         "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 18.1, "pb": 0.60, "rule40Growth": 6, "rule40FCFMargin": -5
     },
     "2409.TW": {
-        "price": 26.95, "eps": 1.50, "bps": 23.00, "dividend": 0.80, "fcf": -1500.0, "shares": 7690.0,
+        "price": 26.75, "eps": 0.90, "bps": 19.81, "dividend": 1.20, "fcf": -6890.23, "shares": 7547.10,
         "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 27.5, "pb": 0.75, "rule40Growth": 6, "rule40FCFMargin": -4
     },
     "2317.TW": {
-        "price": 200.0, "eps": 15.5, "bps": 120.0, "dividend": 7.0, "fcf": 150000.0, "shares": 13860.0,
+        "price": 270.0, "eps": 13.40, "bps": 126.91, "dividend": 7.17, "fcf": 37193.24, "shares": 14001.92,
         "growth1": 10, "growth2": 7, "terminal": 1.5, "discount": 7.5, "safety": 15, "pe": 18.0, "pb": 1.8, "rule40Growth": 15, "rule40FCFMargin": 8
     },
     "2454.TW": {
-        "price": 1400.0, "eps": 75.0, "bps": 310.0, "dividend": 62.0, "fcf": 95000.0, "shares": 1600.0,
+        "price": 4430.0, "eps": 66.12, "bps": 244.52, "dividend": 53.50, "fcf": 73559.38, "shares": 1596.11,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 22.0, "pb": 5.0, "rule40Growth": 18, "rule40FCFMargin": 20
     },
     "2308.TW": {
-        "price": 380.0, "eps": 13.5, "bps": 95.0, "dividend": 6.5, "fcf": 28000.0, "shares": 2590.0,
+        "price": 2185.0, "eps": 22.97, "bps": 115.32, "dividend": 11.60, "fcf": 32521.96, "shares": 2597.54,
         "growth1": 12, "growth2": 8, "terminal": 1.5, "discount": 7.5, "safety": 15, "pe": 28.0, "pb": 4.0, "rule40Growth": 12, "rule40FCFMargin": 10
     },
     "2303.TW": {
-        "price": 55.0, "eps": 4.8, "bps": 28.0, "dividend": 3.0, "fcf": 45000.0, "shares": 12500.0,
+        "price": 140.0, "eps": 3.93, "bps": 32.33, "dividend": 2.85, "fcf": 34353.80, "shares": 12546.43,
         "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 11.5, "pb": 1.9, "rule40Growth": 6, "rule40FCFMargin": 25
     },
     "2382.TW": {
-        "price": 280.0, "eps": 12.0, "bps": 60.0, "dividend": 9.0, "fcf": 42000.0, "shares": 3860.0,
+        "price": 376.0, "eps": 18.92, "bps": 53.83, "dividend": 13.00, "fcf": -98190.83, "shares": 3854.52,
         "growth1": 15, "growth2": 10, "terminal": 1.5, "discount": 8.0, "safety": 15, "pe": 23.0, "pb": 4.6, "rule40Growth": 25, "rule40FCFMargin": 6
     },
     "2301.TW": {
-        "price": 110.0, "eps": 6.2, "bps": 38.0, "dividend": 4.5, "fcf": 9800.0, "shares": 2350.0,
+        "price": 211.0, "eps": 6.59, "bps": 38.83, "dividend": 7.51, "fcf": -3553.09, "shares": 2269.10,
         "growth1": 8, "growth2": 6, "terminal": 1.2, "discount": 7.0, "safety": 10, "pe": 17.5, "pb": 2.9, "rule40Growth": 10, "rule40FCFMargin": 9
     },
     "2891.TW": {
-        "price": 36.0, "eps": 2.8, "bps": 22.5, "dividend": 1.8, "fcf": 0.0, "shares": 19500.0,
+        "price": 71.9, "eps": 4.06, "bps": 27.16, "dividend": 2.30, "fcf": 213396.83, "shares": 19676.90,
         "growth1": 5, "growth2": 4, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 13.0, "pb": 1.6, "rule40Growth": 8, "rule40FCFMargin": 0
     },
     "2603.TW": {
-        "price": 195.0, "eps": 22.0, "bps": 240.0, "dividend": 10.0, "fcf": 85000.0, "shares": 2110.0,
+        "price": 193.5, "eps": 31.64, "bps": 268.71, "dividend": 16.00, "fcf": 28350.01, "shares": 2165.04,
         "growth1": 5, "growth2": 3, "terminal": 0.5, "discount": 9.0, "safety": 25, "pe": 8.8, "pb": 0.8, "rule40Growth": 12, "rule40FCFMargin": 35
     },
     "2379.TW": {
-        "price": 530.0, "eps": 28.0, "bps": 110.0, "dividend": 18.0, "fcf": 18000.0, "shares": 510.0,
+        "price": 819.0, "eps": 28.07, "bps": 87.68, "dividend": 25.00, "fcf": 9227.78, "shares": 512.86,
         "growth1": 12, "growth2": 8, "terminal": 1.5, "discount": 8.0, "safety": 15, "pe": 18.9, "pb": 4.8, "rule40Growth": 14, "rule40FCFMargin": 16
     },
     "3034.TW": {
-        "price": 600.0, "eps": 38.5, "bps": 145.0, "dividend": 32.0, "fcf": 24000.0, "shares": 600.0,
+        "price": 533.0, "eps": 26.85, "bps": 118.20, "dividend": 28.00, "fcf": 24000.00, "shares": 600.00,
         "growth1": 8, "growth2": 5, "terminal": 1.2, "discount": 7.5, "safety": 15, "pe": 15.5, "pb": 4.1, "rule40Growth": 10, "rule40FCFMargin": 20
     },
     "3711.TW": {
-        "price": 165.0, "eps": 9.5, "bps": 72.0, "dividend": 5.5, "fcf": 38000.0, "shares": 4380.0,
+        "price": 608.0, "eps": 10.18, "bps": 79.90, "dividend": 6.60, "fcf": 38000.00, "shares": 4380.00,
         "growth1": 10, "growth2": 7, "terminal": 1.5, "discount": 7.5, "safety": 15, "pe": 17.3, "pb": 2.3, "rule40Growth": 12, "rule40FCFMargin": 12
     },
     "3045.TW": {
-        "price": 105.0, "eps": 4.3, "bps": 32.0, "dividend": 4.3, "fcf": 15000.0, "shares": 3020.0,
+        "price": 118.5, "eps": 4.70, "bps": 30.05, "dividend": 4.80, "fcf": 15000.00, "shares": 3020.00,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.0, "safety": 10, "pe": 24.0, "pb": 3.3, "rule40Growth": 6, "rule40FCFMargin": 15
     },
     "2412.TW": {
-        "price": 125.0, "eps": 4.8, "bps": 50.0, "dividend": 4.8, "fcf": 35000.0, "shares": 7750.0,
+        "price": 145.0, "eps": 5.02, "bps": 51.09, "dividend": 5.20, "fcf": 35000.00, "shares": 7750.00,
         "growth1": 3, "growth2": 2, "terminal": 1.0, "discount": 5.8, "safety": 10, "pe": 26.0, "pb": 2.5, "rule40Growth": 4, "rule40FCFMargin": 18
     },
     "3231.TW": {
-        "price": 115.0, "eps": 5.2, "bps": 35.0, "dividend": 2.6, "fcf": 12000.0, "shares": 2890.0,
+        "price": 161.5, "eps": 8.41, "bps": 59.80, "dividend": 5.50, "fcf": 12000.00, "shares": 2890.00,
         "growth1": 15, "growth2": 10, "terminal": 1.5, "discount": 8.0, "safety": 15, "pe": 22.0, "pb": 3.3, "rule40Growth": 28, "rule40FCFMargin": 5
     },
     "AMZN": {
-        "price": 185.0, "eps": 3.5, "bps": 22.0, "dividend": 0.0, "fcf": 32000.0, "shares": 10400.0,
+        "price": 237.5, "eps": 7.77, "bps": 41.09, "dividend": 0.00, "fcf": 32000.00, "shares": 10400.00,
         "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 52.8, "pb": 8.4, "rule40Growth": 12, "rule40FCFMargin": 11
     },
     "TXN": {
-        "price": 195.0, "eps": 7.0, "bps": 18.0, "dividend": 5.2, "fcf": 5400.0, "shares": 910.0,
+        "price": 301.88, "eps": 5.84, "bps": 18.44, "dividend": 5.56, "fcf": 5400.00, "shares": 910.00,
         "growth1": 8, "growth2": 6, "terminal": 2.0, "discount": 7.5, "safety": 15, "pe": 27.8, "pb": 10.8, "rule40Growth": 8, "rule40FCFMargin": 20
     },
     "ABBV": {
-        "price": 170.0, "eps": 6.5, "bps": 8.0, "dividend": 6.2, "fcf": 22000.0, "shares": 1760.0,
+        "price": 221.23, "eps": 2.05, "bps": -3.77, "dividend": 6.92, "fcf": 22000.00, "shares": 1760.00,
         "growth1": 6, "growth2": 5, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 26.1, "pb": 21.2, "rule40Growth": 6, "rule40FCFMargin": 35
     },
     "AMGN": {
-        "price": 300.0, "eps": 14.5, "bps": 12.0, "dividend": 9.0, "fcf": 11000.0, "shares": 535.0,
+        "price": 341.66, "eps": 14.37, "bps": 17.03, "dividend": 10.08, "fcf": 11000.00, "shares": 535.00,
         "growth1": 7, "growth2": 5, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 20.7, "pb": 25.0, "rule40Growth": 7, "rule40FCFMargin": 30
     },
     "CVX": {
-        "price": 155.0, "eps": 12.0, "bps": 88.0, "dividend": 6.5, "fcf": 18000.0, "shares": 1850.0,
+        "price": 177.58, "eps": 5.75, "bps": 92.91, "dividend": 7.12, "fcf": 18000.00, "shares": 1850.00,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 7.5, "safety": 15, "pe": 12.9, "pb": 1.76, "rule40Growth": 5, "rule40FCFMargin": 12
     },
     "PEP": {
-        "price": 165.0, "eps": 7.2, "bps": 15.0, "dividend": 5.2, "fcf": 8200.0, "shares": 1370.0,
+        "price": 141.59, "eps": 6.37, "bps": 15.63, "dividend": 5.69, "fcf": 8200.00, "shares": 1370.00,
         "growth1": 5, "growth2": 4, "terminal": 1.5, "discount": 6.5, "safety": 10, "pe": 22.9, "pb": 11.0, "rule40Growth": 5, "rule40FCFMargin": 14
     }
 }
@@ -289,38 +291,9 @@ def fetch_realtime_data(force=False):
             if not price:
                 price = fallback["price"]
             
-            # 0050.TW 價格精度防偽校正
-            if symbol == "0050.TW" and price < 150:
-                try:
-                    t006208 = yf.Ticker("006208.TW")
-                    p006208 = t006208.info.get("currentPrice") or t006208.info.get("regularMarketPrice")
-                    if not p006208:
-                        hist006208 = t006208.history(period="1d")
-                        if not hist006208.empty:
-                            p006208 = float(hist006208['Close'].iloc[-1])
-                    if p006208 and p006208 > 0:
-                        price = p006208 * 1.725
-                        print(f"  [0050.TW 價格防偽校正] yfinance 原始價格過低，已依 006208.TW 價格 ({p006208}) 乘 1.725 校正為: {price:.2f}")
-                except Exception as ex:
-                    print(f"  [0050.TW 價格校正失敗]: {ex}")
-            
             # Get financial stats
-            eps = info.get("trailingEps") or info.get("forwardEps")
-            bps = info.get("bookValue")
-            
-            # 台股基本面財務指標防禦性檢驗與校正
-            if symbol.endswith(".TW") and not meta.get("isETF"):
-                if eps is None or eps < (fallback["eps"] * 0.4):
-                    print(f"  [基本面防偽] {symbol} 的 EPS 抓取值 ({eps}) 偏離過大，強制回退至預設值: {fallback['eps']}")
-                    eps = fallback["eps"]
-                if bps is None or bps < (fallback["bps"] * 0.4):
-                    print(f"  [基本面防偽] {symbol} 的 BPS 抓取值 ({bps}) 偏離過大，強制回退至預設值: {fallback['bps']}")
-                    bps = fallback["bps"]
-            else:
-                if not eps:
-                    eps = fallback["eps"]
-                if not bps:
-                    bps = fallback["bps"]
+            eps = info.get("trailingEps") or info.get("forwardEps") or fallback["eps"]
+            bps = info.get("bookValue") or fallback["bps"]
             
             # Dividends (Try info first, fallback to historical sum if missing)
             dividend = info.get("dividendRate") or info.get("trailingAnnualDividendRate")
@@ -338,10 +311,7 @@ def fetch_realtime_data(force=False):
                 except Exception as ex:
                     print(f"  計算歷史股利出錯 ({symbol}): {ex}")
             
-            if symbol.endswith(".TW") and not meta.get("isETF") and (dividend is None or dividend < (fallback["dividend"] * 0.4)):
-                print(f"  [基本面防偽] {symbol} 的預估股利 ({dividend}) 偏離過大，強制回退至預設值: {fallback['dividend']}")
-                dividend = fallback["dividend"]
-            elif dividend is None or dividend <= 0:
+            if dividend is None or dividend <= 0:
                 dividend = fallback["dividend"]
             
             # FCF and Shares

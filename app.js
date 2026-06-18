@@ -7,17 +7,16 @@ const API_BASE = (window.location.hostname === "localhost" || window.location.ho
     ? ""
     : CLOUD_BACKEND_URL;
 
-// Preset Stock Data
 const stockPresets = {
     "2330": {
         symbol: "2330.TW",
         name: "台積電",
-        price: 2400.0,
-        eps: 73.0,
-        bps: 227.0,
+        price: 2405.0,
+        eps: 73.68,
+        bps: 227.17,
         dividend: 24.0,
-        fcf: 719000, // 百萬 TWD
-        shares: 25930, // 百萬股
+        fcf: 719158.44, // 百萬 TWD
+        shares: 25932.37, // 百萬股
         growth1: 18,
         growth2: 12,
         terminal: 2.0,
@@ -37,10 +36,10 @@ const stockPresets = {
     "0050": {
         symbol: "0050.TW",
         name: "元大台灣50 (市值型)",
-        price: 428.0,
-        eps: 9.00,
-        bps: 80.00,
-        dividend: 6.50,
+        price: 107.0,
+        eps: 3.42,
+        bps: 25.00,
+        dividend: 1.36,
         fcf: 0,
         shares: 1,
         growth1: 6,
@@ -65,10 +64,10 @@ const stockPresets = {
     "00878": {
         symbol: "00878.TW",
         name: "國泰永續高股息 (高股息)",
-        price: 33.5,
+        price: 33.6,
         eps: 1.70,
         bps: 18.00,
-        dividend: 1.80,
+        dividend: 1.88,
         fcf: 0,
         shares: 1,
         growth1: 4,
@@ -93,10 +92,10 @@ const stockPresets = {
     "006208": {
         symbol: "006208.TW",
         name: "富邦台50",
-        price: 248.0,
+        price: 248.1,
         eps: 5.60,
         bps: 48.00,
-        dividend: 4.20,
+        dividend: 4.44,
         fcf: 0,
         shares: 1,
         growth1: 6,
@@ -121,10 +120,10 @@ const stockPresets = {
     "00919": {
         symbol: "00919.TW",
         name: "群益台灣精選高息",
-        price: 30.5,
+        price: 30.82,
         eps: 2.00,
         bps: 17.00,
-        dividend: 2.88,
+        dividend: 2.86,
         fcf: 0,
         shares: 1,
         growth1: 4,
@@ -149,10 +148,10 @@ const stockPresets = {
     "00929": {
         symbol: "00929.TW",
         name: "復華台灣科技優息",
-        price: 25.0,
+        price: 30.85,
         eps: 1.60,
         bps: 16.00,
-        dividend: 2.20,
+        dividend: 1.32,
         fcf: 0,
         shares: 1,
         growth1: 5,
@@ -169,7 +168,7 @@ const stockPresets = {
         etfDesc: "首檔月配息科技高股息，社團「每月被動收入」討論度極高。",
         currency: "TWD",
         frequency: 12,
-        riskLevel: "中低風險",
+        riskLevel: "Con",
         riskDesc: "純科技高股息，波動度略高於 00878 等傳統高股息，適合追求每月配息流者。",
         sellPremium: 0.15,
         strategyMode: "dividend"
@@ -177,10 +176,10 @@ const stockPresets = {
     "00713": {
         symbol: "00713.TW",
         name: "元大台灣高息低波 (00713)",
-        price: 58.0,
-        eps: 3.50,
-        bps: 24.50,
-        dividend: 3.20,
+        price: 61.5,
+        eps: 3.80,
+        bps: 26.00,
+        dividend: 3.44,
         fcf: 0,
         shares: 1,
         growth1: 5,
@@ -205,10 +204,10 @@ const stockPresets = {
     "00940": {
         symbol: "00940.TW",
         name: "元大台灣價值高息 (00940)",
-        price: 10.2,
-        eps: 0.65,
+        price: 12.65,
+        eps: 0.70,
         bps: 10.00,
-        dividend: 0.72,
+        dividend: 0.52,
         fcf: 0,
         shares: 1,
         growth1: 4,
@@ -233,12 +232,12 @@ const stockPresets = {
     "AAPL": {
         symbol: "AAPL",
         name: "蘋果公司",
-        price: 214.3,
-        eps: 6.60,
-        bps: 4.85,
-        dividend: 1.00,
-        fcf: 104000, // 百萬 USD
-        shares: 15280, // 百萬股
+        price: 295.95,
+        eps: 8.26,
+        bps: 7.26,
+        dividend: 1.08,
+        fcf: 101090.75, // 百萬 USD
+        shares: 14687.36, // 百萬股
         growth1: 8,
         growth2: 6,
         terminal: 2.0,
@@ -258,12 +257,12 @@ const stockPresets = {
     "NVDA": {
         symbol: "NVDA",
         name: "輝達",
-        price: 127.4,
-        eps: 2.00,
-        bps: 12.50,
+        price: 204.65,
+        eps: 6.53,
+        bps: 8.07,
         dividend: 0.04,
-        fcf: 27000, // 百萬 USD
-        shares: 24500, // 百萬股
+        fcf: 46335.87, // 百萬 USD
+        shares: 24221.0, // 百萬股
         growth1: 30,
         growth2: 15,
         terminal: 2.5,
@@ -283,12 +282,12 @@ const stockPresets = {
     "AVGO": {
         symbol: "AVGO",
         name: "博通 (6月熱門)",
-        price: 175.0,
-        eps: 5.20,
-        bps: 24.50,
-        dividend: 2.12,
-        fcf: 18500,
-        shares: 465,
+        price: 392.9,
+        eps: 6.03,
+        bps: 18.43,
+        dividend: 2.60,
+        fcf: 27212.25,
+        shares: 4757.58,
         growth1: 25,
         growth2: 12,
         terminal: 2.0,
@@ -308,12 +307,12 @@ const stockPresets = {
     "MSFT": {
         symbol: "MSFT",
         name: "微軟",
-        price: 420.0,
-        eps: 11.80,
-        bps: 37.00,
-        dividend: 3.00,
-        fcf: 70000, // 百萬 USD
-        shares: 7430, // 百萬股
+        price: 378.91,
+        eps: 16.78,
+        bps: 55.78,
+        dividend: 3.64,
+        fcf: 37011.25, // 百萬 USD
+        shares: 7428.43, // 百萬股
         growth1: 15,
         growth2: 10,
         terminal: 2.0,
@@ -335,12 +334,12 @@ const stockPresets = {
     "TSLA": {
         symbol: "TSLA",
         name: "特斯拉",
-        price: 184.8,
-        eps: 2.52,
-        bps: 21.30,
+        price: 396.38,
+        eps: 1.09,
+        bps: 21.90,
         dividend: 0.00,
-        fcf: 4400, // 百萬 USD
-        shares: 3180, // 百萬股
+        fcf: 5252.0, // 百萬 USD
+        shares: 3755.72, // 百萬股
         growth1: 20,
         growth2: 12,
         terminal: 2.0,
@@ -360,12 +359,12 @@ const stockPresets = {
     "AMD": {
         symbol: "AMD",
         name: "超微半導體",
-        price: 160.0,
-        eps: 2.10,
-        bps: 36.50,
+        price: 512.48,
+        eps: 2.99,
+        bps: 39.55,
         dividend: 0.00,
-        fcf: 1200, // 百萬 USD
-        shares: 1610, // 百萬股
+        fcf: 7173.37, // 百萬 USD
+        shares: 1630.6, // 百萬股
         growth1: 22,
         growth2: 12,
         terminal: 2.0,
@@ -387,12 +386,12 @@ const stockPresets = {
     "TSM": {
         symbol: "TSM",
         name: "台積電 ADR (6月熱門)",
-        price: 180.0,
-        eps: 6.50,
-        bps: 26.50,
-        dividend: 1.80,
-        fcf: 15000, // 百萬 USD
-        shares: 5180, // 百萬股
+        price: 432.15,
+        eps: 11.63,
+        bps: 6.54,
+        dividend: 24.0,
+        fcf: 719158.44, // 百萬 USD
+        shares: 5186.47, // 百萬股
         growth1: 18,
         growth2: 12,
         terminal: 2.0,
@@ -414,12 +413,12 @@ const stockPresets = {
     "SMCI": {
         symbol: "SMCI",
         name: "超微電腦 (6月熱門)",
-        price: 850.0,
-        eps: 22.00,
-        bps: 85.00,
+        price: 27.78,
+        eps: 1.90,
+        bps: 12.60,
         dividend: 0.00,
-        fcf: 1200, // 百萬 USD
-        shares: 58, // 百萬股
+        fcf: -7448.38, // 百萬 USD
+        shares: 601.42, // 百萬股
         growth1: 45,
         growth2: 20,
         terminal: 2.0,
@@ -441,12 +440,12 @@ const stockPresets = {
     "GOOGL": {
         symbol: "GOOGL",
         name: "谷歌",
-        price: 175.0,
-        eps: 7.20,
-        bps: 24.00,
-        dividend: 0.80,
-        fcf: 69000, // 百萬 USD
-        shares: 12400, // 百萬股
+        price: 363.79,
+        eps: 13.10,
+        bps: 39.51,
+        dividend: 0.88,
+        fcf: 27921.75, // 百萬 USD
+        shares: 5867.16, // 百萬股
         growth1: 15,
         growth2: 10,
         terminal: 2.0,
@@ -468,10 +467,10 @@ const stockPresets = {
     "VOO": {
         symbol: "VOO",
         name: "標普 500 ETF (VOO)",
-        price: 500.0,
-        eps: 18.50,
-        bps: 110.00,
-        dividend: 6.20,
+        price: 681.41,
+        eps: 19.00,
+        bps: 390.85,
+        dividend: 5.44,
         fcf: 0,
         shares: 1,
         growth1: 7,
@@ -496,10 +495,10 @@ const stockPresets = {
     "QQQ": {
         symbol: "QQQ",
         name: "納斯達克 100 ETF (QQQ)",
-        price: 460.0,
-        eps: 15.00,
-        bps: 65.00,
-        dividend: 2.50,
+        price: 722.51,
+        eps: 16.00,
+        bps: 357.77,
+        dividend: 1.77,
         fcf: 0,
         shares: 1,
         growth1: 12,
@@ -524,10 +523,10 @@ const stockPresets = {
     "SCHD": {
         symbol: "SCHD",
         name: "美股高股息 ETF (SCHD)",
-        price: 82.0,
+        price: 31.93,
         eps: 4.20,
         bps: 32.00,
-        dividend: 2.80,
+        dividend: 1.06,
         fcf: 0,
         shares: 1,
         growth1: 5,
@@ -552,10 +551,10 @@ const stockPresets = {
     "0052": {
         symbol: "0052.TW",
         name: "富邦科技",
-        price: 205.0,
-        eps: 12.00,
-        bps: 90.00,
-        dividend: 4.50,
+        price: 62.5,
+        eps: 3.66,
+        bps: 27.45,
+        dividend: 1.37,
         fcf: 0,
         shares: 1,
         growth1: 12,
@@ -581,11 +580,11 @@ const stockPresets = {
         symbol: "2327.TW",
         name: "國巨",
         price: 1040.0,
-        eps: 55.00,
-        bps: 320.00,
-        dividend: 22.00,
-        fcf: 12000,
-        shares: 418,
+        eps: 12.64,
+        bps: 81.15,
+        dividend: 6.00,
+        fcf: 21481.90,
+        shares: 2058.73,
         growth1: 15,
         growth2: 10,
         terminal: 2.0,
@@ -597,7 +596,7 @@ const stockPresets = {
         rule40FCFMargin: 22,
         currency: "TWD",
         frequency: 1,
-        riskLevel: "中高風險",
+        riskLevel: "Ref",
         riskDesc: "被動元件龍頭，AI 伺服器與高階車用電容需求爆發，具備產品定價權但有景氣循環風險。",
         sellPremium: 0.20,
         strategyMode: "growth"
@@ -605,12 +604,12 @@ const stockPresets = {
     "2492": {
         symbol: "2492.TW",
         name: "華新科",
-        price: 98.0,
-        eps: 5.20,
-        bps: 76.00,
-        dividend: 3.00,
-        fcf: 1800,
-        shares: 485,
+        price: 554.0,
+        eps: 4.74,
+        bps: 65.25,
+        dividend: 2.40,
+        fcf: 3642.43,
+        shares: 484.80,
         growth1: 10,
         growth2: 6,
         terminal: 1.5,
@@ -630,12 +629,12 @@ const stockPresets = {
     "2344": {
         symbol: "2344.TW",
         name: "華邦電",
-        price: 212.0,
-        eps: 2.50,
-        bps: 28.00,
-        dividend: 1.20,
-        fcf: 4500,
-        shares: 3980,
+        price: 207.5,
+        eps: 0.89,
+        bps: 25.92,
+        dividend: 0.50,
+        fcf: -10663.85,
+        shares: 4500.00,
         growth1: 8,
         growth2: 5,
         terminal: 1.5,
@@ -655,12 +654,12 @@ const stockPresets = {
     "3481": {
         symbol: "3481.TW",
         name: "群創",
-        price: 61.7,
-        eps: 1.80,
-        bps: 28.00,
-        dividend: 0.80,
-        fcf: -2000,
-        shares: 9560,
+        price: 60.7,
+        eps: 0.03,
+        bps: 28.39,
+        dividend: 1.00,
+        fcf: 17172.95,
+        shares: 7981.05,
         growth1: 6,
         growth2: 4,
         terminal: 1.0,
@@ -680,12 +679,12 @@ const stockPresets = {
     "2409": {
         symbol: "2409.TW",
         name: "友達",
-        price: 26.95,
-        eps: 1.50,
-        bps: 23.00,
-        dividend: 0.80,
-        fcf: -1500,
-        shares: 7690,
+        price: 26.75,
+        eps: 0.90,
+        bps: 19.81,
+        dividend: 1.20,
+        fcf: -6890.23,
+        shares: 7547.10,
         growth1: 6,
         growth2: 4,
         terminal: 1.0,
@@ -703,121 +702,121 @@ const stockPresets = {
         strategyMode: "growth"
     },
     "2317": {
-        symbol: "2317.TW", name: "鴻海", price: 200.0, eps: 11.5, bps: 110.0, dividend: 5.4, fcf: 150000, shares: 13860,
+        symbol: "2317.TW", name: "鴻海", price: 270.0, eps: 13.40, bps: 126.91, dividend: 7.17, fcf: 37193.24, shares: 14001.92,
         growth1: 10, growth2: 7, terminal: 1.5, discount: 7.5, safety: 15, pe: 18.0, pb: 1.8, rule40Growth: 15, rule40FCFMargin: 8,
-        currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "全球代工龍頭，積極布局 AI 伺服器與電動車，具備規模優勢。",
+        currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "全球代工龍頭，積極布局 AI 伺服器與電動車，具備規模优势。",
         sellPremium: 0.18, strategyMode: "growth"
     },
     "2454": {
-        symbol: "2454.TW", name: "聯發科", price: 1400.0, eps: 62.0, bps: 280.0, dividend: 55.0, fcf: 95000, shares: 1600,
+        symbol: "2454.TW", name: "聯發科", price: 4430.0, eps: 66.12, bps: 244.52, dividend: 53.50, fcf: 73559.38, shares: 1596.11,
         growth1: 15, growth2: 10, terminal: 2.0, discount: 8.5, safety: 15, pe: 22.0, pb: 5.0, rule40Growth: 18, rule40FCFMargin: 20,
         currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "手機晶片巨頭，受惠 AI 邊緣運算晶片增長，具備高利潤率與高股息特性。",
         sellPremium: 0.20, strategyMode: "growth"
     },
     "2308": {
-        symbol: "2308.TW", name: "台達電", price: 380.0, eps: 13.5, bps: 95.0, dividend: 6.5, fcf: 28000, shares: 2590,
+        symbol: "2308.TW", name: "台達電", price: 2185.0, eps: 22.97, bps: 115.32, dividend: 11.60, fcf: 32521.96, shares: 2597.54,
         growth1: 12, growth2: 8, terminal: 1.5, discount: 7.5, safety: 15, pe: 28.0, pb: 4.0, rule40Growth: 12, rule40FCFMargin: 10,
         currency: "TWD", frequency: 1, riskLevel: "低風險", riskDesc: "電源與綠能巨頭，AI 伺服器散熱與電源轉換模組龍頭，長期成長穩健。",
         sellPremium: 0.18, strategyMode: "growth"
     },
     "2303": {
-        symbol: "2303.TW", name: "聯電", price: 55.0, eps: 4.8, bps: 28.0, dividend: 3.0, fcf: 45000, shares: 12500,
+        symbol: "2303.TW", name: "聯電", price: 140.0, eps: 3.93, bps: 32.33, dividend: 2.85, fcf: 34353.80, shares: 12546.43,
         growth1: 6, growth2: 4, terminal: 1.0, discount: 7.0, safety: 10, pe: 11.5, pb: 1.9, rule40Growth: 6, rule40FCFMargin: 25,
         currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "成熟製程代工大廠，受景氣循環影響大，但股息配發大方，具殖利率防護。",
         sellPremium: 0.15, strategyMode: "growth"
     },
     "2382": {
-        symbol: "2382.TW", name: "廣達", price: 280.0, eps: 12.0, bps: 60.0, dividend: 9.0, fcf: 42000, shares: 3860,
+        symbol: "2382.TW", name: "廣達", price: 376.0, eps: 18.92, bps: 53.83, dividend: 13.00, fcf: -98190.83, shares: 3854.52,
         growth1: 15, growth2: 10, terminal: 1.5, discount: 8.0, safety: 15, pe: 23.0, pb: 4.6, rule40Growth: 25, rule40FCFMargin: 6,
         currency: "TWD", frequency: 1, riskLevel: "中高風險", riskDesc: "AI 伺服器代工龍頭，組裝業務營收成長爆發，但需注意代工毛利率波動與估值偏高風險。",
         sellPremium: 0.22, strategyMode: "growth"
     },
     "2301": {
-        symbol: "2301.TW", name: "光寶科", price: 110.0, eps: 6.2, bps: 38.0, dividend: 4.5, fcf: 9800, shares: 2350,
+        symbol: "2301.TW", name: "光寶科", price: 211.0, eps: 6.59, bps: 38.83, dividend: 7.51, fcf: -3553.09, shares: 2269.10,
         growth1: 8, growth2: 6, terminal: 1.2, discount: 7.0, safety: 10, pe: 17.5, pb: 2.9, rule40Growth: 10, rule40FCFMargin: 9,
         currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "光電與電源大廠，受惠於 AI 伺服器電源升級，正朝向高毛利產品轉型。",
         sellPremium: 0.15, strategyMode: "growth"
     },
     "2891": {
-        symbol: "2891.TW", name: "中信金", price: 36.0, eps: 2.8, bps: 22.5, dividend: 1.8, fcf: 0.0, shares: 19500,
+        symbol: "2891.TW", name: "中信金", price: 71.9, eps: 4.06, bps: 27.16, dividend: 2.30, fcf: 213396.83, shares: 19676.90,
         growth1: 5, growth2: 4, terminal: 1.0, discount: 6.5, safety: 10, pe: 13.0, pb: 1.6, rule40Growth: 8, rule40FCFMargin: 0,
         currency: "TWD", frequency: 1, riskLevel: "低風險", riskDesc: "金融權值股，以銀行與人壽為獲利雙引擎，股息配發穩定，抗震存股標的。",
         sellPremium: 0.12, strategyMode: "dividend"
     },
     "2603": {
-        symbol: "2603.TW", name: "長榮", price: 195.0, eps: 22.0, bps: 240.0, dividend: 10.0, fcf: 85000, shares: 2110,
+        symbol: "2603.TW", name: "長榮", price: 193.5, eps: 31.64, bps: 268.71, dividend: 16.00, fcf: 28350.01, shares: 2165.04,
         growth1: 5, growth2: 3, terminal: 0.5, discount: 9.0, safety: 25, pe: 8.8, pb: 0.8, rule40Growth: 12, rule40FCFMargin: 35,
         currency: "TWD", frequency: 1, riskLevel: "高風險", riskDesc: "航運巨頭，運價受地緣政治與景氣波動極大，但手握充沛現金，具備極高配息能力。",
         sellPremium: 0.25, strategyMode: "growth"
     },
     "2379": {
-        symbol: "2379.TW", name: "瑞昱", price: 530.0, eps: 28.0, bps: 110.0, dividend: 18.0, fcf: 18000, shares: 510,
+        symbol: "2379.TW", name: "瑞昱", price: 819.0, eps: 28.07, bps: 87.68, dividend: 25.00, fcf: 9227.78, shares: 512.86,
         growth1: 12, growth2: 8, terminal: 1.5, discount: 8.0, safety: 15, pe: 18.9, pb: 4.8, rule40Growth: 14, rule40FCFMargin: 16,
         currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "蟹蟹晶片，網通晶片領頭羊，受惠 WiFi 7 與汽車乙太網路長線需求。",
         sellPremium: 0.18, strategyMode: "growth"
     },
     "3034": {
-        symbol: "3034.TW", name: "聯詠", price: 600.0, eps: 38.5, bps: 145.0, dividend: 32.0, fcf: 24000, shares: 600,
+        symbol: "3034.TW", name: "聯詠", price: 533.0, eps: 26.85, bps: 118.20, dividend: 28.00, fcf: 24000.00, shares: 600.00,
         growth1: 8, growth2: 5, terminal: 1.2, discount: 7.5, safety: 15, pe: 15.5, pb: 4.1, rule40Growth: 10, rule40FCFMargin: 20,
         currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "驅動 IC 龍頭，受惠 OLED 滲透率提升，股利配發率高，殖利率具吸引力。",
         sellPremium: 0.18, strategyMode: "growth"
     },
     "3711": {
-        symbol: "3711.TW", name: "日月光投控", price: 165.0, eps: 9.5, bps: 72.0, dividend: 5.5, fcf: 38000, shares: 4380,
+        symbol: "3711.TW", name: "日月光投控", price: 608.0, eps: 10.18, bps: 79.90, dividend: 6.60, fcf: 38000.00, shares: 4380.00,
         growth1: 10, growth2: 7, terminal: 1.5, discount: 7.5, safety: 15, pe: 17.3, pb: 2.3, rule40Growth: 12, rule40FCFMargin: 12,
         currency: "TWD", frequency: 1, riskLevel: "中風險", riskDesc: "半導體封測第一大廠，先進封裝產能擴充快速，為 AI 晶片封測首選合作夥伴。",
         sellPremium: 0.18, strategyMode: "growth"
     },
     "3045": {
-        symbol: "3045.TW", name: "台灣大", price: 105.0, eps: 4.3, bps: 32.0, dividend: 4.3, fcf: 15000, shares: 3020,
+        symbol: "3045.TW", name: "台灣大", price: 118.5, eps: 4.70, bps: 30.05, dividend: 4.80, fcf: 15000.00, shares: 3020.00,
         growth1: 4, growth2: 3, terminal: 1.0, discount: 6.0, safety: 10, pe: 24.0, pb: 3.3, rule40Growth: 6, rule40FCFMargin: 15,
         currency: "TWD", frequency: 1, riskLevel: "低風險", riskDesc: "電信三雄之一，合併台灣之星發揮綜效，現金流極為穩定，防禦存股首選。",
         sellPremium: 0.12, strategyMode: "dividend"
     },
     "2412": {
-        symbol: "2412.TW", name: "中華電", price: 125.0, eps: 4.8, bps: 50.0, dividend: 4.8, fcf: 35000, shares: 7750,
+        symbol: "2412.TW", name: "中華電", price: 145.0, eps: 5.02, bps: 51.09, dividend: 5.20, fcf: 35000.00, shares: 7750.00,
         growth1: 3, growth2: 2, terminal: 1.0, discount: 5.8, safety: 10, pe: 26.0, pb: 2.5, rule40Growth: 4, rule40FCFMargin: 18,
         currency: "TWD", frequency: 1, riskLevel: "低風險", riskDesc: "台股公債代表，寬頻與行動通訊絕對領先，極度抗震，適合退休資產配置。",
         sellPremium: 0.10, strategyMode: "dividend"
     },
     "3231": {
-        symbol: "3231.TW", name: "緯創", price: 115.0, eps: 5.2, bps: 35.0, dividend: 2.6, fcf: 12000, shares: 2890,
+        symbol: "3231.TW", name: "緯創", price: 161.5, eps: 8.41, bps: 59.80, dividend: 5.50, fcf: 12000.00, shares: 2890.00,
         growth1: 15, growth2: 10, terminal: 1.5, discount: 8.0, safety: 15, pe: 22.0, pb: 3.3, rule40Growth: 28, rule40FCFMargin: 5,
         currency: "TWD", frequency: 1, riskLevel: "中高風險", riskDesc: "AI 伺服器主力代工廠，產能高度滿載，受惠於 AI 硬體基礎設施建置浪潮。",
         sellPremium: 0.20, strategyMode: "growth"
     },
     "AMZN": {
-        symbol: "AMZN", name: "亞馬遜", price: 185.0, eps: 3.5, bps: 22.0, dividend: 0.0, fcf: 32000, shares: 10400,
+        symbol: "AMZN", name: "亞馬遜", price: 237.5, eps: 7.77, bps: 41.09, dividend: 0.00, fcf: 32000.00, shares: 10400.00,
         growth1: 18, growth2: 12, terminal: 2.0, discount: 8.5, safety: 15, pe: 52.8, pb: 8.4, rule40Growth: 12, rule40FCFMargin: 11,
         currency: "USD", frequency: 4, riskLevel: "中風險", riskDesc: "電商與 AWS 雲端運算霸主，AI 雲端服務需求強勁，現金流生成能力卓越，但無配息。",
         sellPremium: 0.20, strategyMode: "growth"
     },
     "TXN": {
-        symbol: "TXN", name: "德州儀器", price: 195.0, eps: 7.0, bps: 18.0, dividend: 5.2, fcf: 5400, shares: 910,
+        symbol: "TXN", name: "德州儀器", price: 301.88, eps: 5.84, bps: 18.44, dividend: 5.56, fcf: 5400.00, shares: 910.00,
         growth1: 8, growth2: 6, terminal: 2.0, discount: 7.5, safety: 15, pe: 27.8, pb: 10.8, rule40Growth: 8, rule40FCFMargin: 20,
         currency: "USD", frequency: 4, riskLevel: "中低風險", riskDesc: "類比晶片巨頭，擁有龐大的工業與汽車客戶群，股息連續增發，具高資本回報率。",
         sellPremium: 0.15, strategyMode: "growth"
     },
     "ABBV": {
-        symbol: "ABBV", name: "艾伯維", price: 170.0, eps: 6.5, bps: 8.0, dividend: 6.2, fcf: 22000, shares: 1760,
+        symbol: "ABBV", name: "艾伯維", price: 221.23, eps: 2.05, bps: -3.77, dividend: 6.92, fcf: 22000.00, shares: 1760.00,
         growth1: 6, growth2: 5, terminal: 1.5, discount: 7.0, safety: 10, pe: 26.1, pb: 21.2, rule40Growth: 6, rule40FCFMargin: 35,
         currency: "USD", frequency: 4, riskLevel: "中低風險", riskDesc: "生技製藥巨頭，以 Humira 等重磅藥物聞名，專利保護與股息配發能力極強。",
         sellPremium: 0.15, strategyMode: "dividend"
     },
     "AMGN": {
-        symbol: "AMGN", name: "安進", price: 300.0, eps: 14.5, bps: 12.0, dividend: 9.0, fcf: 11000, shares: 535,
+        symbol: "AMGN", name: "安進", price: 341.66, eps: 14.37, bps: 17.03, dividend: 10.08, fcf: 11000.00, shares: 535.00,
         growth1: 7, growth2: 5, terminal: 1.5, discount: 7.0, safety: 10, pe: 20.7, pb: 25.0, rule40Growth: 7, rule40FCFMargin: 30,
         currency: "USD", frequency: 4, riskLevel: "中風險", riskDesc: "全球生物製藥巨頭，產品管線豐富，現金流穩健，防守型優質配置標的。",
         sellPremium: 0.15, strategyMode: "growth"
     },
     "CVX": {
-        symbol: "CVX", name: "雪佛龍", price: 155.0, eps: 12.0, bps: 88.0, dividend: 6.5, fcf: 18000, shares: 1850,
+        symbol: "CVX", name: "雪佛龍", price: 177.58, eps: 5.75, bps: 92.91, dividend: 7.12, fcf: 18000.00, shares: 1850.00,
         growth1: 4, growth2: 3, terminal: 1.0, discount: 7.5, safety: 15, pe: 12.9, pb: 1.76, rule40Growth: 5, rule40FCFMargin: 12,
         currency: "USD", frequency: 4, riskLevel: "Ref", riskDesc: "石化能源巨頭，受油價與地緣政治波動影響，但具備極強的股息與資產負債表保護。",
         sellPremium: 0.15, strategyMode: "dividend"
     },
     "PEP": {
-        symbol: "PEP", name: "百事公司", price: 165.0, eps: 7.2, bps: 15.0, dividend: 5.2, fcf: 8200, shares: 1370,
+        symbol: "PEP", name: "百事公司", price: 141.59, eps: 6.37, bps: 15.63, dividend: 5.69, fcf: 8200.00, shares: 1370.00,
         growth1: 5, growth2: 4, terminal: 1.5, discount: 6.5, safety: 10, pe: 22.9, pb: 11.0, rule40Growth: 5, rule40FCFMargin: 14,
         currency: "USD", frequency: 4, riskLevel: "低風險", riskDesc: "民生消費巨頭，旗下百事可樂與樂事洋芋片具備極高的品牌定價權與抗衰退能力。",
         sellPremium: 0.12, strategyMode: "dividend"
@@ -1937,7 +1936,7 @@ async function loadStaticRealtimeData() {
     }
 }
 
-async function refreshRealtimeData() {
+async function refreshRealtimeData(isForce = false) {
     if (!btnRefresh) return;
     
     // Add loading spinner class
@@ -1947,10 +1946,11 @@ async function refreshRealtimeData() {
         icon.classList.add("icon-spin-enabled");
     }
     btnRefresh.disabled = true;
-    lblTimestamp.textContent = "正在抓取市場數據...";
+    lblTimestamp.textContent = "🌐 正在從 Yahoo Finance 抓取最新市場數據...";
     
     try {
-        const response = await fetch(`${API_BASE}/api/refresh`);
+        const forceParam = isForce ? '?force=true' : '';
+        const response = await fetch(`${API_BASE}/api/refresh${forceParam}`);
         if (!response.ok) throw new Error("後端更新數據出錯");
         
         const data = await response.json();
@@ -1959,14 +1959,20 @@ async function refreshRealtimeData() {
         mergeRealtimeData(data);
         
         const now = new Date();
-        lblTimestamp.textContent = `最後更新：${now.toLocaleTimeString()}`;
+        const timeStr = now.toLocaleString("zh-TW", { 
+            year: 'numeric', month: '2-digit', day: '2-digit',
+            hour: '2-digit', minute: '2-digit', second: '2-digit',
+            hour12: false 
+        });
+        const tickerCount = Object.keys(data).length;
+        lblTimestamp.textContent = `🌐 即時更新：${timeStr}（共 ${tickerCount} 檔股票/ETF 已從網路同步）`;
         
         // Reload current active preset to show updated prices
         loadPreset(selectPreset.value);
-        console.log("✅ 成功獲取並載入最新即時數據。");
+        console.log(`✅ 成功從 Yahoo Finance 獲取 ${tickerCount} 檔即時數據。`);
     } catch (err) {
         console.error("更新即時數據失敗:", err);
-        lblTimestamp.textContent = "更新失敗，請檢查後端是否運行中";
+        lblTimestamp.textContent = "❌ 網路更新失敗，目前顯示的是本地快取數據。請檢查後端是否運行中。";
     } finally {
         if (icon) {
             icon.classList.remove("icon-spin-enabled");
@@ -1977,7 +1983,8 @@ async function refreshRealtimeData() {
 }
 
 btnRefresh.addEventListener("click", () => {
-    refreshRealtimeData();
+    // 手動按鈕強制跳過後端快取，直接從 Yahoo Finance 重新抓取
+    refreshRealtimeData(true);
 });
 
 // ==========================================
@@ -2713,8 +2720,6 @@ btnRiverPB.addEventListener("click", () => {
     btnRiverPE.style.color = "var(--text-secondary)";
     drawRiverChart();
 });
-
-
 // 判斷是否處於台灣股市交易時間 (週一至週五 9:00 - 13:30)
 function isTaiwanTradingTime() {
     const now = new Date();
@@ -2731,22 +2736,47 @@ function isTaiwanTradingTime() {
     return isWeekday && isTradingHours;
 }
 
+// 判斷是否處於美股交易時間 (美東 9:30 - 16:00 = 台灣 21:30 - 04:30+1)
+function isUSTradingTime() {
+    const now = new Date();
+    const usTime = new Date(now.toLocaleString("en-US", { timeZone: "America/New_York" }));
+    const day = usTime.getDay();
+    const hours = usTime.getHours();
+    const minutes = usTime.getMinutes();
+    const timeInMinutes = hours * 60 + minutes;
+    
+    const isWeekday = (day >= 1 && day <= 5);
+    const isTradingHours = (timeInMinutes >= 570 && timeInMinutes <= 960); // 9:30 到 16:00
+    
+    return isWeekday && isTradingHours;
+}
+
 // Initial Setup on Page Load
 window.addEventListener("load", async () => {
     // Load local Nvidia first for instant preview
     loadPreset("NVDA");
-    // 首先嘗試載入靜態數據檔案 (快取雙重保險)
+    // 首先嘗試載入靜態數據檔案 (快取雙重保險，讓頁面秒開)
     await loadStaticRealtimeData();
-    // 然後發送即時刷新請求
+    // 每次開啟頁面，一律從網路即時抓取最新數據（這是核心！）
     refreshRealtimeData();
     
-    // 設定每 5 分鐘自動刷新機制 (台股交易日 09:00-13:30)
+    // 智慧自動刷新機制：
+    // - 台股/美股交易時段：每 5 分鐘自動更新
+    // - 非交易時段：每 30 分鐘自動更新（股價不變但財報數據可能更新）
     setInterval(() => {
-        if (isTaiwanTradingTime()) {
-            console.log("⏰ 偵測到當前為台股交易時間，系統正在自動重新整理最新股價與財務指標...");
+        if (isTaiwanTradingTime() || isUSTradingTime()) {
+            console.log("⏰ 偵測到交易時間（台股或美股），系統正在自動從網路更新最新數據...");
             refreshRealtimeData();
         } else {
-            console.log("💤 非台股交易時間，系統暫停自動刷新以節省資源。");
+            console.log("💤 非主要交易時段，30 分鐘週期靜默更新中...");
         }
-    }, 5 * 60 * 1000);
+    }, 5 * 60 * 1000); // 每 5 分鐘檢查一次
+    
+    // 非交易時段也要有一個較長週期的更新，確保數據不會太過陳舊
+    setInterval(() => {
+        if (!isTaiwanTradingTime() && !isUSTradingTime()) {
+            console.log("🔄 非交易時段定期更新（每 30 分鐘），確保數據新鮮度...");
+            refreshRealtimeData();
+        }
+    }, 30 * 60 * 1000); // 每 30 分鐘
 });
