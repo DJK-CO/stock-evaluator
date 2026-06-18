@@ -698,6 +698,25 @@ function loadPreset(key) {
     // Update Slider text displays
     updateSliderLabels();
     
+    // Reset valuation river state on preset load
+    currentRiverType = 'pe';
+    const btnPE = document.getElementById("btn-river-pe");
+    const btnPB = document.getElementById("btn-river-pb");
+    if (btnPE && btnPB) {
+        btnPE.classList.add("active");
+        btnPB.classList.remove("active");
+        btnPE.style.borderColor = "var(--accent)";
+        btnPE.style.background = "rgba(var(--accent-rgb), 0.15)";
+        btnPE.style.color = "var(--accent)";
+        btnPB.style.borderColor = "var(--border)";
+        btnPB.style.background = "rgba(255,255,255,0.05)";
+        btnPB.style.color = "var(--text-secondary)";
+    }
+    cachedRiverData = null;
+    if (activeTab === "river") {
+        loadRiverData();
+    }
+
     // Perform calculations for all tabs unconditionally to prevent leftover currency symbols in background tabs
     calculateValuation();
     calculateCompoundInterest();
@@ -1264,6 +1283,7 @@ btnRefresh.addEventListener("click", () => {
 // ==========================================
 const tabs = [
     { btnId: "tab-btn-valuation", contentId: "tab-content-valuation", key: "valuation" },
+    { btnId: "tab-btn-river", contentId: "tab-content-river", key: "river" },
     { btnId: "tab-btn-compound", contentId: "tab-content-compound", key: "compound" },
     { btnId: "tab-btn-drip", contentId: "tab-content-drip", key: "drip" }
 ];
@@ -1287,6 +1307,8 @@ function switchTab(tabKey) {
     // Re-trigger calculation and charts updates when active
     if (tabKey === "valuation") {
         calculateValuation();
+    } else if (tabKey === "river") {
+        loadRiverData();
     } else if (tabKey === "compound") {
         calculateCompoundInterest();
     } else if (tabKey === "drip") {
@@ -1296,6 +1318,7 @@ function switchTab(tabKey) {
 
 // Attach event listeners to tab buttons
 document.getElementById("tab-btn-valuation").addEventListener("click", () => switchTab("valuation"));
+document.getElementById("tab-btn-river").addEventListener("click", () => switchTab("river"));
 document.getElementById("tab-btn-compound").addEventListener("click", () => switchTab("compound"));
 document.getElementById("tab-btn-drip").addEventListener("click", () => switchTab("drip"));
 
@@ -1629,6 +1652,366 @@ function updateDRIPChart(labels, sharesData, incomeData) {
 document.getElementById("drip-frequency").addEventListener("change", calculateDRIP);
 dripReinvestCheck.addEventListener("change", calculateDRIP);
 dripYearsSlider.addEventListener("input", calculateDRIP);
+
+
+// ==========================================
+// Valuation River Charting
+// ==========================================
+let riverChartInstance = null;
+let currentRiverType = 'pe'; // 'pe' or 'pb'
+let cachedRiverData = null;
+
+// DOM Elements River
+const riverStockInfo = document.getElementById("river-stock-info");
+const btnRiverPE = document.getElementById("btn-river-pe");
+const btnRiverPB = document.getElementById("btn-river-pb");
+const riverTypeSelectorWrapper = document.getElementById("river-type-selector-wrapper");
+const riverDesc = document.getElementById("river-desc");
+const riverStatusText = document.getElementById("river-status-text");
+const riverChartTitle = document.getElementById("river-chart-title");
+
+async function loadRiverData() {
+    // 獲取當前所選的 symbol
+    const select = document.getElementById("stock-preset");
+    const selectedPresetKey = select.value;
+    let symbol = "";
+    
+    if (selectedPresetKey === "custom") {
+        symbol = document.getElementById("stock-symbol").value.toUpperCase().trim();
+    } else {
+        symbol = stockPresets[selectedPresetKey].symbol;
+    }
+    
+    if (!symbol) {
+        riverStatusText.textContent = "請輸入或選擇一個有效的股票代號";
+        return;
+    }
+    
+    riverStockInfo.textContent = symbol;
+    riverStatusText.textContent = `正在獲取 ${symbol} 的歷史河流數據，請稍候...`;
+    
+    try {
+        const res = await fetch(`${API_BASE}/api/river?symbol=${symbol}`);
+        if (!res.ok) {
+            throw new Error(`HTTP 錯誤! 狀態碼: ${res.status}`);
+        }
+        const data = await res.json();
+        cachedRiverData = data;
+        drawRiverChart();
+    } catch (err) {
+        console.error("載入歷史估值河流數據失敗:", err);
+        riverStatusText.innerHTML = `<span style="color: #f87171;">數據載入失敗：${err.message}。後端服務可能仍在啟動中或網路超時，請點擊「即時數據更新」或重試。</span>`;
+    }
+}
+
+function drawRiverChart() {
+    if (!cachedRiverData) return;
+    
+    const ctx = document.getElementById("riverChart").getContext("2d");
+    const isETF = cachedRiverData.isETF;
+    const labels = cachedRiverData.dates;
+    const closeData = cachedRiverData.close;
+    const currentPrice = closeData[closeData.length - 1];
+    const currencySym = cachedRiverData.currency === "TWD" ? "NT$" : "$";
+    
+    // 清除舊圖表
+    if (riverChartInstance) {
+        riverChartInstance.destroy();
+        riverChartInstance = null;
+    }
+    
+    if (isETF) {
+        // ETF 均線圖
+        riverTypeSelectorWrapper.style.display = "none";
+        riverChartTitle.innerHTML = `<i data-lucide="waves"></i> 歷史移動平均均線走勢圖 (ETF)`;
+        riverDesc.textContent = "針對 ETF 採用均線估值法。20MA (月線) 代表短期支撐，60MA (季線) 代表中期支撐，120MA (半年線) 代表中長期支撐，240MA (年線) 為長期支撐防禦線。";
+        if (window.lucide) window.lucide.createIcons();
+        
+        const ma20 = cachedRiverData.ma20;
+        const ma60 = cachedRiverData.ma60;
+        const ma120 = cachedRiverData.ma120;
+        const ma240 = cachedRiverData.ma240;
+        
+        // 估值定位分析
+        let statusHtml = "";
+        const ref240 = ma240[ma240.length - 1];
+        const ref120 = ma120[ma120.length - 1];
+        const ref60 = ma60[ma60.length - 1];
+        
+        if (ref240 && currentPrice < ref240) {
+            statusHtml = `當前股價 <span style="color: #4ade80;">${currencySym} ${currentPrice}</span> 低於年線 (${currencySym} ${ref240.toFixed(2)})，為 <strong style="color: #4ade80;">超跌極佳買點</strong>！長期安全邊際極高。`;
+        } else if (ref120 && currentPrice < ref120) {
+            statusHtml = `當前股價 <span style="color: #a3e635;">${currencySym} ${currentPrice}</span> 介於半年線與年線之間，為 <strong style="color: #a3e635;">中期甜美佈局點</strong>。`;
+        } else if (ref60 && currentPrice < ref60) {
+            statusHtml = `當前股價 <span style="color: #60a5fa;">${currencySym} ${currentPrice}</span> 介於季線與半年線之間，為 <strong style="color: #60a5fa;">合理分批進場點</strong>。`;
+        } else {
+            statusHtml = `當前股價 <span style="color: #f87171;">${currencySym} ${currentPrice}</span> 高於所有短中長期均線，<strong style="color: #f87171;">偏高偏貴</strong>，建議分批定期定額，耐心等待修正支撐位。`;
+        }
+        riverStatusText.innerHTML = statusHtml;
+        
+        // 繪圖
+        riverChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [
+                    {
+                        label: '收盤價',
+                        data: closeData,
+                        borderColor: '#38bdf8',
+                        backgroundColor: 'rgba(56, 189, 248, 0.05)',
+                        borderWidth: 2.5,
+                        tension: 0.1,
+                        pointRadius: 0,
+                        pointHoverRadius: 5
+                    },
+                    {
+                        label: '20MA',
+                        data: ma20,
+                        borderColor: '#a855f7',
+                        borderWidth: 1.5,
+                        borderDash: [2, 2],
+                        tension: 0.1,
+                        pointRadius: 0
+                    },
+                    {
+                        label: '60MA',
+                        data: ma60,
+                        borderColor: '#ec4899',
+                        borderWidth: 1.5,
+                        borderDash: [3, 3],
+                        tension: 0.1,
+                        pointRadius: 0
+                    },
+                    {
+                        label: '120MA',
+                        data: ma120,
+                        borderColor: '#eab308',
+                        borderWidth: 1.5,
+                        tension: 0.1,
+                        pointRadius: 0
+                    },
+                    {
+                        label: '240MA',
+                        data: ma240,
+                        borderColor: '#10b981',
+                        borderWidth: 1.8,
+                        tension: 0.1,
+                        pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { labels: { color: '#f8fafc', font: { family: 'Inter', size: 11 } } },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        titleFont: { family: 'Outfit' },
+                        bodyFont: { family: 'Inter' },
+                        callbacks: {
+                            label: function(context) {
+                                return ` ${context.dataset.label}: ${currencySym} ${context.raw !== null ? context.raw.toFixed(2) : '無'}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#94a3b8', font: { family: 'Outfit', size: 11 } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: { family: 'Inter', size: 10 }, maxTicksLimit: 12 }
+                    }
+                }
+            }
+        });
+        
+    } else {
+        // 個股 PE/PB 河流圖
+        riverTypeSelectorWrapper.style.display = "block";
+        riverChartTitle.innerHTML = `<i data-lucide="waves"></i> 歷史估值河流走勢 (${currentRiverType.toUpperCase()})`;
+        
+        let bands = null;
+        let midVal = 0;
+        
+        if (currentRiverType === 'pe') {
+            riverDesc.textContent = "本益比河流圖：以歷史 TTM EPS 乘上當前設定的本益比倍數中軸 (0.6x, 0.8x, 1.0x, 1.2x, 1.4x) 來劃分 5 個估值河流區間，反映股價相對於獲利能力的評價高低。";
+            bands = cachedRiverData.pe_bands;
+            midVal = cachedRiverData.pe_mid;
+        } else {
+            riverDesc.textContent = "本淨比河流圖：以歷史每股淨值 (BPS) 乘上當前設定的本淨比倍數中軸 (0.6x, 0.8x, 1.0x, 1.2x, 1.4x) 來劃分 5 個估值河流區間，適用於波動較大或重資產個股。";
+            bands = cachedRiverData.pb_bands;
+            midVal = cachedRiverData.pb_mid;
+        }
+        if (window.lucide) window.lucide.createIcons();
+        
+        const cheap = bands.cheap_0_6;
+        const low = bands.low_0_8;
+        const fair = bands.fair_1_0;
+        const high = bands.high_1_2;
+        const expensive = bands.expensive_1_4;
+        
+        // 估值定位分析
+        let statusHtml = "";
+        const cVal = cheap[cheap.length - 1];
+        const lVal = low[low.length - 1];
+        const fVal = fair[fair.length - 1];
+        const hVal = high[high.length - 1];
+        
+        if (currentPrice < cVal) {
+            statusHtml = `當前股價 <span style="color: #4ade80;">${currencySym} ${currentPrice}</span> 低於 0.6x 河流底 (${currencySym} ${cVal.toFixed(2)})，為 <strong style="color: #4ade80;">極度便宜 (極佳安全邊際)</strong>！`;
+        } else if (currentPrice < lVal) {
+            statusHtml = `當前股價 <span style="color: #a3e635;">${currencySym} ${currentPrice}</span> 處於 <strong style="color: #a3e635;">便宜偏低區間</strong>。`;
+        } else if (currentPrice < fVal) {
+            statusHtml = `當前股價 <span style="color: #60a5fa;">${currencySym} ${currentPrice}</span> 處於 <strong style="color: #60a5fa;">合理價值區間</strong>。`;
+        } else if (currentPrice < hVal) {
+            statusHtml = `當前股價 <span style="color: #fb923c;">${currencySym} ${currentPrice}</span> 處於 <strong style="color: #fb923c;">偏高溢價區間</strong>，注意拉回風險。`;
+        } else {
+            statusHtml = `當前股價 <span style="color: #f87171;">${currencySym} ${currentPrice}</span> 高於 1.2x 河流頂 (${currencySym} ${hVal.toFixed(2)})，處於 <strong style="color: #f87171;">極度昂貴 (泡沫溢價)</strong> 區間！`;
+        }
+        riverStatusText.innerHTML = statusHtml;
+        
+        // 河流圖的資料集
+        const datasets = [
+            {
+                label: '收盤價',
+                data: closeData,
+                borderColor: '#ffffff',
+                backgroundColor: 'rgba(255, 255, 255, 0.02)',
+                borderWidth: 2.5,
+                tension: 0.1,
+                pointRadius: 0,
+                pointHoverRadius: 6,
+                zIndex: 10
+            },
+            {
+                label: `昂貴價 (${(midVal * 1.2).toFixed(1)}x)`,
+                data: expensive,
+                borderColor: 'rgba(239, 68, 68, 0.4)', // 紅色
+                borderWidth: 1,
+                fill: '-1',
+                backgroundColor: 'rgba(239, 68, 68, 0.03)',
+                tension: 0.1,
+                pointRadius: 0
+            },
+            {
+                label: `偏高價 (${(midVal * 1.0).toFixed(1)}x)`,
+                data: high,
+                borderColor: 'rgba(249, 115, 22, 0.3)', // 橘色
+                borderWidth: 1,
+                fill: '-1',
+                backgroundColor: 'rgba(249, 115, 22, 0.03)',
+                tension: 0.1,
+                pointRadius: 0
+            },
+            {
+                label: `合理價 (${(midVal * 0.8).toFixed(1)}x)`,
+                data: fair,
+                borderColor: 'rgba(59, 130, 246, 0.3)', // 藍色
+                borderWidth: 1,
+                fill: '-1',
+                backgroundColor: 'rgba(59, 130, 246, 0.03)',
+                tension: 0.1,
+                pointRadius: 0
+            },
+            {
+                label: `偏低價 (${(midVal * 0.6).toFixed(1)}x)`,
+                data: low,
+                borderColor: 'rgba(163, 230, 53, 0.3)', // 嫩綠
+                borderWidth: 1,
+                fill: '-1',
+                backgroundColor: 'rgba(163, 230, 53, 0.03)',
+                tension: 0.1,
+                pointRadius: 0
+            },
+            {
+                label: '便宜價',
+                data: cheap,
+                borderColor: 'rgba(34, 197, 94, 0.3)', // 綠色
+                borderWidth: 1,
+                tension: 0.1,
+                pointRadius: 0
+            }
+        ];
+        
+        riverChartInstance = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: datasets
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: {
+                    legend: { labels: { color: '#f8fafc', font: { family: 'Inter', size: 10 } } },
+                    tooltip: {
+                        backgroundColor: 'rgba(15, 23, 42, 0.95)',
+                        borderColor: 'rgba(255, 255, 255, 0.1)',
+                        borderWidth: 1,
+                        titleFont: { family: 'Outfit' },
+                        bodyFont: { family: 'Inter' },
+                        callbacks: {
+                            label: function(context) {
+                                return ` ${context.dataset.label}: ${currencySym} ${context.raw !== null ? context.raw.toFixed(2) : '無'}`;
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        grid: { color: 'rgba(255, 255, 255, 0.05)' },
+                        ticks: { color: '#94a3b8', font: { family: 'Outfit', size: 11 } }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#94a3b8', font: { family: 'Inter', size: 10 }, maxTicksLimit: 12 }
+                    }
+                }
+            }
+        });
+    }
+}
+
+// 綁定按鈕事件
+btnRiverPE.addEventListener("click", () => {
+    if (currentRiverType === 'pe') return;
+    currentRiverType = 'pe';
+    btnRiverPE.classList.add("active");
+    btnRiverPB.classList.remove("active");
+    // 更新 inline 樣式以實現高質感視覺切換
+    btnRiverPE.style.borderColor = "var(--accent)";
+    btnRiverPE.style.background = "rgba(var(--accent-rgb), 0.15)";
+    btnRiverPE.style.color = "var(--accent)";
+    btnRiverPB.style.borderColor = "var(--border)";
+    btnRiverPB.style.background = "rgba(255,255,255,0.05)";
+    btnRiverPB.style.color = "var(--text-secondary)";
+    drawRiverChart();
+});
+
+btnRiverPB.addEventListener("click", () => {
+    if (currentRiverType === 'pb') return;
+    currentRiverType = 'pb';
+    btnRiverPB.classList.add("active");
+    btnRiverPE.classList.remove("active");
+    // 更新 inline 樣式
+    btnRiverPB.style.borderColor = "var(--accent)";
+    btnRiverPB.style.background = "rgba(var(--accent-rgb), 0.15)";
+    btnRiverPB.style.color = "var(--accent)";
+    btnRiverPE.style.borderColor = "var(--border)";
+    btnRiverPE.style.background = "rgba(255,255,255,0.05)";
+    btnRiverPE.style.color = "var(--text-secondary)";
+    drawRiverChart();
+});
+
 
 // 判斷是否處於台灣股市交易時間 (週一至週五 9:00 - 13:30)
 function isTaiwanTradingTime() {

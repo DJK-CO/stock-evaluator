@@ -68,6 +68,7 @@
         <!-- Tab Navigation Bar -->
         <nav class="tab-navigation">
             <button class="tab-btn active" id="tab-btn-valuation"><i data-lucide="line-chart"></i> 內在價值估值</button>
+            <button class="tab-btn" id="tab-btn-river"><i data-lucide="waves"></i> 估值河流圖</button>
             <button class="tab-btn" id="tab-btn-compound"><i data-lucide="badge-dollar-sign"></i> 複利與定期定額</button>
             <button class="tab-btn" id="tab-btn-drip"><i data-lucide="piggy-bank"></i> 高股息再投資 (DRIP)</button>
         </nav>
@@ -541,6 +542,59 @@
                         <h2 class="section-title"><i data-lucide="line-chart"></i> 股利滾存與股數增長曲線</h2>
                         <div class="chart-container">
                             <canvas id="dripChart"></canvas>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- Tab 4: Valuation River Charts -->
+        <div id="tab-content-river" class="tab-content-container" style="display: none;">
+            <div class="calculator-grid">
+                <!-- Sidebar: Controls -->
+                <aside class="control-panel card">
+                    <h2 class="section-title"><i data-lucide="sliders"></i> 河流圖設定</h2>
+                    
+                    <div class="parameter-group info-group">
+                        <div class="input-wrapper">
+                            <label>當前分析標的</label>
+                            <span id="river-stock-info" class="value-display" style="color: var(--accent); font-weight: 600; font-size: 1.1rem; display: block; padding: 0.5rem 0;">NVDA</span>
+                        </div>
+                        
+                        <!-- Valuation Selector for Individual Stocks -->
+                        <div class="input-wrapper" id="river-type-selector-wrapper">
+                            <label for="river-type">估值河流類型</label>
+                            <div class="btn-group-horizontal" style="display: flex; gap: 0.5rem; margin-top: 0.5rem;">
+                                <button id="btn-river-pe" class="river-type-btn active" style="flex: 1; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: var(--text-secondary); cursor: pointer; font-weight: 500; transition: all 0.2s;">本益比 (PE) 河流</button>
+                                <button id="btn-river-pb" class="river-type-btn" style="flex: 1; padding: 0.6rem; border-radius: 8px; border: 1px solid var(--border); background: rgba(255,255,255,0.05); color: var(--text-secondary); cursor: pointer; font-weight: 500; transition: all 0.2s;">本淨比 (PB) 河流</button>
+                            </div>
+                        </div>
+                        
+                        <div class="input-wrapper" id="river-desc-wrapper" style="margin-top: 1rem;">
+                            <span id="river-desc" style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; display: block;">
+                                本益比河流圖結合歷史股價與估計每股盈餘 (EPS)，將股價相對於盈餘的倍數劃分為 5 個區間線（便宜、偏低、合理、偏高、昂貴），可協助觀察股價的相對估值高低。
+                            </span>
+                        </div>
+                    </div>
+                </aside>
+
+                <!-- Main: Chart & Stats -->
+                <main class="results-panel">
+                    <!-- Dynamic Valuation Analysis Banner -->
+                    <section class="summary-dashboard card gradient-card" style="margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                        <h3 style="font-size: 0.9rem; font-weight: 500; color: var(--text-secondary); display: flex; align-items: center; gap: 0.5rem;">
+                            <i data-lucide="compass" style="width: 1.1rem; height: 1.1rem;"></i> 估值定位導航
+                        </h3>
+                        <div id="river-status-text" style="font-size: 1.25rem; font-weight: 600; color: var(--text-primary); transition: all 0.3s ease;">
+                            正在載入河流圖數據...
+                        </div>
+                    </section>
+
+                    <!-- Chart Card -->
+                    <div class="chart-card card" style="min-height: 400px; width: 100%;">
+                        <h2 class="section-title" id="river-chart-title"><i data-lucide="waves"></i> 歷史估值河流走勢</h2>
+                        <div class="chart-container" style="position: relative; width: 100%; height: 350px;">
+                            <canvas id="riverChart"></canvas>
                         </div>
                     </div>
                 </main>

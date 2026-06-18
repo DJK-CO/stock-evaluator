@@ -310,6 +310,204 @@ def fetch_realtime_data(force=False):
     return results
 
 
+def get_valuation_river(symbol):
+    """
+    計算並獲取過去 3 年的估值河流數據（個股）或移動平均線數據（ETF）
+    並包含本地日級快取機制
+    """
+    import os
+    import json
+    import time
+    import math
+    from datetime import datetime
+    import pandas as pd
+    import yfinance as yf
+    
+    symbol = symbol.upper().strip()
+    
+    # 建立快取目錄
+    cache_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "river_cache")
+    os.makedirs(cache_dir, exist_ok=True)
+    cache_path = os.path.join(cache_dir, f"{symbol}.json")
+    
+    today_str = datetime.now().strftime("%Y-%m-%d")
+    
+    # 檢查快取
+    if os.path.exists(cache_path):
+        try:
+            with open(cache_path, "r", encoding="utf-8") as f:
+                cached_data = json.load(f)
+                if cached_data.get("cache_date") == today_str:
+                    print(f"[River Cache Hit!] 讀取歷史河流快取: {symbol}")
+                    return cached_data
+        except Exception as ex:
+            print(f"讀取河流快取失敗: {ex}")
+            
+    # 沒有快取或過期，從 yfinance 重新拉取
+    print(f"快取不存在或已過期，開始拉取 {symbol} 3年歷史數據...")
+    
+    # 獲取 meta 資訊
+    meta = TICKERS.get(symbol, {"currency": "USD", "isETF": False})
+    fallback = MOCK_FALLBACKS.get(symbol, {
+        "price": 100.0, "eps": 5.0, "bps": 30.0, "pe": 20.0, "pb": 3.0, "growth1": 8.0
+    })
+    
+    is_etf = meta.get("isETF", False)
+    
+    try:
+        ticker = yf.Ticker(symbol)
+        # 抓取 3 年日線數據
+        hist = ticker.history(period="3y")
+        if hist.empty:
+            raise ValueError("yfinance 回傳的歷史股價為空")
+    except Exception as e:
+        print(f"[River Fetch Error] 拉取 {symbol} 歷史股價失敗: {e}。使用 Fallback 生成模擬歷史數據。")
+        # 如果 yfinance 完蛋，生成一份乾淨的模擬歷史數據以求穩定性
+        import pandas as pd
+        dates = pd.date_range(end=datetime.now(), periods=150, freq='W')
+        close_prices = []
+        base_price = fallback["price"]
+        import random
+        random.seed(42) # 固定隨機數種子以保證數據穩定
+        for i in range(150):
+            # 隨機漫步模擬歷史股價
+            base_price = base_price * (1 + random.uniform(-0.04, 0.05))
+            close_prices.append(round(base_price, 2))
+        
+        hist = pd.DataFrame({
+            "Close": close_prices
+        }, index=dates)
+
+    # 開始處理數據
+    hist = hist.sort_index()
+    
+    # 日期序列轉字串 (YYYY-MM-DD)
+    hist['DateStr'] = hist.index.strftime("%Y-%m-%d")
+    
+    result_data = {
+        "symbol": symbol,
+        "name": "台積電" if symbol == "2330.TW" else (fallback.get("name") or symbol),
+        "isETF": is_etf,
+        "currency": meta["currency"],
+        "cache_date": today_str,
+        "dates": [],
+        "close": [],
+    }
+    
+    if is_etf:
+        # ETF 計算 20MA, 60MA, 120MA, 240MA
+        hist['MA20'] = hist['Close'].rolling(window=20).mean()
+        hist['MA60'] = hist['Close'].rolling(window=60).mean()
+        hist['MA120'] = hist['Close'].rolling(window=120).mean()
+        hist['MA240'] = hist['Close'].rolling(window=240).mean()
+        
+        # 降採樣 (每 5 天取一筆，避免點數太多)
+        sampled = hist.iloc[::5].copy()
+        
+        # 定義輔助函數來安全清理 nan
+        def clean_val(val):
+            try:
+                if val is None or pd.isnull(val) or (isinstance(val, float) and math.isnan(val)):
+                    return None
+                return round(float(val), 2)
+            except:
+                return None
+        
+        result_data["dates"] = sampled['DateStr'].tolist()
+        result_data["close"] = [clean_val(x) for x in sampled['Close']]
+        result_data["ma20"] = [clean_val(x) for x in sampled['MA20']]
+        result_data["ma60"] = [clean_val(x) for x in sampled['MA60']]
+        result_data["ma120"] = [clean_val(x) for x in sampled['MA120']]
+        result_data["ma240"] = [clean_val(x) for x in sampled['MA240']]
+        
+    else:
+        # 個股計算 PE / PB 河流圖
+        # 讀取當前的即時數據以獲取最新的 EPS/BPS (維持一致性)，否則用 fallback
+        latest_eps = fallback["eps"]
+        latest_bps = fallback["bps"]
+        pe_mid = fallback["pe"]
+        pb_mid = fallback["pb"]
+        growth = fallback["growth1"] / 100.0 # 轉小數，如 0.18
+        
+        # 嘗試從已生成的 realtime_data.json 中讀取最新值
+        realtime_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "realtime_data.json")
+        if os.path.exists(realtime_path):
+            try:
+                with open(realtime_path, "r", encoding="utf-8") as f:
+                    rt = json.load(f)
+                    if symbol in rt:
+                        latest_eps = rt[symbol].get("eps", latest_eps)
+                        latest_bps = rt[symbol].get("bps", latest_bps)
+                        pe_mid = rt[symbol].get("pe", pe_mid)
+                        pb_mid = rt[symbol].get("pb", pb_mid)
+            except Exception as e:
+                print(f"讀取 realtime_data 失敗: {e}")
+                
+        # 降採樣 (每 5 天取一筆)
+        sampled = hist.iloc[::5].copy()
+        
+        dates_list = sampled['DateStr'].tolist()
+        close_list = [round(float(x), 2) for x in sampled['Close']]
+        
+        pe_bands = {
+            "cheap_0_6": [],
+            "low_0_8": [],
+            "fair_1_0": [],
+            "high_1_2": [],
+            "expensive_1_4": []
+        }
+        pb_bands = {
+            "cheap_0_6": [],
+            "low_0_8": [],
+            "fair_1_0": [],
+            "high_1_2": [],
+            "expensive_1_4": []
+        }
+        
+        # 基準點日期 T (最後一個採樣點)
+        last_date = sampled.index[-1]
+        
+        for idx, row in sampled.iterrows():
+            # 計算歷史平滑 EPS & BPS
+            days_diff = (last_date - idx).days
+            years_diff = days_diff / 365.25
+            
+            # 歷史上當時的 EPS 和 BPS
+            hist_eps = latest_eps * ((1 + growth) ** (-years_diff))
+            hist_bps = latest_bps * ((1 + growth) ** (-years_diff))
+            
+            # PE 河流區間
+            pe_bands["cheap_0_6"].append(round(hist_eps * pe_mid * 0.6, 2))
+            pe_bands["low_0_8"].append(round(hist_eps * pe_mid * 0.8, 2))
+            pe_bands["fair_1_0"].append(round(hist_eps * pe_mid * 1.0, 2))
+            pe_bands["high_1_2"].append(round(hist_eps * pe_mid * 1.2, 2))
+            pe_bands["expensive_1_4"].append(round(hist_eps * pe_mid * 1.4, 2))
+            
+            # PB 河流區間
+            pb_bands["cheap_0_6"].append(round(hist_bps * pb_mid * 0.6, 2))
+            pb_bands["low_0_8"].append(round(hist_bps * pb_mid * 0.8, 2))
+            pb_bands["fair_1_0"].append(round(hist_bps * pb_mid * 1.0, 2))
+            pb_bands["high_1_2"].append(round(hist_bps * pb_mid * 1.2, 2))
+            pb_bands["expensive_1_4"].append(round(hist_bps * pb_mid * 1.4, 2))
+            
+        result_data["dates"] = dates_list
+        result_data["close"] = close_list
+        result_data["pe_mid"] = pe_mid
+        result_data["pb_mid"] = pb_mid
+        result_data["pe_bands"] = pe_bands
+        result_data["pb_bands"] = pb_bands
+        
+    # 儲存到快取
+    try:
+        with open(cache_path, "w", encoding="utf-8") as f:
+            json.dump(result_data, f, ensure_ascii=False, indent=4)
+        print(f"[River Cache Saved] 成功儲存 {symbol} 快取。")
+    except Exception as ex:
+        print(f"儲存河流快取失敗: {ex}")
+        
+    return result_data
+
+
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         # CLI Mode: Analyze single stock
