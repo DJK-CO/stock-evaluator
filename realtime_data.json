@@ -20,7 +20,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 35,
-        "rule40FCFMargin": 58
+        "rule40FCFMargin": 58,
+        "beta": 1.25,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "0050.TW": {
         "symbol": "0050.TW",
@@ -43,7 +58,22 @@
         "etfType": "市值型",
         "etfDesc": "追蹤台灣前50大市值企業，大盤估值領頭羊。",
         "rule40Growth": 12,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 1.0,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "006208.TW": {
         "symbol": "006208.TW",
@@ -66,7 +96,22 @@
         "etfType": "市值型",
         "etfDesc": "小資族定期定額首選，低內扣費用，追蹤台灣前50大市值企業。",
         "rule40Growth": 12,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 1.0,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "00878.TW": {
         "symbol": "00878.TW",
@@ -89,7 +134,22 @@
         "etfType": "高股息",
         "etfDesc": "結合ESG與高股息篩選，配息穩定度高。",
         "rule40Growth": 8,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 0.75,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "00919.TW": {
         "symbol": "00919.TW",
@@ -112,7 +172,22 @@
         "etfType": "高股息",
         "etfDesc": "社團人氣配息王，精選高股息率成分股，配息爆發力強。",
         "rule40Growth": 8,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 0.8,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "00929.TW": {
         "symbol": "00929.TW",
@@ -135,7 +210,22 @@
         "etfType": "高股息",
         "etfDesc": "首檔月配息科技高股息，社團「每月被動收入」討論度極高。",
         "rule40Growth": 10,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 0.85,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "00713.TW": {
         "symbol": "00713.TW",
@@ -158,7 +248,22 @@
         "etfType": "高股息",
         "etfDesc": "元大台灣高息低波，季配息，兼具高股利與極佳的抗震波動控制特性。",
         "rule40Growth": 10,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 0.65,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "00940.TW": {
         "symbol": "00940.TW",
@@ -181,7 +286,22 @@
         "etfType": "高股息",
         "etfDesc": "元大台灣價值高息，月配息熱門話題標的，巴菲特價值因子選股。",
         "rule40Growth": 8,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 0.8,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "AAPL": {
         "symbol": "AAPL",
@@ -204,7 +324,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 16,
-        "rule40FCFMargin": 32
+        "rule40FCFMargin": 32,
+        "beta": 1.09,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "NVDA": {
         "symbol": "NVDA",
@@ -227,7 +362,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 85,
-        "rule40FCFMargin": 65
+        "rule40FCFMargin": 65,
+        "beta": 2.2,
+        "piotroski": {
+            "score": 9,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true
+            ]
+        }
     },
     "AVGO": {
         "symbol": "AVGO",
@@ -250,7 +400,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 47,
-        "rule40FCFMargin": 48
+        "rule40FCFMargin": 48,
+        "beta": 1.43,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "TSLA": {
         "symbol": "TSLA",
@@ -273,7 +438,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 15,
-        "rule40FCFMargin": 4
+        "rule40FCFMargin": 4,
+        "beta": 1.8,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "MSFT": {
         "symbol": "MSFT",
@@ -296,7 +476,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 18,
-        "rule40FCFMargin": 46
+        "rule40FCFMargin": 46,
+        "beta": 1.1,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "AMD": {
         "symbol": "AMD",
@@ -319,7 +514,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 37,
-        "rule40FCFMargin": 14
+        "rule40FCFMargin": 14,
+        "beta": 2.49,
+        "piotroski": {
+            "score": 6,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "GOOGL": {
         "symbol": "GOOGL",
@@ -342,7 +552,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 21,
-        "rule40FCFMargin": 36
+        "rule40FCFMargin": 36,
+        "beta": 1.24,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "TSM": {
         "symbol": "TSM",
@@ -365,7 +590,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 35,
-        "rule40FCFMargin": 58
+        "rule40FCFMargin": 58,
+        "beta": 1.25,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "SMCI": {
         "symbol": "SMCI",
@@ -388,7 +628,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 122,
-        "rule40FCFMargin": 6
+        "rule40FCFMargin": 6,
+        "beta": 1.87,
+        "piotroski": {
+            "score": 5,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "VOO": {
         "symbol": "VOO",
@@ -411,7 +666,22 @@
         "etfType": "市值型",
         "etfDesc": "Vanguard S&P 500 ETF，最經典的美股標普500大盤代表，長期複利穩健。",
         "rule40Growth": 14,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 1.0,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "QQQ": {
         "symbol": "QQQ",
@@ -434,7 +704,22 @@
         "etfType": "市值型",
         "etfDesc": "Invesco QQQ，追蹤Nasdaq 100指數，美股科技龍頭大本營，長期成長動能強。",
         "rule40Growth": 18,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 1.15,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "SCHD": {
         "symbol": "SCHD",
@@ -457,7 +742,22 @@
         "etfType": "高股息",
         "etfDesc": "Schwab US Dividend Equity ETF，美股最熱門高息增長 ETF，防禦與存股首選。",
         "rule40Growth": 10,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 0.78,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "0052.TW": {
         "symbol": "0052.TW",
@@ -480,7 +780,22 @@
         "etfType": "科技型",
         "etfDesc": "富邦台灣科技 ETF，追蹤台灣科技板塊，台股科技巨頭與半導體比例高。",
         "rule40Growth": 15,
-        "rule40FCFMargin": 20
+        "rule40FCFMargin": 20,
+        "beta": 1.25,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "2327.TW": {
         "symbol": "2327.TW",
@@ -503,7 +818,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 22,
-        "rule40FCFMargin": 25
+        "rule40FCFMargin": 25,
+        "beta": 2.04,
+        "piotroski": {
+            "score": 6,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "2492.TW": {
         "symbol": "2492.TW",
@@ -526,7 +856,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 9,
-        "rule40FCFMargin": 7
+        "rule40FCFMargin": 7,
+        "beta": 2.21,
+        "piotroski": {
+            "score": 5,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "2344.TW": {
         "symbol": "2344.TW",
@@ -549,7 +894,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 91,
-        "rule40FCFMargin": 32
+        "rule40FCFMargin": 32,
+        "beta": 1.92,
+        "piotroski": {
+            "score": 4,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "3481.TW": {
         "symbol": "3481.TW",
@@ -572,7 +932,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 19,
-        "rule40FCFMargin": 2
+        "rule40FCFMargin": 2,
+        "beta": 1.38,
+        "piotroski": {
+            "score": 4,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "2409.TW": {
         "symbol": "2409.TW",
@@ -595,7 +970,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": -4,
-        "rule40FCFMargin": 0
+        "rule40FCFMargin": 0,
+        "beta": 1.05,
+        "piotroski": {
+            "score": 4,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "2317.TW": {
         "symbol": "2317.TW",
@@ -618,7 +1008,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 28,
-        "rule40FCFMargin": 3
+        "rule40FCFMargin": 3,
+        "beta": 0.85,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "2454.TW": {
         "symbol": "2454.TW",
@@ -641,7 +1046,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": -2,
-        "rule40FCFMargin": 15
+        "rule40FCFMargin": 15,
+        "beta": 1.9,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "2308.TW": {
         "symbol": "2308.TW",
@@ -664,7 +1084,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 34,
-        "rule40FCFMargin": 17
+        "rule40FCFMargin": 17,
+        "beta": 1.42,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "2303.TW": {
         "symbol": "2303.TW",
@@ -687,7 +1122,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 5,
-        "rule40FCFMargin": 18
+        "rule40FCFMargin": 18,
+        "beta": 1.59,
+        "piotroski": {
+            "score": 6,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "2382.TW": {
         "symbol": "2382.TW",
@@ -710,7 +1160,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 66,
-        "rule40FCFMargin": 2
+        "rule40FCFMargin": 2,
+        "beta": 0.68,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "2301.TW": {
         "symbol": "2301.TW",
@@ -733,7 +1198,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 19,
-        "rule40FCFMargin": 9
+        "rule40FCFMargin": 9,
+        "beta": 1.06,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "2891.TW": {
         "symbol": "2891.TW",
@@ -756,7 +1236,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 18,
-        "rule40FCFMargin": 56
+        "rule40FCFMargin": 56,
+        "beta": 0.61,
+        "piotroski": {
+            "score": 6,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "2603.TW": {
         "symbol": "2603.TW",
@@ -779,7 +1274,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": -21,
-        "rule40FCFMargin": 10
+        "rule40FCFMargin": 10,
+        "beta": 0.65,
+        "piotroski": {
+            "score": 6,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "2379.TW": {
         "symbol": "2379.TW",
@@ -802,7 +1312,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 4,
-        "rule40FCFMargin": 11
+        "rule40FCFMargin": 11,
+        "beta": 0.71,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "3034.TW": {
         "symbol": "3034.TW",
@@ -825,7 +1350,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": -14,
-        "rule40FCFMargin": 17
+        "rule40FCFMargin": 17,
+        "beta": 0.73,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "3711.TW": {
         "symbol": "3711.TW",
@@ -848,7 +1388,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 17,
-        "rule40FCFMargin": 10
+        "rule40FCFMargin": 10,
+        "beta": 1.48,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "3045.TW": {
         "symbol": "3045.TW",
@@ -871,7 +1426,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 3,
-        "rule40FCFMargin": 11
+        "rule40FCFMargin": 11,
+        "beta": 0.04,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "2412.TW": {
         "symbol": "2412.TW",
@@ -894,7 +1464,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 7,
-        "rule40FCFMargin": 21
+        "rule40FCFMargin": 21,
+        "beta": 0.11,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "3231.TW": {
         "symbol": "3231.TW",
@@ -917,7 +1502,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 144,
-        "rule40FCFMargin": 3
+        "rule40FCFMargin": 3,
+        "beta": 0.82,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "AMZN": {
         "symbol": "AMZN",
@@ -940,7 +1540,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 16,
-        "rule40FCFMargin": 13
+        "rule40FCFMargin": 13,
+        "beta": 1.44,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     },
     "TXN": {
         "symbol": "TXN",
@@ -963,7 +1578,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 18,
-        "rule40FCFMargin": 37
+        "rule40FCFMargin": 37,
+        "beta": 1.31,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "ABBV": {
         "symbol": "ABBV",
@@ -986,7 +1616,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 12,
-        "rule40FCFMargin": 32
+        "rule40FCFMargin": 32,
+        "beta": 0.31,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "AMGN": {
         "symbol": "AMGN",
@@ -1009,7 +1654,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 5,
-        "rule40FCFMargin": 33
+        "rule40FCFMargin": 33,
+        "beta": 0.42,
+        "piotroski": {
+            "score": 7,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false
+            ]
+        }
     },
     "CVX": {
         "symbol": "CVX",
@@ -1032,7 +1692,22 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 2,
-        "rule40FCFMargin": 7
+        "rule40FCFMargin": 7,
+        "beta": 0.47,
+        "piotroski": {
+            "score": 6,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false,
+                false,
+                false
+            ]
+        }
     },
     "PEP": {
         "symbol": "PEP",
@@ -1055,6 +1730,21 @@
         "etfType": "",
         "etfDesc": "",
         "rule40Growth": 8,
-        "rule40FCFMargin": 16
+        "rule40FCFMargin": 16,
+        "beta": 0.36,
+        "piotroski": {
+            "score": 8,
+            "details": [
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                true,
+                false
+            ]
+        }
     }
 }
