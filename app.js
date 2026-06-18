@@ -63,7 +63,7 @@ const stockPresets = {
     },
     "00878": {
         symbol: "00878.TW",
-        name: "國泰永續高股息 (高股息)",
+        name: "國泰永續高股息",
         price: 33.6,
         eps: 1.70,
         bps: 18.00,
@@ -175,7 +175,7 @@ const stockPresets = {
     },
     "00713": {
         symbol: "00713.TW",
-        name: "元大台灣高息低波 (00713)",
+        name: "元大台灣高息低波",
         price: 61.5,
         eps: 3.80,
         bps: 26.00,
@@ -203,7 +203,7 @@ const stockPresets = {
     },
     "00940": {
         symbol: "00940.TW",
-        name: "元大台灣價值高息 (00940)",
+        name: "元大台灣價值高息",
         price: 12.65,
         eps: 0.70,
         bps: 10.00,

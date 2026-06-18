@@ -387,7 +387,7 @@ input[type="number"]:focus {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 2rem;
 }
 
@@ -395,6 +395,8 @@ input[type="number"]:focus {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
+    flex: 1;
+    min-width: 0;
 }
 
 .stock-badge {
@@ -418,6 +420,8 @@ input[type="number"]:focus {
     font-family: 'Outfit', sans-serif;
     font-size: 1.75rem;
     font-weight: 700;
+    word-break: break-word;
+    white-space: normal;
 }
 
 .metric-container {
