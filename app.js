@@ -1013,7 +1013,9 @@ function loadPreset(key) {
     sliderGrowth1.value = data.growth1;
     sliderGrowth2.value = data.growth2;
     sliderTerminal.value = data.terminal;
-    sliderDiscount.value = data.discount;
+    // CAPM 動態折現率
+    const computedDiscount = data.beta ? Math.round((4.2 + data.beta * 5.5) * 10) / 10 : data.discount;
+    sliderDiscount.value = computedDiscount;
     sliderSafety.value = data.safety;
 
     inputPe.value = data.pe;
@@ -1462,71 +1464,130 @@ function calculateValuation() {
     displayPriceNow.textContent = formatCurrency(price);
 
     // ==========================================
-    // Model A: DCF (Discounted Cash Flow)
+    // CAPM & Piotroski UI Updates
     // ==========================================
-    let dcfValue = 0;
-    const fcfPerShare = fcf / shares;
-    let projectedFcf = fcfPerShare;
-    let sumPvOfFcf = 0;
-
-    // 10 years prediction
-    for (let year = 1; year <= 10; year++) {
-        const growth = year <= 5 ? g1 : g2;
-        projectedFcf = projectedFcf * (1 + growth);
-        const pv = projectedFcf / Math.pow(1 + discount, year);
-        sumPvOfFcf += pv;
-    }
-    // Terminal value
-    const fcfYear10 = projectedFcf;
-    let terminalValue = 0;
-    if (discount > gTerminal) {
-        terminalValue = (fcfYear10 * (1 + gTerminal)) / (discount - gTerminal);
-    }
-    const pvOfTerminalValue = terminalValue / Math.pow(1 + discount, 10);
-    dcfValue = sumPvOfFcf + pvOfTerminalValue;
-    if (dcfValue < 0) dcfValue = 0;
-
-    // ==========================================
-    // Model B: Graham Number
-    // ==========================================
-    let grahamValue = 0;
-    if (eps > 0 && bps > 0) {
-        grahamValue = Math.sqrt(22.5 * eps * bps);
-    }
-
-    // ==========================================
-    // Model C: DDM (Dividend Discount Model)
-    // ==========================================
-    let ddmValue = 0;
-    if (dividend > 0 && discount > gTerminal) {
-        ddmValue = (dividend * (1 + gTerminal)) / (discount - gTerminal);
-    }
-
-    // ==========================================
-    // Model D: Multipliers (PE & PB Relative Valuation)
-    // ==========================================
-    const peValuation = eps * pe;
-    const pbValuation = bps * pb;
-    const multiplierValue = (peValuation + pbValuation) / 2;
-
     const currentPresetKey = selectPreset.value;
     const isETFSelected = stockPresets[currentPresetKey] ? stockPresets[currentPresetKey].isETF : false;
-
-    // Display model results
-    calcDcfEl.textContent = isETFSelected ? "不適用" : formatCurrency(dcfValue);
-    calcGrahamEl.textContent = isETFSelected ? "不適用" : formatCurrency(grahamValue);
-    calcDdmEl.textContent = dividend <= 0 ? "不適用 (無配息)" : formatCurrency(ddmValue);
-    calcMultiplierEl.textContent = formatCurrency(multiplierValue);
+    
+    const defaultPiotroski = isETFSelected 
+        ? { score: 7, details: [true, true, true, true, true, true, true, false, false] }
+        : { score: 6, details: [true, true, true, false, true, true, true, false, false] };
+        
+    const pData = (activePreset && activePreset.piotroski) ? activePreset.piotroski : defaultPiotroski;
+    const currentBeta = (activePreset && activePreset.beta) ? activePreset.beta : 1.0;
+    
+    // 渲染 F-Score Badge 與 9 個亮燈
+    const fscoreBadge = document.getElementById("fscore-badge");
+    if (fscoreBadge) {
+        fscoreBadge.textContent = `${pData.score} / 9`;
+        if (pData.score >= 7) {
+            fscoreBadge.style.color = "#34d399";
+            fscoreBadge.style.background = "rgba(52, 211, 153, 0.12)";
+            fscoreBadge.style.border = "1px solid rgba(52, 211, 153, 0.25)";
+        } else if (pData.score <= 4) {
+            fscoreBadge.style.color = "#f87171";
+            fscoreBadge.style.background = "rgba(239, 68, 68, 0.12)";
+            fscoreBadge.style.border = "1px solid rgba(239, 68, 68, 0.25)";
+        } else {
+            fscoreBadge.style.color = "#fbbf24";
+            fscoreBadge.style.background = "rgba(245, 158, 11, 0.12)";
+            fscoreBadge.style.border = "1px solid rgba(245, 158, 11, 0.25)";
+        }
+    }
+    
+    for (let i = 1; i <= 9; i++) {
+        const dot = document.getElementById(`f-dot-${i}`);
+        if (dot) {
+            if (pData.details[i - 1]) {
+                dot.style.background = "rgba(52, 211, 153, 0.15)";
+                dot.style.color = "#34d399";
+                dot.style.border = "1px solid rgba(52, 211, 153, 0.3)";
+            } else {
+                dot.style.background = "rgba(255, 255, 255, 0.02)";
+                dot.style.color = "var(--text-muted)";
+                dot.style.border = "1px solid rgba(255, 255, 255, 0.05)";
+            }
+        }
+    }
+    
+    // 渲染 CAPM 資訊
+    const capmDiscountEl = document.getElementById("capm-discount-label");
+    const capmBetaEl = document.getElementById("capm-beta-value");
+    const computedDiscountVal = Math.round((4.2 + currentBeta * 5.5) * 10) / 10;
+    
+    if (capmDiscountEl) capmDiscountEl.textContent = `${computedDiscountVal}%`;
+    if (capmBetaEl) capmBetaEl.textContent = currentBeta.toFixed(2);
 
     // ==========================================
-    // Weights Calculation
+    // Reusable Single-Scenario Valuation function
+    // ==========================================
+    function computeScenarioValuation(growth1Rate, growth2Rate, termRate, discRate) {
+        // Model A: DCF
+        let dcf = 0;
+        const fcfPerShare = fcf / shares;
+        let projFcf = fcfPerShare;
+        let sumFcf = 0;
+        for (let year = 1; year <= 10; year++) {
+            const g = year <= 5 ? growth1Rate : growth2Rate;
+            projFcf = projFcf * (1 + g);
+            sumFcf += projFcf / Math.pow(1 + discRate, year);
+        }
+        let termVal = 0;
+        if (discRate > termRate) {
+            termVal = (projFcf * (1 + termRate)) / (discRate - termRate);
+        }
+        dcf = sumFcf + (termVal / Math.pow(1 + discRate, 10));
+        if (dcf < 0) dcf = 0;
+
+        // Model B: Graham
+        let graham = 0;
+        if (eps > 0 && bps > 0) {
+            graham = Math.sqrt(22.5 * eps * bps);
+        }
+
+        // Model C: DDM
+        let ddm = 0;
+        if (dividend > 0 && discRate > termRate) {
+            ddm = (dividend * (1 + termRate)) / (discRate - termRate);
+        }
+
+        // Model D: Multipliers
+        const peVal = eps * pe;
+        const pbVal = bps * pb;
+        const mult = (peVal + pbVal) / 2;
+
+        // Display Base case details on the UI
+        if (growth1Rate === g1 && discRate === discount) {
+            calcDcfEl.textContent = isETFSelected ? "不適用" : formatCurrency(dcf);
+            calcGrahamEl.textContent = isETFSelected ? "不適用" : formatCurrency(graham);
+            calcDdmEl.textContent = dividend <= 0 ? "不適用 (無配息)" : formatCurrency(ddm);
+            calcMultiplierEl.textContent = formatCurrency(mult);
+            
+            // Model E: EPV (Zero-Growth Benchmark)
+            const epvVal = isETFSelected ? (dividend / discRate) : (eps / discRate);
+            const calcEpvEl = document.getElementById("calc-epv");
+            if (calcEpvEl) {
+                calcEpvEl.textContent = epvVal <= 0 ? "不適用" : formatCurrency(epvVal);
+            }
+        }
+
+        const wDcf = parseInt(weightDcfInput.value) || 0;
+        const wGraham = parseInt(weightGrahamInput.value) || 0;
+        const wDdm = parseInt(weightDdmInput.value) || 0;
+        const wMult = parseInt(weightMultInput.value) || 0;
+        
+        return (dcf * wDcf + graham * wGraham + ddm * wDdm + mult * wMult) / 100;
+    }
+
+    // ==========================================
+    // Multi-Scenario Analysis Calculation
     // ==========================================
     const wDcf = parseInt(weightDcfInput.value) || 0;
     const wGraham = parseInt(weightGrahamInput.value) || 0;
     const wDdm = parseInt(weightDdmInput.value) || 0;
     const wMult = parseInt(weightMultInput.value) || 0;
-
     const totalWeight = wDcf + wGraham + wDdm + wMult;
+
     let intrinsicValue = 0;
 
     if (totalWeight !== 100) {
@@ -1534,12 +1595,45 @@ function calculateValuation() {
         displayPriceIntrinsic.textContent = "無法計算";
         displayPriceIntrinsic.style.color = "var(--text-muted)";
         return;
-    } else {
-        weightErrorEl.textContent = "";
-        intrinsicValue = (dcfValue * wDcf + grahamValue * wGraham + ddmValue * wDdm + multiplierValue * wMult) / 100;
-        displayPriceIntrinsic.textContent = formatCurrency(intrinsicValue);
-        displayPriceIntrinsic.style.color = "";
     }
+
+    weightErrorEl.textContent = "";
+
+    // 1. 基準情境 (Base, 50% 機率)
+    const valBase = computeScenarioValuation(g1, g2, gTerminal, discount);
+
+    // 2. 悲觀情境 (Bear, 20% 機率)
+    const valBear = computeScenarioValuation(g1 * 0.50, g2 * 0.50, gTerminal * 0.80, discount + 0.015);
+
+    // 3. 樂觀情境 (Bull, 30% 機率)
+    const valBull = computeScenarioValuation(g1 * 1.30, g2 * 1.30, gTerminal * 1.20, discount - 0.010);
+
+    // 4. 機率加權綜合內在價值
+    intrinsicValue = (valBear * 20 + valBase * 50 + valBull * 30) / 100;
+
+    // 5. 渲染多情境 UI
+    const valBearEl = document.getElementById("val-bear");
+    const valBaseEl = document.getElementById("val-base");
+    const valBullEl = document.getElementById("val-bull");
+    const valBearLabel = document.getElementById("val-bear-label");
+    const valBullLabel = document.getElementById("val-bull-label");
+    const rangeBar = document.getElementById("val-range-bar");
+
+    if (valBearEl) valBearEl.textContent = formatCurrency(valBear);
+    if (valBaseEl) valBaseEl.textContent = formatCurrency(valBase);
+    if (valBullEl) valBullEl.textContent = formatCurrency(valBull);
+    if (valBearLabel) valBearLabel.textContent = formatCurrency(valBear);
+    if (valBullLabel) valBullLabel.textContent = formatCurrency(valBull);
+    
+    if (rangeBar) {
+        const rangePct = valBull > valBear ? ((valBase - valBear) / (valBull - valBear)) * 100 : 50;
+        rangeBar.style.left = "0%";
+        rangeBar.style.width = `${Math.min(100, Math.max(0, rangePct))}%`;
+    }
+
+    displayPriceIntrinsic.textContent = formatCurrency(intrinsicValue);
+    displayPriceIntrinsic.style.color = "";
+
 
     // ==========================================
     // Rule of 40 Analysis
@@ -1910,6 +2004,8 @@ function mergeRealtimeData(data) {
             stockPresets[presetKey].pb = val.pb;
             stockPresets[presetKey].rule40Growth = val.rule40Growth;
             stockPresets[presetKey].rule40FCFMargin = val.rule40FCFMargin;
+            if (val.beta !== undefined) stockPresets[presetKey].beta = val.beta;
+            if (val.piotroski !== undefined) stockPresets[presetKey].piotroski = val.piotroski;
         }
     }
 }

@@ -67,186 +67,462 @@ MOCK_FALLBACKS = {
     "2330.TW": {
         "price": 2405.0, "eps": 73.68, "bps": 227.17, "dividend": 24.0, "fcf": 719158.44, "shares": 25932.37,
         "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 25, "pb": 5.8, "rule40Growth": 22, "rule40FCFMargin": 38
+    ,
+        "beta": 1.25,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "0050.TW": {
         "price": 107.0, "eps": 3.42, "bps": 25.00, "dividend": 1.36, "fcf": 0.0, "shares": 1.0,
         "growth1": 6, "growth2": 4, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 21.8, "pb": 2.4, "rule40Growth": 12, "rule40FCFMargin": 0
+    ,
+        "beta": 1.00,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "006208.TW": {
         "price": 248.1, "eps": 5.60, "bps": 48.00, "dividend": 4.44, "fcf": 0.0, "shares": 1.0,
         "growth1": 6, "growth2": 4, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 21.0, "pb": 2.40, "rule40Growth": 12, "rule40FCFMargin": 0
+    ,
+        "beta": 1.00,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "00878.TW": {
         "price": 33.6, "eps": 1.70, "bps": 18.00, "dividend": 1.88, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 15.6, "pb": 1.47, "rule40Growth": 8, "rule40FCFMargin": 0
+    ,
+        "beta": 0.75,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "00919.TW": {
         "price": 30.82, "eps": 2.00, "bps": 17.00, "dividend": 2.86, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 14.0, "pb": 1.56, "rule40Growth": 8, "rule40FCFMargin": 0
+    ,
+        "beta": 0.80,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "00929.TW": {
         "price": 30.85, "eps": 1.60, "bps": 16.00, "dividend": 1.32, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.8, "safety": 10, "pe": 14.5, "pb": 1.33, "rule40Growth": 10, "rule40FCFMargin": 0
+    ,
+        "beta": 0.85,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "AAPL": {
         "price": 295.95, "eps": 8.26, "bps": 7.26, "dividend": 1.08, "fcf": 101090.75, "shares": 14687.36,
         "growth1": 8, "growth2": 6, "terminal": 2.0, "discount": 7.5, "safety": 15, "pe": 30, "pb": 44.0, "rule40Growth": 6, "rule40FCFMargin": 26
+    ,
+        "beta": 1.10,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "NVDA": {
         "price": 204.65, "eps": 6.53, "bps": 8.07, "dividend": 0.04, "fcf": 46335.87, "shares": 24221.0,
         "growth1": 30, "growth2": 15, "terminal": 2.5, "discount": 9.0, "safety": 20, "pe": 45, "pb": 15.0, "rule40Growth": 90, "rule40FCFMargin": 45
+    ,
+        "beta": 1.75,
+        "piotroski": {
+            "score": 9,
+            "details": [True,True,True,True,True,True,True,True,True]
+        }
     },
     "AVGO": {
         "price": 392.9, "eps": 6.03, "bps": 18.43, "dividend": 2.6, "fcf": 27212.25, "shares": 4757.58,
         "growth1": 25, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 33.0, "pb": 7.1, "rule40Growth": 45, "rule40FCFMargin": 42
+    ,
+        "beta": 1.20,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "MSFT": {
         "price": 378.91, "eps": 16.78, "bps": 55.78, "dividend": 3.64, "fcf": 37011.25, "shares": 7428.43,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.0, "safety": 15, "pe": 35, "pb": 12.0, "rule40Growth": 15, "rule40FCFMargin": 30
+    ,
+        "beta": 1.15,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "TSLA": {
         "price": 396.38, "eps": 1.09, "bps": 21.90, "dividend": 0.00, "fcf": 5252.0, "shares": 3755.72,
         "growth1": 20, "growth2": 12, "terminal": 2.0, "discount": 10.0, "safety": 25, "pe": 65, "pb": 8.5, "rule40Growth": 15, "rule40FCFMargin": 10
+    ,
+        "beta": 1.55,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "AMD": {
         "price": 512.48, "eps": 2.99, "bps": 39.55, "dividend": 0.00, "fcf": 7173.37, "shares": 1630.6,
         "growth1": 22, "growth2": 12, "terminal": 2.0, "discount": 9.5, "safety": 20, "pe": 75.0, "pb": 4.4, "rule40Growth": 15, "rule40FCFMargin": 10
+    ,
+        "beta": 1.65,
+        "piotroski": {
+            "score": 6,
+            "details": [True,True,True,True,True,True,False,False,False]
+        }
     },
     "GOOGL": {
         "price": 363.79, "eps": 13.10, "bps": 39.51, "dividend": 0.88, "fcf": 27921.75, "shares": 5867.16,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.0, "safety": 15, "pe": 24.0, "pb": 7.29, "rule40Growth": 14, "rule40FCFMargin": 28
+    ,
+        "beta": 1.15,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "TSM": {
         "price": 432.15, "eps": 11.63, "bps": 6.54, "dividend": 24.0, "fcf": 719158.44, "shares": 5186.47,
         "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 28.0, "pb": 6.8, "rule40Growth": 22, "rule40FCFMargin": 38
+    ,
+        "beta": 1.25,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "SMCI": {
         "price": 27.78, "eps": 1.90, "bps": 12.60, "dividend": 0.00, "fcf": -7448.38, "shares": 601.42,
         "growth1": 45, "growth2": 20, "terminal": 2.0, "discount": 10.5, "safety": 30, "pe": 35.0, "pb": 8.5, "rule40Growth": 80, "rule40FCFMargin": 10
+    ,
+        "beta": 2.05,
+        "piotroski": {
+            "score": 5,
+            "details": [True,True,True,True,True,False,False,False,False]
+        }
     },
     "00713.TW": {
         "price": 61.5, "eps": 3.80, "bps": 26.00, "dividend": 3.44, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.5, "safety": 10, "pe": 16.5, "pb": 2.3, "rule40Growth": 10, "rule40FCFMargin": 0
+    ,
+        "beta": 0.65,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "00940.TW": {
         "price": 12.65, "eps": 0.70, "bps": 10.00, "dividend": 0.52, "fcf": 0.0, "shares": 1.0,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 15.0, "pb": 1.0, "rule40Growth": 8, "rule40FCFMargin": 0
+    ,
+        "beta": 0.80,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "VOO": {
         "price": 681.41, "eps": 19.00, "bps": 390.85, "dividend": 5.44, "fcf": 0.0, "shares": 1.0,
         "growth1": 7, "growth2": 5, "terminal": 1.8, "discount": 7.0, "safety": 10, "pe": 25.0, "pb": 4.5, "rule40Growth": 14, "rule40FCFMargin": 0
+    ,
+        "beta": 1.00,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "QQQ": {
         "price": 722.51, "eps": 16.00, "bps": 357.77, "dividend": 1.77, "fcf": 0.0, "shares": 1.0,
         "growth1": 12, "growth2": 8, "terminal": 2.0, "discount": 7.5, "safety": 10, "pe": 30.0, "pb": 7.0, "rule40Growth": 18, "rule40FCFMargin": 0
+    ,
+        "beta": 1.15,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "SCHD": {
         "price": 31.93, "eps": 4.30, "bps": 34.00, "dividend": 1.06, "fcf": 0.0, "shares": 1.0,
         "growth1": 5, "growth2": 4, "terminal": 1.2, "discount": 6.5, "safety": 10, "pe": 16.5, "pb": 2.5, "rule40Growth": 10, "rule40FCFMargin": 0
+    ,
+        "beta": 0.78,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "0052.TW": {
         "price": 62.5, "eps": 3.66, "bps": 27.45, "dividend": 1.37, "fcf": 0.0, "shares": 1.0,
         "growth1": 12, "growth2": 8, "terminal": 1.8, "discount": 7.0, "safety": 10, "pe": 18.0, "pb": 2.20, "rule40Growth": 15, "rule40FCFMargin": 0
+    ,
+        "beta": 1.25,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "2327.TW": {
         "price": 1040.0, "eps": 12.64, "bps": 81.15, "dividend": 6.00, "fcf": 21481.90, "shares": 2058.73,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 13.5, "pb": 2.20, "rule40Growth": 18, "rule40FCFMargin": 22
+    ,
+        "beta": 1.10,
+        "piotroski": {
+            "score": 6,
+            "details": [True,True,True,True,True,True,False,False,False]
+        }
     },
     "2492.TW": {
         "price": 554.0, "eps": 4.74, "bps": 65.25, "dividend": 2.40, "fcf": 3642.43, "shares": 484.80,
         "growth1": 10, "growth2": 6, "terminal": 1.5, "discount": 7.5, "safety": 10, "pe": 18.8, "pb": 1.30, "rule40Growth": 12, "rule40FCFMargin": 15
+    ,
+        "beta": 1.05,
+        "piotroski": {
+            "score": 5,
+            "details": [True,True,True,True,True,False,False,False,False]
+        }
     },
     "2344.TW": {
         "price": 207.5, "eps": 0.89, "bps": 25.92, "dividend": 0.50, "fcf": -10663.85, "shares": 4500.00,
         "growth1": 8, "growth2": 5, "terminal": 1.5, "discount": 7.5, "safety": 10, "pe": 16.3, "pb": 1.20, "rule40Growth": 8, "rule40FCFMargin": 12
+    ,
+        "beta": 1.10,
+        "piotroski": {
+            "score": 4,
+            "details": [True,True,True,True,False,False,False,False,False]
+        }
     },
     "3481.TW": {
         "price": 60.7, "eps": 0.03, "bps": 28.39, "dividend": 1.00, "fcf": 17172.95, "shares": 7981.05,
         "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 18.1, "pb": 0.60, "rule40Growth": 6, "rule40FCFMargin": -5
+    ,
+        "beta": 1.05,
+        "piotroski": {
+            "score": 4,
+            "details": [True,True,True,True,False,False,False,False,False]
+        }
     },
     "2409.TW": {
         "price": 26.75, "eps": 0.90, "bps": 19.81, "dividend": 1.20, "fcf": -6890.23, "shares": 7547.10,
         "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 27.5, "pb": 0.75, "rule40Growth": 6, "rule40FCFMargin": -4
+    ,
+        "beta": 1.00,
+        "piotroski": {
+            "score": 4,
+            "details": [True,True,True,True,False,False,False,False,False]
+        }
     },
     "2317.TW": {
         "price": 270.0, "eps": 13.40, "bps": 126.91, "dividend": 7.17, "fcf": 37193.24, "shares": 14001.92,
         "growth1": 10, "growth2": 7, "terminal": 1.5, "discount": 7.5, "safety": 15, "pe": 18.0, "pb": 1.8, "rule40Growth": 15, "rule40FCFMargin": 8
+    ,
+        "beta": 1.10,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "2454.TW": {
         "price": 4430.0, "eps": 66.12, "bps": 244.52, "dividend": 53.50, "fcf": 73559.38, "shares": 1596.11,
         "growth1": 15, "growth2": 10, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 22.0, "pb": 5.0, "rule40Growth": 18, "rule40FCFMargin": 20
+    ,
+        "beta": 1.20,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "2308.TW": {
         "price": 2185.0, "eps": 22.97, "bps": 115.32, "dividend": 11.60, "fcf": 32521.96, "shares": 2597.54,
         "growth1": 12, "growth2": 8, "terminal": 1.5, "discount": 7.5, "safety": 15, "pe": 28.0, "pb": 4.0, "rule40Growth": 12, "rule40FCFMargin": 10
+    ,
+        "beta": 0.95,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "2303.TW": {
         "price": 140.0, "eps": 3.93, "bps": 32.33, "dividend": 2.85, "fcf": 34353.80, "shares": 12546.43,
         "growth1": 6, "growth2": 4, "terminal": 1.0, "discount": 7.0, "safety": 10, "pe": 11.5, "pb": 1.9, "rule40Growth": 6, "rule40FCFMargin": 25
+    ,
+        "beta": 1.05,
+        "piotroski": {
+            "score": 6,
+            "details": [True,True,True,True,True,True,False,False,False]
+        }
     },
     "2382.TW": {
         "price": 376.0, "eps": 18.92, "bps": 53.83, "dividend": 13.00, "fcf": -98190.83, "shares": 3854.52,
         "growth1": 15, "growth2": 10, "terminal": 1.5, "discount": 8.0, "safety": 15, "pe": 23.0, "pb": 4.6, "rule40Growth": 25, "rule40FCFMargin": 6
+    ,
+        "beta": 1.30,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "2301.TW": {
         "price": 211.0, "eps": 6.59, "bps": 38.83, "dividend": 7.51, "fcf": -3553.09, "shares": 2269.10,
         "growth1": 8, "growth2": 6, "terminal": 1.2, "discount": 7.0, "safety": 10, "pe": 17.5, "pb": 2.9, "rule40Growth": 10, "rule40FCFMargin": 9
+    ,
+        "beta": 1.05,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "2891.TW": {
         "price": 71.9, "eps": 4.06, "bps": 27.16, "dividend": 2.30, "fcf": 213396.83, "shares": 19676.90,
         "growth1": 5, "growth2": 4, "terminal": 1.0, "discount": 6.5, "safety": 10, "pe": 13.0, "pb": 1.6, "rule40Growth": 8, "rule40FCFMargin": 0
+    ,
+        "beta": 0.70,
+        "piotroski": {
+            "score": 6,
+            "details": [True,True,True,True,True,True,False,False,False]
+        }
     },
     "2603.TW": {
         "price": 193.5, "eps": 31.64, "bps": 268.71, "dividend": 16.00, "fcf": 28350.01, "shares": 2165.04,
         "growth1": 5, "growth2": 3, "terminal": 0.5, "discount": 9.0, "safety": 25, "pe": 8.8, "pb": 0.8, "rule40Growth": 12, "rule40FCFMargin": 35
+    ,
+        "beta": 1.15,
+        "piotroski": {
+            "score": 6,
+            "details": [True,True,True,True,True,True,False,False,False]
+        }
     },
     "2379.TW": {
         "price": 819.0, "eps": 28.07, "bps": 87.68, "dividend": 25.00, "fcf": 9227.78, "shares": 512.86,
         "growth1": 12, "growth2": 8, "terminal": 1.5, "discount": 8.0, "safety": 15, "pe": 18.9, "pb": 4.8, "rule40Growth": 14, "rule40FCFMargin": 16
+    ,
+        "beta": 1.15,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "3034.TW": {
         "price": 533.0, "eps": 26.85, "bps": 118.20, "dividend": 28.00, "fcf": 24000.00, "shares": 600.00,
         "growth1": 8, "growth2": 5, "terminal": 1.2, "discount": 7.5, "safety": 15, "pe": 15.5, "pb": 4.1, "rule40Growth": 10, "rule40FCFMargin": 20
+    ,
+        "beta": 1.00,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "3711.TW": {
         "price": 608.0, "eps": 10.18, "bps": 79.90, "dividend": 6.60, "fcf": 38000.00, "shares": 4380.00,
         "growth1": 10, "growth2": 7, "terminal": 1.5, "discount": 7.5, "safety": 15, "pe": 17.3, "pb": 2.3, "rule40Growth": 12, "rule40FCFMargin": 12
+    ,
+        "beta": 1.15,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "3045.TW": {
         "price": 118.5, "eps": 4.70, "bps": 30.05, "dividend": 4.80, "fcf": 15000.00, "shares": 3020.00,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 6.0, "safety": 10, "pe": 24.0, "pb": 3.3, "rule40Growth": 6, "rule40FCFMargin": 15
+    ,
+        "beta": 0.40,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "2412.TW": {
         "price": 145.0, "eps": 5.02, "bps": 51.09, "dividend": 5.20, "fcf": 35000.00, "shares": 7750.00,
         "growth1": 3, "growth2": 2, "terminal": 1.0, "discount": 5.8, "safety": 10, "pe": 26.0, "pb": 2.5, "rule40Growth": 4, "rule40FCFMargin": 18
+    ,
+        "beta": 0.25,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "3231.TW": {
         "price": 161.5, "eps": 8.41, "bps": 59.80, "dividend": 5.50, "fcf": 12000.00, "shares": 2890.00,
         "growth1": 15, "growth2": 10, "terminal": 1.5, "discount": 8.0, "safety": 15, "pe": 22.0, "pb": 3.3, "rule40Growth": 28, "rule40FCFMargin": 5
+    ,
+        "beta": 1.35,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "AMZN": {
         "price": 237.5, "eps": 7.77, "bps": 41.09, "dividend": 0.00, "fcf": 32000.00, "shares": 10400.00,
         "growth1": 18, "growth2": 12, "terminal": 2.0, "discount": 8.5, "safety": 15, "pe": 52.8, "pb": 8.4, "rule40Growth": 12, "rule40FCFMargin": 11
+    ,
+        "beta": 1.15,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     },
     "TXN": {
         "price": 301.88, "eps": 5.84, "bps": 18.44, "dividend": 5.56, "fcf": 5400.00, "shares": 910.00,
         "growth1": 8, "growth2": 6, "terminal": 2.0, "discount": 7.5, "safety": 15, "pe": 27.8, "pb": 10.8, "rule40Growth": 8, "rule40FCFMargin": 20
+    ,
+        "beta": 1.00,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "ABBV": {
         "price": 221.23, "eps": 2.05, "bps": -3.77, "dividend": 6.92, "fcf": 22000.00, "shares": 1760.00,
         "growth1": 6, "growth2": 5, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 26.1, "pb": 21.2, "rule40Growth": 6, "rule40FCFMargin": 35
+    ,
+        "beta": 0.60,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "AMGN": {
         "price": 341.66, "eps": 14.37, "bps": 17.03, "dividend": 10.08, "fcf": 11000.00, "shares": 535.00,
         "growth1": 7, "growth2": 5, "terminal": 1.5, "discount": 7.0, "safety": 10, "pe": 20.7, "pb": 25.0, "rule40Growth": 7, "rule40FCFMargin": 30
+    ,
+        "beta": 0.60,
+        "piotroski": {
+            "score": 7,
+            "details": [True,True,True,True,True,True,True,False,False]
+        }
     },
     "CVX": {
         "price": 177.58, "eps": 5.75, "bps": 92.91, "dividend": 7.12, "fcf": 18000.00, "shares": 1850.00,
         "growth1": 4, "growth2": 3, "terminal": 1.0, "discount": 7.5, "safety": 15, "pe": 12.9, "pb": 1.76, "rule40Growth": 5, "rule40FCFMargin": 12
+    ,
+        "beta": 0.85,
+        "piotroski": {
+            "score": 6,
+            "details": [True,True,True,True,True,True,False,False,False]
+        }
     },
     "PEP": {
         "price": 141.59, "eps": 6.37, "bps": 15.63, "dividend": 5.69, "fcf": 8200.00, "shares": 1370.00,
         "growth1": 5, "growth2": 4, "terminal": 1.5, "discount": 6.5, "safety": 10, "pe": 22.9, "pb": 11.0, "rule40Growth": 5, "rule40FCFMargin": 14
+    ,
+        "beta": 0.55,
+        "piotroski": {
+            "score": 8,
+            "details": [True,True,True,True,True,True,True,True,False]
+        }
     }
 }
 
@@ -280,6 +556,7 @@ def fetch_realtime_data(force=False):
                 info = {}
             
             # Fetch current price
+            beta_val = info.get("beta")
             price = info.get("currentPrice") or info.get("regularMarketPrice")
             if not price:
                 try:
@@ -450,7 +727,9 @@ def fetch_realtime_data(force=False):
                 "etfType": meta.get("etfType", ""),
                 "etfDesc": meta.get("etfDesc", ""),
                 "rule40Growth": growth_pct,
-                "rule40FCFMargin": fcf_margin_pct
+                "rule40FCFMargin": fcf_margin_pct,
+                "beta": round(float(beta_val), 2) if (beta_val is not None) else fallback["beta"],
+                "piotroski": fallback["piotroski"]
             }
             print(f"[OK] Success fetching {symbol}: Price {price} {meta['currency']}")
             
@@ -510,7 +789,9 @@ def fetch_realtime_data(force=False):
                 "etfType": meta.get("etfType", ""),
                 "etfDesc": meta.get("etfDesc", ""),
                 "rule40Growth": fallback["rule40Growth"],
-                "rule40FCFMargin": fallback["rule40FCFMargin"]
+                "rule40FCFMargin": fallback["rule40FCFMargin"],
+                "beta": fallback["beta"],
+                "piotroski": fallback["piotroski"]
             }
             
     # Write to local file
