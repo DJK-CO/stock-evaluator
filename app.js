@@ -168,7 +168,7 @@ const stockPresets = {
         etfDesc: "首檔月配息科技高股息，社團「每月被動收入」討論度極高。",
         currency: "TWD",
         frequency: 12,
-        riskLevel: "Con",
+        riskLevel: "中低風險",
         riskDesc: "純科技高股息，波動度略高於 00878 等傳統高股息，適合追求每月配息流者。",
         sellPremium: 0.15,
         strategyMode: "dividend"
@@ -596,7 +596,7 @@ const stockPresets = {
         rule40FCFMargin: 22,
         currency: "TWD",
         frequency: 1,
-        riskLevel: "Ref",
+        riskLevel: "中風險",
         riskDesc: "被動元件龍頭，AI 伺服器與高階車用電容需求爆發，具備產品定價權但有景氣循環風險。",
         sellPremium: 0.20,
         strategyMode: "growth"
@@ -812,7 +812,7 @@ const stockPresets = {
     "CVX": {
         symbol: "CVX", name: "雪佛龍", price: 177.58, eps: 5.75, bps: 92.91, dividend: 7.12, fcf: 18000.00, shares: 1850.00,
         growth1: 4, growth2: 3, terminal: 1.0, discount: 7.5, safety: 15, pe: 12.9, pb: 1.76, rule40Growth: 5, rule40FCFMargin: 12,
-        currency: "USD", frequency: 4, riskLevel: "Ref", riskDesc: "石化能源巨頭，受油價與地緣政治波動影響，但具備極強的股息與資產負債表保護。",
+        currency: "USD", frequency: 4, riskLevel: "中風險", riskDesc: "石化能源巨頭，受油價與地緣政治波動影響，但具備極強的股息與資產負債表保護。",
         sellPremium: 0.15, strategyMode: "dividend"
     },
     "PEP": {
@@ -1621,7 +1621,7 @@ function calculateValuation() {
 
     if (badgeRisk) {
         badgeRisk.textContent = riskLevel;
-        if (riskLevel.includes("低")) {
+        if (riskLevel === "低風險") {
             badgeRisk.style.color = "#34d399";
             badgeRisk.style.background = "rgba(16, 185, 129, 0.15)";
             badgeRisk.style.border = "1px solid rgba(16, 185, 129, 0.25)";
